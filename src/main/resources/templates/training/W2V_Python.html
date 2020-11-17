@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<meta charset="UTF-8">
+<title>Python Word2Vec</title>
+</head>
+<body>
+
+<div>
+		<input id="pac-input"type="text" placeholder="Search Box" name="search" />
+	
+		<div id="W2V"></div>
+
+		</div>
+<script>
+$("#pac-input").keydown(function(key){
+    if(key.keyCode==13){
+         let search = $("#pac-input").val();
+         $.ajax({
+            url : "/W2V",
+            type : "POST",
+            data : {"search": search},
+            dataType :"text",
+            success : function(retVal){
+               console.log(retVal);
+               $("#W2V").html(retVal);
+            },
+            error : function(retVal){
+               alert("error");
+            }
+               
+       })};
+ });
+</script>
+
+</body>
+</html>

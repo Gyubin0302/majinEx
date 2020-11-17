@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.majin.bit.dao.TrainerDao">
+	<insert id="trainerInsert" parameterType="java.util.Map">
+		INSERT INTO TRAINERSKINNY(TRNO, TRNAME, PART, DEBUT, TYEARTOTAL, TALLTOTAL, TCONSECUTIVEWINNINGP, TCOMPLEMENTARYRATE, TWINNINGP)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.trNo}, #{item.trName}, #{item.part}, #{item.debut}, #{item.tYearTotal}, #{item.tAllTotal}, #{item.tConsecutiveWinningP}, #{item.tComplementRyRate}, #{item.tWinningP})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+			TRNO = values(TRNO), 
+			TRNAME = values(TRNAME), 
+			PART = values(PART), 
+			DEBUT = values(DEBUT), 
+			TYEARTOTAL = values(TYEARTOTAL), 
+			TALLTOTAL = values(TALLTOTAL),
+			TCONSECUTIVEWINNINGP = values(TCONSECUTIVEWINNINGP), 
+			TCOMPLEMENTARYRATE = values(TCOMPLEMENTARYRATE), 
+			TWINNINGP = values(TWINNINGP)
+	</insert>
+</mapper>

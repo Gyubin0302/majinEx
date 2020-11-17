@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-timeout: 20000
+      max-lifetime: 1200000
+      maximum-pool-size: 30
+      minimum-idle: 2
+      password: 1234
+      pool-name: hikari-cp
+      username: majin
+    password: 1234
+    url: jdbc:mysql://112.169.196.210:10000/majin?serverTimezone=UTC&characterEncoding=UTF-8
+    username: majin
+    
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      
+  jpa:
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: d7aa1a058208ce9c3e3d0a97bf67df5f
+            client-secret: wF0l0wqkhl8f9DQnf3Ha9CvZJ1wfrdUg
+          google:
+            client-id: 812570960299-kqm03pp6rnqguril0571qnek5bo72350.apps.googleusercontent.com
+            client-secret: BoD5YooCzR88LJn-IqhmMPBO
+          naver:
+            client-id: gxPiqw42Ue3RfXQjxDzC
+            client-secret: Uh4x6VI3sh

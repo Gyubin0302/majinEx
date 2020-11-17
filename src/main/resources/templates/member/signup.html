@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>register page</title>
+</head>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<form th:action="@{/signup}" th:method="post">
+		<table border="1px">
+			<tr><td>아이디</td><td><input type="text" id="id" name="id">&nbsp&nbsp&nbsp<button type="button" id="chkId" >아이디 체크</button></td><tr>
+			<tr><td>비밀번호</td><td><input type="password" id="pw" name="pw"></td><tr>
+			<tr><td>비밀번호 확인</td><td><input type="password" id="pwcheck" name="pwcheck"></td><tr>
+			<tr><td>이름</td><td><input type="text" name="name"></td><tr>
+			<tr><td>닉네임</td><td><input type="text" name="nick"></td><tr>
+			<tr><td>이메일</td><td><input type="text" id="email" name="email"> @
+  				<select name="email">
+	            	<option value="gmail.com">gmail.com</option>
+	                <option value="naver.com">naver.com</option>
+	                <option value="daum.net">daum.net</option>
+	                <option value="nate.com">nate.com</option>
+	            </select>
+	        </td><tr>
+	        <tr><td colspan="2" style="text-align: center;">
+	        	<div id="idNotice" style="color: red">아이디를 입력해 주세요</div>
+                <div id="pwNotice" style="color: red">비밀번호를 입력해주세요</div>
+                <div id="pwChkNotice" style="color: red">비밀번호 확인을 입력해주세요</div>
+            </td></tr>
+			<tr><td colspan="2" style="text-align: center;"><input type="submit" value="회원가입"><input type="reset" value="다시입력"></td><tr>
+		</table>
+	</form>
+  	<script src="/js/regicheck.js"></script>
+</body>
+</html>

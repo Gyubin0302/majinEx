@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.majin.bit.dao.JockeyDao">
+	<insert id="jockeyInsert" parameterType="java.util.Map">
+		INSERT INTO JOCKEYSKINNY(JKNO, JKNAME, TRNO, PART, JRWEIGHT, DEBUT, JYEARTOTAL, JALLTOTAL, JCONSECUTIVEWINNINGP, JCOMPLEMENTARYRATE, JWINNINGP, SPDATE)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.jkNo}, #{item.jkName}, #{item.trNo}, #{item.part}, #{item.jRweight}, #{item.debut}, #{item.jYearTotal}, #{item.jAllTotal},
+			 #{item.jConsecutiveWinningP}, #{item.jComplementRyRate}, #{item.jWinningP}, #{item.spDate})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+			JKNO = values(JKNO),
+			JKNAME = values(JKNAME), 
+			TRNO = values(TRNO), 
+			PART = values(PART), 
+			JRWEIGHT = values(JRWEIGHT), 
+			DEBUT = values(DEBUT), 
+			JYEARTOTAL = values(JYEARTOTAL), 
+			JALLTOTAL = values(JALLTOTAL), 
+			JCONSECUTIVEWINNINGP = values(JCONSECUTIVEWINNINGP), 
+			JCOMPLEMENTARYRATE = values(JCOMPLEMENTARYRATE),
+			JWINNINGP = values(JWINNINGP), 
+			SPDATE = values(SPDATE)
+	</insert>
+</mapper>

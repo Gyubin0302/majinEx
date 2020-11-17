@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	content="${_csrf.headerName}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<title>관리자 API Insert Page</title>
+</head>
+<body>
+	<div>
+		<input id="horseapi_s" type="button" name="search" value="말(서울)" />
+		<input id="horseapi_b" type="button" name="search" value="말(부산)" />
+		<input id="horseapi_j" type="button" name="search" value="말(제주)" /> <br>
+		<input id="jkapi_s" type="button" name="search" value="기수(서울)" /> 
+		<input id="jkapi_b" type="button" name="search" value="기수(부산)" /> 
+		<input id="jkapi_j" type="button" name="search" value="기수(제주)" /> <br>
+		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
+		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
+		<input id="trapi_j" type="button" name="search" value="조교(제주)" />
+
+	</div>
+
+	<div id="API">
+		<th:block th:if="${horseList != null} ">
+			<h3>말 목록</h3>
+			<table border=1>
+				<tr>
+					<th>말 번호</th>
+					<th>말 이름</th>
+					<th>말 성별</th>
+					<th>말 등급</th>
+					<th>말 국가</th>
+					<th>말 출생년도</th>
+					<th>레이팅</th>
+					<th>조교사 번호</th>
+					<th>통산전적</th>
+					<th>승률</th>
+					<th>복승률</th>
+					<th>연승률</th>
+				</tr>
+				<tr th:each="horse : ${horseList}">
+					<td th:text="${horse.hrNo}"></td>
+					<td th:text="${horse.hrName}"></td>
+					<td th:text="${horse.sex}"></td>
+					<td th:text="${horse.rank}"></td>
+					<td th:text="${horse.nation}"></td>
+					<td th:text="${horse.birthDay}"></td>
+					<td th:text="${horse.rating}"></td>
+					<td th:text="${horse.trNo}"></td>
+					<td th:text="${horse.totalRecords}"></td>
+					<td th:text="${horse.WinningP}"></td>
+					<td th:text="${horse.ComplementaryRate}"></td>
+					<td th:text="${horse.ConsecutiveWinningP}"></td>
+				</tr>
+			</table>
+		</th:block>
+		
+		<th:block th:if="${trList != null} ">
+			<h3>조교사 목록</h3>
+			<table border=1>
+				<tr>
+					<th>조교사 번호</th>
+					<th>조교사 이름</th>
+					<th>소속조</th>
+					<th>데뷔일자</th>
+					<th>최근 1년 전적</th>
+					<th>통산 전적</th>
+					<th>통산 승률</th>
+					<th>통산 복승률</th>
+					<th>통산 연승률</th>
+				</tr>
+				<tr th:each="tr : ${trList}">
+					<td th:text="${tr.trNo}"></td>
+					<td th:text="${tr.trName}"></td>
+					<td th:text="${tr.part}"></td>
+					<td th:text="${tr.debut}"></td>
+					<td th:text="${tr.tYearTotal}"></td>
+					<td th:text="${tr.tAllTotal}"></td>
+					<td th:text="${tr.tWinningP}"></td>
+					<td th:text="${tr.tComplementRyRate}"></td>
+					<td th:text="${tr.tConsecutiveWinningP}"></td>
+				</tr>
+			</table>
+		</th:block>
+		
+		<th:block th:if="${jkList != null} ">
+			<h3>기수 목록</h3>
+			<table border=1>
+				<tr>
+					<th>기수 번호</th>
+					<th>기수 이름</th>
+					<th>조교 번호</th>
+					<th>소속조</th>
+					<th>기능가능중량(소속조)</th>
+					<th>데뷔일자</th>
+					<th>최근 1년 전적</th>
+					<th>통산 전적</th>
+					<th>통산 승률</th>
+					<th>통산 복승률</th>
+					<th>통산 연승률</th>
+					<th>은퇴 날짜 </th>
+				</tr>
+				<tr th:each="jk : ${jkList}">
+					<td th:text="${jk.jkNo}"></td>
+					<td th:text="${jk.jkName}"></td>
+					<td th:text="${jk.trNo}"></td>
+					<td th:text="${jk.part}"></td>
+					<td th:text="${jk.jRweight}"></td>
+					<td th:text="${jk.debut}"></td>
+					<td th:text="${jk.jYearTotal}"></td>
+					<td th:text="${jk.jAllTotal}"></td>
+					<td th:text="${jk.jConsecutiveWinningP}"></td>
+					<td th:text="${jk.jComplementRyRate}"></td>
+					<td th:text="${jk.jWinningP}"></td>
+					<td th:text="${jk.spDate}"></td>
+				</tr>
+			</table>
+		</th:block>
+	</div>
+	<script>
+		let url;
+		$("#horseapi_s").click(function() {
+			url = "/horseapi";
+			meet = {"meet" : "1"}
+			api(url, meet)
+		});
+		$("#horseapi_b").click(function() {
+			url = "/horseapi";
+			meet = {"meet" : "3"}
+			api(url, meet)
+		});
+		$("#horseapi_j").click(function() {
+			url = "/horseapi";
+			meet = {"meet" : "2"}
+			api(url, meet)
+		});
+		$("#jkapi_s").click(function() {
+			url = "/jkapi";
+			meet = {"meet" : "1"}
+			api(url, meet)
+		});
+		$("#jkapi_b").click(function() {
+			url = "/jkapi";
+			meet = {"meet" : "3"}
+			api(url, meet)
+		});
+		$("#jkapi_j").click(function() {
+			url = "/jkapi";
+			meet = {"meet" : "2"}
+			api(url, meet)
+		});
+		$("#trapi_s").click(function() {
+			url = "/trapi";
+			meet = {"meet" : "1"}
+			api(url, meet)
+		});
+		$("#trapi_b").click(function() {
+			url = "/trapi";
+			meet = {"meet" : "3"}
+			api(url, meet)
+		});
+		$("#trapi_j").click(function() {
+			url = "/trapi";
+			meet = {"meet" : "2"}
+			api(url, meet)
+		});
+
+		function api(mapping) {
+			console.log(mapping);
+			$.ajax({
+				url : mapping,
+				type : "POST",
+				data : meet,
+				dataType : "text",
+				cache : false,
+				success : function(retVal) {
+					console.log(retVal);
+					$("#API").val("");
+					/* let jsonn = JSON.parse(retVal);
+					console.log(jsonn); */
+					$("#API").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+
+			});
+		};
+	</script>
+
+</body>
+</html>

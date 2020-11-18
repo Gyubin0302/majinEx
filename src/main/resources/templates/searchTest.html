@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8">
 <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<title>관리자 API Insert Page</title>
+<meta charset="UTF-8">
+<title>main</title>
 </head>
 <body>
-	<div>
-		<input id="horseapi_s" type="button" name="search" value="말(서울)" />
-		<input id="horseapi_b" type="button" name="search" value="말(부산)" />
-		<input id="horseapi_j" type="button" name="search" value="말(제주)" /> <br>
-		<input id="jkapi_s" type="button" name="search" value="기수(서울)" /> 
-		<input id="jkapi_b" type="button" name="search" value="기수(부산)" /> 
-		<input id="jkapi_j" type="button" name="search" value="기수(제주)" /> <br>
-		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
-		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
-		<input id="trapi_j" type="button" name="search" value="조교(제주)" />
-	</div>
 
-	<div id="API">
-		<th:block th:if="${horseList != null} ">
+	<div>
+		<input id="search" type="text" placeholder="Search Box" name="search" />
+	</div>
+	<div id="test">
+		<th:block th:unless="${#lists.isEmpty(searchHorse)} ">
 			<h3>말 목록</h3>
 			<table border=1>
 				<tr>
@@ -40,11 +32,11 @@
 					<th>복승률</th>
 					<th>연승률</th>
 				</tr>
-				<tr th:each="horse : ${horseList}">
+				<tr th:each="horse : ${searchHorse}">
 					<td th:text="${horse.hrNo}"></td>
 					<td th:text="${horse.hrName}"></td>
 					<td th:text="${horse.sex}"></td>
-					<td th:text="${horse.rank}"></td>
+					<td th:text="${horse.ranks}"></td>
 					<td th:text="${horse.nation}"></td>
 					<td th:text="${horse.birthDay}"></td>
 					<td th:text="${horse.rating}"></td>
@@ -57,7 +49,7 @@
 			</table>
 		</th:block>
 		
-		<th:block th:if="${trList != null} ">
+		<th:block th:unless="${#lists.isEmpty(searchTrainer)} ">
 			<h3>조교사 목록</h3>
 			<table border=1>
 				<tr>
@@ -71,7 +63,7 @@
 					<th>통산 복승률</th>
 					<th>통산 연승률</th>
 				</tr>
-				<tr th:each="tr : ${trList}">
+				<tr th:each="tr : ${searchTrainer}">
 					<td th:text="${tr.trNo}"></td>
 					<td th:text="${tr.trName}"></td>
 					<td th:text="${tr.part}"></td>
@@ -85,7 +77,7 @@
 			</table>
 		</th:block>
 		
-		<th:block th:if="${jkList != null} ">
+		<th:block th:unless="${#lists.isEmpty(searchJockey)} ">
 			<h3>기수 목록</h3>
 			<table border=1>
 				<tr>
@@ -102,7 +94,7 @@
 					<th>통산 연승률</th>
 					<th>은퇴 날짜 </th>
 				</tr>
-				<tr th:each="jk : ${jkList}">
+				<tr th:each="jk : ${searchJockey}">
 					<td th:text="${jk.jkNo}"></td>
 					<td th:text="${jk.jkName}"></td>
 					<td th:text="${jk.trNo}"></td>
@@ -117,84 +109,39 @@
 					<td th:text="${jk.spDate}"></td>
 				</tr>
 			</table>
-		</th:block>
 	</div>
+
+	
 	<script>
 		let token = $("meta[name='_csrf']").attr("content");
 		let header = $("meta[name='_csrf_header']").attr("content");
-		
 		$(function() {
 		    $(document).ajaxSend(function(e, xhr, options) {
-		        xhr.setRequestHeader(header, token); // 요청할 때 송신하는 헤더를 추가
+		        xhr.setRequestHeader(header, token);
 		    });
 		});
 		
-		let url;
-		$("#horseapi_s").click(function() {
-			url = "/horseapi";
-			meet = {"meet" : "1"}
-			api(url, meet)
-		});
-		$("#horseapi_b").click(function() {
-			url = "/horseapi";
-			meet = {"meet" : "3"}
-			api(url, meet)
-		});
-		$("#horseapi_j").click(function() {
-			url = "/horseapi";
-			meet = {"meet" : "2"}
-			api(url, meet)
-		});
-		$("#jkapi_s").click(function() {
-			url = "/jkapi";
-			meet = {"meet" : "1"}
-			api(url, meet)
-		});
-		$("#jkapi_b").click(function() {
-			url = "/jkapi";
-			meet = {"meet" : "3"}
-			api(url, meet)
-		});
-		$("#jkapi_j").click(function() {
-			url = "/jkapi";
-			meet = {"meet" : "2"}
-			api(url, meet)
-		});
-		$("#trapi_s").click(function() {
-			url = "/trapi";
-			meet = {"meet" : "1"}
-			api(url, meet)
-		});
-		$("#trapi_b").click(function() {
-			url = "/trapi";
-			meet = {"meet" : "3"}
-			api(url, meet)
-		});
-		$("#trapi_j").click(function() {
-			url = "/trapi";
-			meet = {"meet" : "2"}
-			api(url, meet)
-		});
+		$("#search").keydown(function(key) {
+			if (key.keyCode == 13) {
+				let search = $("#search").val();
+				console.log(search);
+				$.ajax({
+					url : "/searchTest",
+					type : "POST",
+					data : {"search" : search},
+					dataType : "text",
+					success : function(retVal) {
+						console.log(retVal);
+						$("#test").val("");
+						$("#test").html(retVal);
+					},
+					error : function(retVal) {
+						alert("error");
+					}
 
-		function api(mapping, meet) {
-			console.log(mapping);
-			console.log(meet);
-			$.ajax({
-				url : mapping,
-				type : "POST",
-				data : meet,
-                dataType : "text",
-				success : function(retVal) {
-					console.log(retVal);
-					$("#API").val("");
-					$("#API").replaceWith(retVal);
-				},
-				error : function(retVal) {
-					alert("error");
-				}
-
-			});
-		};
+				})
+			};
+		});
 	</script>
 
 </body>

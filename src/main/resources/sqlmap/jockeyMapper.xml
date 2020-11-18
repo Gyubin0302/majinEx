@@ -25,4 +25,8 @@
 			JWINNINGP = values(JWINNINGP), 
 			SPDATE = values(SPDATE)
 	</insert>
+	
+	<select id="searchJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">
+		SELECT * FROM JOCKEYSKINNY WHERE JKNAME LIKE CONCAT('%',#{search},'%') 
+	</select>
 </mapper>

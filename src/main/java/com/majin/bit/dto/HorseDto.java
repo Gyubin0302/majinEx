@@ -5,7 +5,7 @@ public class HorseDto {
 	private String trNo;
 	private String hrName;
 	private String rating; //crawling
-	private String rank;
+	private String ranks;
 	private String nation;
 	private String sex; 
 	private String birthDay;
@@ -46,12 +46,12 @@ public class HorseDto {
 		this.rating = rating;
 	}
 
-	public String getRank() {
-		return rank;
+	public String getRanks() {
+		return ranks;
 	}
 
-	public void setRank(String rank) {
-		this.rank = rank;
+	public void setRanks(String ranks) {
+		this.ranks = ranks;
 	}
 
 	public String getNation() {
@@ -112,8 +112,8 @@ public class HorseDto {
 
 	@Override
 	public String toString() {
-		return "HorseDto [hrNo=" + hrNo + ", trNo=" + trNo + ", hrName=" + hrName + ", rating=" + rating + ", rank="
-				+ rank + ", nation=" + nation + ", sex=" + sex + ", birthDay=" + birthDay + ", totalRecords="
+		return "HorseDto [hrNo=" + hrNo + ", trNo=" + trNo + ", hrName=" + hrName + ", rating=" + rating + ", ranks="
+				+ ranks + ", nation=" + nation + ", sex=" + sex + ", birthDay=" + birthDay + ", totalRecords="
 				+ totalRecords + ", ConsecutiveWinningP=" + ConsecutiveWinningP + ", ComplementaryRate="
 				+ ComplementaryRate + ", WinningP=" + WinningP + "]";
 	}

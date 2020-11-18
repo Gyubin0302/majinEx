@@ -21,4 +21,8 @@
 			TCOMPLEMENTARYRATE = values(TCOMPLEMENTARYRATE), 
 			TWINNINGP = values(TWINNINGP)
 	</insert>
+	
+	<select id="searchTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="java.lang.String">
+		SELECT * FROM TRAINERSKINNY WHERE TRNAME LIKE CONCAT('%',#{search},'%') 
+	</select>
 </mapper>

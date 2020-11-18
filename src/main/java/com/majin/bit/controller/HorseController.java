@@ -106,9 +106,9 @@ public class HorseController {
 				horseDto.setWinningP(horse.get("WinningP").toString());
 				
 				if(jsonItem.get("rank") == null) {
-					horseDto.setRank("-");
+					horseDto.setRanks("-");
 				}else {
-					horseDto.setRank(jsonItem.get("rank").toString());
+					horseDto.setRanks(jsonItem.get("rank").toString());
 				}
 				horseList.add(horseDto);
 			}

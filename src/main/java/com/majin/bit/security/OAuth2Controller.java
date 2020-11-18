@@ -1,11 +1,11 @@
 package com.majin.bit.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +17,16 @@ import com.majin.bit.service.MemberServiceImpl;
 
 @Controller
 public class OAuth2Controller {
-	
 	@Autowired
 	private MemberServiceImpl memberService;
 
 	@GetMapping({ "", "/" })
-	public String getAuthorizationMessage() {
+	public String index() {
+		return "index";
+	}
+	
+	@GetMapping("/home")
+	public String home() {
 		return "home";
 	}
 

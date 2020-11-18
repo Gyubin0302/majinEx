@@ -39,7 +39,7 @@ public class OAuth2Controller {
 	}
 
 	@GetMapping("/hello")
-	   public String hello(@AuthenticationPrincipal DefaultOAuth2User user,@AuthenticationPrincipal UserDetails user2) {
+	   public String hello(@AuthenticationPrincipal DefaultOAuth2User user, @AuthenticationPrincipal UserDetails user2) {
 	      if(user!=null) {
 	         System.out.println("\n\n\nController-----------------------\n"+user.getAttributes());
 	      

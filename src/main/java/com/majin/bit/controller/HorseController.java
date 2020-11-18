@@ -40,11 +40,6 @@ public class HorseController {
         return "admin/APIInsert";
     }
 	
-	@RequestMapping(value="/fileedit")
-    public String fileedit(){
-        return "test/fileEdit";
-    }
-	
 	@RequestMapping(value = "/horseapi", method = {RequestMethod.GET, RequestMethod.POST})
 	public String horse(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;

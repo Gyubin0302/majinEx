@@ -38,6 +38,7 @@ public class TrainerController {
 	public String tr(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;
 		String buffer = "";
+		System.out.println(meet);
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551015/API19/trainerInfo");
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=YsfeAQ1K0KPH1fOqYRLcvfqOP2P6Mo2iQOiZSumF4bMSlfyWjdPg4NWPu7Y5ms%2Fql9n2oi4dQbNq2bISj%2Bi4Hg%3D%3D");
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("210", "UTF-8")); /*한 페이지 결과 수*/

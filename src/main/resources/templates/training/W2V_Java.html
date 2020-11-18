@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -17,15 +19,21 @@
 
 	</div>
 	<script>
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+		$(function() {
+		    $(document).ajaxSend(function(e, xhr, options) {
+		        xhr.setRequestHeader(header, token);
+		    });
+		});
+		
 		$("#pac-input").keydown(function(key) {
 			if (key.keyCode == 13) {
 				let search = $("#pac-input").val();
 				$.ajax({
 					url : "/trainingTest",
 					type : "POST",
-					data : {
-						"search" : search
-					},
+					data : {"search" : search},
 					dataType : "text",
 					success : function(retVal) {
 						console.log(retVal);
@@ -36,8 +44,7 @@
 					}
 
 				})
-			}
-			;
+			};
 		});
 	</script>
 

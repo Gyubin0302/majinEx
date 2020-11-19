@@ -8,7 +8,7 @@
 		INSERT INTO HORSESKINNY(HRNO, HRNAME, TRNO, RATING, RANKS, NATION, SEX, BIRTHDAY, TOTALRECORDS, CONSECUTIVEWINNINGP, COMPLEMENTARYRATE, WINNINGP)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-			(#{item.hrNo}, #{item.hrName}, #{item.trNo}, #{item.rating}, #{item.rank}, #{item.nation}, #{item.sex}, {item.birthDay}, 
+			(#{item.hrNo}, #{item.hrName}, #{item.trNo}, #{item.rating}, #{item.ranks}, #{item.nation}, #{item.sex}, #{item.birthDay}, 
 			 #{item.totalRecords}, #{item.ConsecutiveWinningP}, #{item.ComplementaryRate}, #{item.WinningP})
 		</foreach>
 		ON DUPLICATE KEY UPDATE
@@ -25,4 +25,12 @@
 			COMPLEMENTARYRATE = values(COMPLEMENTARYRATE),
 			WINNINGP = values(WINNINGP)
 	</insert>
+	
+	<select id="searchHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
+		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%')  
+	</select>
+	
+	<select id="searchOneHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
+		SELECT * FROM HORSESKINNY WHERE HRNO = #{hrNo}
+	</select>
 </mapper>

@@ -44,7 +44,7 @@
 					<td th:text="${horse.hrNo}"></td>
 					<td th:text="${horse.hrName}"></td>
 					<td th:text="${horse.sex}"></td>
-					<td th:text="${horse.rank}"></td>
+					<td th:text="${horse.ranks}"></td>
 					<td th:text="${horse.nation}"></td>
 					<td th:text="${horse.birthDay}"></td>
 					<td th:text="${horse.rating}"></td>
@@ -125,7 +125,7 @@
 		
 		$(function() {
 		    $(document).ajaxSend(function(e, xhr, options) {
-		        xhr.setRequestHeader(header, token);
+		        xhr.setRequestHeader(header, token); // 요청할 때 송신하는 헤더를 추가
 		    });
 		});
 		

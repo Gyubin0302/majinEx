@@ -15,5 +15,5 @@ public interface HorseDao {
 	
 	public boolean horseInsert(Map<String, Object> map);
 	public List<HorseDto> searchHorse(String search);
-
+	public HorseDto searchOneHorse(String hrNo);
 }

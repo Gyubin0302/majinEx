@@ -24,4 +24,8 @@ public class TrainerService {
 	public List<TrDto> searchTrainer(String search){
 		return trainerDao.searchTrainer(search);
 	}
+	
+	public TrDto searchOneTrainer(String trNo) {
+		return trainerDao.searchOneTrainer(trNo);
+	}
 }

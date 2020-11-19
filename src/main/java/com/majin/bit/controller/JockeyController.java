@@ -114,7 +114,15 @@ public class JockeyController {
 
 		model.addAttribute("jkList", jkList);
 		
-		return "admin/APItest :: #API";
+		return "admin/APIInsert :: #API";
 		
+	}
+	
+	@RequestMapping(value = "/jockeyDetail", method = RequestMethod.POST)
+	public String jockeyDetail(String jkNo, Model model) {
+
+		model.addAttribute("jockey",jockeyService.searchOneJockey(jkNo));
+		
+		return "jockeyDetail";
 	}
 }

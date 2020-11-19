@@ -1,5 +1,6 @@
 package com.majin.bit.controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +41,7 @@ public class SearchController {
 	@Autowired
 	private TrainerService trainerService;
 	
-//	@RequestMapping(value="/search")
+//	@RequestMapping(value="/mulSearch")
 //    public String training(){
 //        return "/MultiCheck";
 //    }
@@ -65,18 +68,22 @@ public class SearchController {
 //		
 //	}
 	
-	@RequestMapping(value="/search")
-    public String search(){
-        return "/searchTest";
-    }
-	
 	@RequestMapping(value="/searchTest", method = RequestMethod.POST)
     public String searchTest(@RequestParam String search, Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
+		FileWriter userText;
+		try {
+			userText = new FileWriter("D:/final/userText/" + auth.getName() + "_save.txt", true); // 파일 이어쓰기
+			userText.write(search + "\n");
+			userText.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("searchHorse", horseService.searchHorse(search));
 		model.addAttribute("searchTrainer", trainerService.searchTrainer(search));
 		model.addAttribute("searchJockey", jockeyService.searchJockey(search));
 		
-        return "searchTest :: #test";
+        return "index :: #test";
     }
 }

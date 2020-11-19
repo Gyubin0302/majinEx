@@ -5,7 +5,7 @@
 
 <mapper namespace="com.majin.bit.dao.TrainerDao">
 	<insert id="trainerInsert" parameterType="java.util.Map">
-		INSERT INTO TRAINERSKINNY(TRNO, TRNAME, PART, DEBUT, TYEARTOTAL, TALLTOTAL, TCONSECUTIVEWINNINGP, TCOMPLEMENTARYRATE, TWINNINGP)
+		INSERT INTO TRAINERSKINNY(TRNO, TRNAME, PART, DEBUT, TYEARTOTAL, TALLTOTAL, TCONSECUTIVEWINNINGP, TCOMPLEMENTRYRATE, TWINNINGP)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.trNo}, #{item.trName}, #{item.part}, #{item.debut}, #{item.tYearTotal}, #{item.tAllTotal}, #{item.tConsecutiveWinningP}, #{item.tComplementRyRate}, #{item.tWinningP})
@@ -18,11 +18,15 @@
 			TYEARTOTAL = values(TYEARTOTAL), 
 			TALLTOTAL = values(TALLTOTAL),
 			TCONSECUTIVEWINNINGP = values(TCONSECUTIVEWINNINGP), 
-			TCOMPLEMENTARYRATE = values(TCOMPLEMENTARYRATE), 
+			TCOMPLEMENTRYRATE = values(TCOMPLEMENTRYRATE), 
 			TWINNINGP = values(TWINNINGP)
 	</insert>
 	
 	<select id="searchTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="java.lang.String">
 		SELECT * FROM TRAINERSKINNY WHERE TRNAME LIKE CONCAT('%',#{search},'%') 
+	</select>
+	
+	<select id="searchOneTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="java.lang.String">
+		SELECT * FROM TRAINERSKINNY WHERE TRNO = #{trNo}
 	</select>
 </mapper>

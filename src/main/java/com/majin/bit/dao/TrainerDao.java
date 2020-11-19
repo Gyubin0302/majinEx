@@ -15,4 +15,5 @@ public interface TrainerDao {
 	
 	public boolean trainerInsert(Map<String, Object> map);
 	public List<TrDto> searchTrainer(String search);
+	public TrDto searchOneTrainer(String trNo);
 }

@@ -24,5 +24,9 @@ public class HorseService {
 	public List<HorseDto> searchHorse(String search){
 		return horseDao.searchHorse(search);
 	}
+	
+	public HorseDto searchOneHorse(String hrNo) {
+		return horseDao.searchOneHorse(hrNo);
+	}
 
 }

@@ -113,4 +113,12 @@ public class TrainerController {
 		
 	}
 	
+	@RequestMapping(value = "/trainerDetail", method = RequestMethod.POST)
+	public String trainerDetail(String trNo, Model model) {
+
+		model.addAttribute("trainer",trainerService.searchOneTrainer(trNo));
+		
+		return "trainerDetail";
+	}
+	
 }

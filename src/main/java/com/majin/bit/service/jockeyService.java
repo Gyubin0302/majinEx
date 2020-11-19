@@ -25,4 +25,8 @@ public class jockeyService {
 	public List<JkDto> searchJockey(String search){
 		return jockeyDao.searchJockey(search);
 	}
+	
+	public JkDto searchOneJockey(String jkNo) {
+		return jockeyDao.searchOneJockey(jkNo);
+	}
 }

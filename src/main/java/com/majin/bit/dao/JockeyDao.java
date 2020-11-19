@@ -15,4 +15,5 @@ public interface JockeyDao {
 	
 	public boolean jockeyInsert(Map<String, Object> map);
 	public List<JkDto> searchJockey(String search);
+	public JkDto searchOneJockey(String jkNo);
 }

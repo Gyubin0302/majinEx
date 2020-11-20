@@ -68,6 +68,12 @@ public class MailService {
 	public void save(MailDto mailDto) {
 		mailDao.save(mailDto);
 	}
+	
+	public void update(MailDto mailDto) {
+		MailDto user = mailDao.findByAddress(mailDto.getAddress());
+		mailDto.setMailId(user.getMailId());
+		save(mailDto);
+	}
 
 	public boolean checkMail(MailDto mailDto) {
 		System.out.println(mailDto.getAddress());
@@ -75,5 +81,9 @@ public class MailService {
 		System.out.println("\n발급키 : "+mail.getMessage());
 		System.out.println("입력키 : "+mailDto.getMessage());
 		return mail.getMessage().equals(mailDto.getMessage()) ? true : false;
+	}
+
+	public boolean chkDuplicate(String address) {
+		return mailDao.findByAddress(address) != null ? true : false;
 	}
 }

@@ -60,7 +60,7 @@ public class OAuth2Controller {
 		
 		return "index";
 	}
-	
+
 	@GetMapping("/home")
 	public String home() {
 		return "home";
@@ -79,19 +79,19 @@ public class OAuth2Controller {
 	}
 
 	@GetMapping("/hello")
-	   public String hello(@AuthenticationPrincipal DefaultOAuth2User user, @AuthenticationPrincipal UserDetails user2) {
-	      if(user!=null) {
-	         System.out.println("\n\n\nController-----------------------\n"+user.getAttributes());
-	      
-	         System.out.println("name:"+user.getAttributes().get("name"));
-	      } else if(user2!=null) {
-	         System.out.println("\n\n\nController-----------------------\n"+user2.getUsername());
-	         
-	         System.out.println("name:"+user2.getAuthorities());
-	      }
-	      return "hello";
-	   }
-	
+	public String hello(@AuthenticationPrincipal DefaultOAuth2User user, @AuthenticationPrincipal UserDetails user2) {
+		if (user != null) {
+			System.out.println("\n\n\nController-----------------------\n" + user.getAttributes());
+
+			System.out.println("name:" + user.getAttributes().get("name"));
+		} else if (user2 != null) {
+			System.out.println("\n\n\nController-----------------------\n" + user2.getUsername());
+
+			System.out.println("name:" + user2.getAuthorities());
+		}
+		return "hello";
+	}
+
 	@GetMapping("/loginFailure")
 	public String loginFailure() {
 		return "loginFailure";
@@ -114,7 +114,13 @@ public class OAuth2Controller {
 	public boolean IdCheck(@RequestParam String id) throws Exception {
 		return memberService.idcheck(id);
 	}
-	
+
+	@GetMapping("/yundoHorse")
+	public String getYundoHorse() {
+		
+		return "home";
+	}
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

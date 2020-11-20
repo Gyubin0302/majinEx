@@ -19,6 +19,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,14 +42,14 @@ import com.majin.bit.word2vecTest.Word2VecTest;
 @Controller
 public class Wrod2VecController {
 
-	@RequestMapping(value="/training")
-	public String Word2VecTestpage() throws Exception {
-		
-		Word2VecTest word2vec = new Word2VecTest();
-		word2vec.training();
-		
-		return "/training/w2v";
-	}
+//	@RequestMapping(value="/training")
+//	public String Word2VecTestpage() throws Exception {
+//		
+//		Word2VecTest word2vec = new Word2VecTest();
+//		word2vec.training();
+//		
+//		return "/training/w2v";
+//	}
 	
 	@RequestMapping(value="/t")
 	public String Word2VecTestpage2(){
@@ -57,10 +59,16 @@ public class Wrod2VecController {
 	
 	@ResponseBody
 	@RequestMapping(value="/trainingTest", method = RequestMethod.POST)
-	public Collection<String> Word2VecTestpage2(String search){
+	public String Word2VecTestpage2(String search){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		RecommendProcess recommend = new RecommendProcess();
-		recommend.recommender(search);
-		return recommend.recommender(search);
+		Collection<String> recommendWord =  recommend.recommender(auth.getName(), search);
+		if(recommendWord != null) {
+			return recommendWord.toString();
+		} else {
+			return "추천단어가 없습니다.";
+		}
+		
 	}
 	
 	@RequestMapping(value="/w")

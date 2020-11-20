@@ -17,9 +17,9 @@ public class Word2VecTest {
 
 	public void training(String userId) throws Exception {
 		
+		// Java Word2Vec
 		File trainingFile = new File("D:/final/userText/" + userId + "_save.txt");
 		if(trainingFile.length() != 0) {
-//			String userId = "rbsks0302";
 			logger.info("Load & Vectorize Sentences....");
 			SentenceIterator iter = new BasicLineIterator(trainingFile);
 			
@@ -34,16 +34,26 @@ public class Word2VecTest {
 			});
 			
 			logger.info("Building model....");
-			Word2Vec vec = new Word2Vec.Builder().minWordFrequency(1).iterations(50).layerSize(300).seed(42).windowSize(3)
-					.iterate(iter).tokenizerFactory(t).build();
+			Word2Vec vec = new Word2Vec.Builder()
+					.batchSize(1000) // cpu나 gpu에서 iteration을 한번에 처리하는 단어의 양
+					.useAdaGrad(false)
+					.learningRate(0.025) // 학습속도
+					.minLearningRate(1e-3) // 학습 속도의 하한선
+					.minWordFrequency(1) // 말뭉치에서 유효한 단어로 인정받는데 필요한 최소 단어 개수\
+					.iterations(50) // 전체 데이터에 몇 회의 학습을 할 것인지 정함
+					.layerSize(300) // 단어의 백터 차원 300 차원
+					.seed(42)
+					.windowSize(3)
+					.iterate(iter) // 데이터의 여러 배치(batch, 데이터를 쪼갠 단위)중 어떤 배치에서 현재 학습중인지를 알려 줌
+					.tokenizerFactory(t) // 배치에 있는 단어를 학습 과정에 공급
+					.build();
 	
 			logger.info("Fitting Word2Vec model....");
-			vec.fit();
+			vec.fit(); // 학습 시작
 	
 			// Word Vectors.
 			logger.info("Writing word vectors to text file....");
 	
-//			WordVectorSerializer.writeWordVectors(vec, new File("src/main/webapp/trainingFile/" + userId + ".txt"));
 			WordVectorSerializer.writeWordVectors(vec, new File("D:/final/userText/" + userId + "_training.txt"));
 	
 			/*

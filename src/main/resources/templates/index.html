@@ -12,10 +12,17 @@
 <body>
 	<a th:href="@{/home}">홈</a>
 	<div>
-		<input id="search" type="text" placeholder="Search Box" name="search" />
+		<input id="search" type="text" placeholder="검색어를 입력해 주세요" name="search" />
 	</div>
-	<div id="test">
-		<th:block th:unless="${#lists.isEmpty(searchHorse)} ">
+	<div id="recommendWord">
+		<th:block th:unless="${#lists.isEmpty(recommendWord)} ">
+			<ul id="recommendList">
+				<li style="list-style: none" th:each="recommend: ${recommendWord}" th:text=${recommend}></li>
+			</ul>
+		</th:block>
+	</div>
+	<div id="information">
+		<th:block th:unless="${#lists.isEmpty(searchHorse)}">
 			<h3>말 목록</h3>
 			<table border=1>
 				<tr>
@@ -49,7 +56,7 @@
 			</table>
 		</th:block>
 		
-		<th:block th:unless="${#lists.isEmpty(searchTrainer)} ">
+		<th:block th:unless="${#lists.isEmpty(searchTrainer)}">
 			<h3>조교사 목록</h3>
 			<table border=1>
 				<tr>
@@ -77,7 +84,7 @@
 			</table>
 		</th:block>
 		
-		<th:block th:unless="${#lists.isEmpty(searchJockey)} ">
+		<th:block th:unless="${#lists.isEmpty(searchJockey)}">
 			<h3>기수 목록</h3>
 			<table border=1>
 				<tr>
@@ -110,7 +117,6 @@
 				</tr>
 			</table>
 	</div>
-
 	
 	<script>
 		let token = $("meta[name='_csrf']").attr("content");
@@ -121,26 +127,39 @@
 		        xhr.setRequestHeader(header, token);
 		    });
 		});
-		
-		$("#search").keydown(function(key) {
-			if (key.keyCode == 13) {
-				let search = $("#search").val();
-				console.log(search);
+
+		$("#search").keyup(function(key){
+			let search = $("#search").val();
+			if (key.keyCode !== 13) {
+				$.ajax({
+					url : "/recommendWord",
+					type : "POST",
+					data : {"search" : search},
+					dataType : "text",
+					success : function(retVal) {
+						$("#recommendWord").val("");
+						$("#recommendWord").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+			}else if(search !==  ""){
 				$.ajax({
 					url : "/searchTest",
 					type : "POST",
 					data : {"search" : search},
 					dataType : "text",
 					success : function(retVal) {
-						$("#test").val("");
-						$("#test").html(retVal);
+						$("#information").val("");
+						$("#recommendList").remove(); 
+						$("#information").replaceWith(retVal);
 					},
-					error : function(retVal) {
+					error : function() {
 						alert("error");
 					}
-
-				})
-			};
+				});
+			 };
 		});
 		
 		function horseDetail(hrNo, trNo){

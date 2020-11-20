@@ -2,7 +2,10 @@ package com.majin.bit.controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,7 @@ import com.majin.bit.service.HorseService;
 import com.majin.bit.service.SearchService;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.service.jockeyService;
+import com.majin.bit.util.RecommendProcess;
 
 @Controller
 public class SearchController {
@@ -45,7 +49,6 @@ public class SearchController {
 //    public String training(){
 //        return "/MultiCheck";
 //    }
-//	
 //	
 //	@RequestMapping(value = "check.do", method = RequestMethod.GET)
 //	public String checkBoxTest(HttpServletRequest request) throws IOException, ServletException{
@@ -68,6 +71,24 @@ public class SearchController {
 //		
 //	}
 	
+	@RequestMapping(value="/recommendWord", method = RequestMethod.POST)
+	public String recommendWord(String search, Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		RecommendProcess recommend = new RecommendProcess();
+		List<String> returnRecommend = new ArrayList<String>();
+		Collection<String> recommendWord =  recommend.recommender(auth.getName(), search);
+
+		if(recommendWord != null) {
+			returnRecommend = recommendWord.stream().collect(Collectors.toList()); // String[] test = recommendWord.toArray(new String[0]);
+			model.addAttribute("recommendWord", returnRecommend);
+			
+		} else {
+			model.addAttribute("recommendWord", "추천단어가 없습니다.");
+		}
+		
+		return "index :: #recommendWord";
+	}
+	
 	@RequestMapping(value="/searchTest", method = RequestMethod.POST)
     public String searchTest(@RequestParam String search, Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -84,6 +105,6 @@ public class SearchController {
 		model.addAttribute("searchTrainer", trainerService.searchTrainer(search));
 		model.addAttribute("searchJockey", jockeyService.searchJockey(search));
 		
-        return "index :: #test";
+        return "index :: #information";
     }
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.majin.bit.dto.HorseDto;
 import com.majin.bit.service.HorseService;
+import com.majin.bit.service.TrainerService;
 import com.majin.bit.util.HorseCrawling;
 
 
@@ -34,15 +35,12 @@ public class HorseController {
 	@Autowired
 	private HorseService horseService;
 
+	@Autowired
+	private TrainerService trainerService;
 	
 	@RequestMapping(value="/admin")
     public String apitest(){
         return "admin/APIInsert";
-    }
-	
-	@RequestMapping(value="/fileedit")
-    public String fileedit(){
-        return "test/fileEdit";
     }
 	
 	@RequestMapping(value = "/horseapi", method = {RequestMethod.GET, RequestMethod.POST})
@@ -111,9 +109,9 @@ public class HorseController {
 				horseDto.setWinningP(horse.get("WinningP").toString());
 				
 				if(jsonItem.get("rank") == null) {
-					horseDto.setRank("-");
+					horseDto.setRanks("-");
 				}else {
-					horseDto.setRank(jsonItem.get("rank").toString());
+					horseDto.setRanks(jsonItem.get("rank").toString());
 				}
 				horseList.add(horseDto);
 			}
@@ -137,6 +135,15 @@ public class HorseController {
 		
 		return "admin/APIInsert :: #API";
 				
+	}
+	
+	@RequestMapping(value = "/horseDetail", method = RequestMethod.POST)
+	public String horseDetail(String hrNo, String trNo, Model model) {
+		
+		model.addAttribute("horse", horseService.searchOneHorse(hrNo));
+		model.addAttribute("trainer",trainerService.searchOneTrainer(trNo));
+		
+		return "horseDetail";
 	}
 
 }

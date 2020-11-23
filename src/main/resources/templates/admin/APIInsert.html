@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}" />
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -21,7 +20,6 @@
 		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
 		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
 		<input id="trapi_j" type="button" name="search" value="조교(제주)" />
-
 	</div>
 
 	<div id="API">
@@ -46,7 +44,7 @@
 					<td th:text="${horse.hrNo}"></td>
 					<td th:text="${horse.hrName}"></td>
 					<td th:text="${horse.sex}"></td>
-					<td th:text="${horse.rank}"></td>
+					<td th:text="${horse.ranks}"></td>
 					<td th:text="${horse.nation}"></td>
 					<td th:text="${horse.birthDay}"></td>
 					<td th:text="${horse.rating}"></td>
@@ -122,6 +120,15 @@
 		</th:block>
 	</div>
 	<script>
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
+		$(function() {
+		    $(document).ajaxSend(function(e, xhr, options) {
+		        xhr.setRequestHeader(header, token); // 요청할 때 송신하는 헤더를 추가
+		    });
+		});
+		
 		let url;
 		$("#horseapi_s").click(function() {
 			url = "/horseapi";
@@ -169,19 +176,17 @@
 			api(url, meet)
 		});
 
-		function api(mapping) {
+		function api(mapping, meet) {
 			console.log(mapping);
+			console.log(meet);
 			$.ajax({
 				url : mapping,
 				type : "POST",
 				data : meet,
-				dataType : "text",
-				cache : false,
+                dataType : "text",
 				success : function(retVal) {
 					console.log(retVal);
 					$("#API").val("");
-					/* let jsonn = JSON.parse(retVal);
-					console.log(jsonn); */
 					$("#API").replaceWith(retVal);
 				},
 				error : function(retVal) {

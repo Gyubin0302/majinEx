@@ -11,12 +11,11 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@SequenceGenerator(name="seq",sequenceName = "MID",allocationSize = 1)
 @Data
 @Table(name = "member")
 public class Member {
 	@Id
-	@GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mid")
 	private int mid;
 	@Column(name = "id")

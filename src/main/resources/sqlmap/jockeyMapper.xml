@@ -5,7 +5,7 @@
 
 <mapper namespace="com.majin.bit.dao.JockeyDao">
 	<insert id="jockeyInsert" parameterType="java.util.Map">
-		INSERT INTO JOCKEYSKINNY(JKNO, JKNAME, TRNO, PART, JRWEIGHT, DEBUT, JYEARTOTAL, JALLTOTAL, JCONSECUTIVEWINNINGP, JCOMPLEMENTARYRATE, JWINNINGP, SPDATE)
+		INSERT INTO JOCKEYSKINNY(JKNO, JKNAME, TRNO, PART, JRWEIGHT, DEBUT, JYEARTOTAL, JALLTOTAL, JCONSECUTIVEWINNINGP, JCOMPLEMENTRYRATE, JWINNINGP, SPDATE)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.jkNo}, #{item.jkName}, #{item.trNo}, #{item.part}, #{item.jRweight}, #{item.debut}, #{item.jYearTotal}, #{item.jAllTotal},
@@ -21,8 +21,16 @@
 			JYEARTOTAL = values(JYEARTOTAL), 
 			JALLTOTAL = values(JALLTOTAL), 
 			JCONSECUTIVEWINNINGP = values(JCONSECUTIVEWINNINGP), 
-			JCOMPLEMENTARYRATE = values(JCOMPLEMENTARYRATE),
+			JCOMPLEMENTRYRATE = values(JCOMPLEMENTRYRATE),
 			JWINNINGP = values(JWINNINGP), 
 			SPDATE = values(SPDATE)
 	</insert>
+	
+	<select id="searchJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">
+		SELECT * FROM JOCKEYSKINNY WHERE JKNAME LIKE CONCAT('%',#{search},'%') 
+	</select>
+	
+	<select id="searchOneJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">
+		SELECT * FROM JOCKEYSKINNY WHERE JKNO = #{jkNo}
+	</select>
 </mapper>

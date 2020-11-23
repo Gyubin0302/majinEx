@@ -24,6 +24,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.majin.bit.service.CustomOAuth2UserService;
@@ -49,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/", "/signup", "/idcheck", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**").permitAll()
+				.antMatchers("/", "/yundo/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**").permitAll()
 				.antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
 				.antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
 				.antMatchers("/naver").hasAuthority(NAVER.getRoleType())
@@ -72,8 +74,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
 				.and()
 					.logout()
-						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-						.logoutSuccessUrl("/");
+//						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/")
+						.invalidateHttpSession(true);
+						
 	}
 
 	@Bean

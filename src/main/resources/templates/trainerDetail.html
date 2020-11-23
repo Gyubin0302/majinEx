@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h3>조교사 프로필</h3>
+		<table border=1>
+			<tr>
+				<th>성명</th>
+				<td>[[${trainer.trName}]]</td>
+				<th>소속조</th>
+				<td>[[${trainer.part}]]</td>
+				<th>데뷔날짜</th>
+				<td>[[${trainer.debut}]]</td>
+				<th>최근 1년 전적</th>
+				<td>[[${trainer.tYearTotal}]]</td>
+			</tr>
+			<tr>
+				<th>통산 전적</th>
+				<td>[[${trainer.tAllTotal}]]</td>
+				<th>승률</th>
+				<td>[[${trainer.tWinningP}]]</td>
+				<th>복승률</th>
+				<td>[[${trainer.tComplementRyRate}]]</td>
+				<th>연승률</th>
+				<td>[[${trainer.tConsecutiveWinningP}]]</td>
+			</tr>
+
+		</table>
+	</div>
+</body>
+</html>

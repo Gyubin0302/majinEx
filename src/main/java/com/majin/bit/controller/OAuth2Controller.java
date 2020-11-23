@@ -1,4 +1,4 @@
-package com.majin.bit.security;
+package com.majin.bit.controller;
 
 import java.io.BufferedWriter;
 import java.io.File;

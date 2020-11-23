@@ -1,4 +1,4 @@
-package com.majin.bit.security;
+package com.majin.bit.configuration;
 
 import static com.majin.bit.security.SocialType.GOOGLE;
 import static com.majin.bit.security.SocialType.KAKAO;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
@@ -28,6 +29,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.majin.bit.security.CustomOAuth2Provider;
 import com.majin.bit.service.CustomOAuth2UserService;
 import com.majin.bit.service.MemberServiceImpl;
 
@@ -105,4 +107,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 		return null;
 	}
+	
+	@Override
+	 public void configure(WebSecurity webSecurity) throws Exception {
+		 
+	  webSecurity.ignoring().antMatchers("/static/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/images/**", "/webjars/**"); 
+	 }
 }

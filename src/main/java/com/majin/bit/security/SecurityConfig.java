@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/", "/yundo/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**").permitAll()
+				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**").permitAll()
 				.antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
 				.antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
 				.antMatchers("/naver").hasAuthority(NAVER.getRoleType())

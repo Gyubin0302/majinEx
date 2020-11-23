@@ -34,7 +34,7 @@ public class OAuth2Controller {
 	@GetMapping({ "", "/" })
 	public String index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String path = "D:/final/userText2/";
+		String path = "D:/final/userText/";
 		File folder = new File(path);
 		File userText = new File(path + auth.getName() + "_save.txt");
 		if(!folder.exists()) { // 폴더가 없으면 폴더 생성
@@ -50,7 +50,7 @@ public class OAuth2Controller {
 			}
 		} else {
 			try {
-				if(!userText.exists()) {
+				if(!userText.exists() && auth.getName() != "anonymousUser") {
 					userText.createNewFile();
 				}
 			} catch (IOException e) {

@@ -22,7 +22,6 @@ public class Word2VecTest {
 		if(trainingFile.length() != 0) {
 			logger.info("Load & Vectorize Sentences....");
 			SentenceIterator iter = new BasicLineIterator(trainingFile);
-			
 	
 			TokenizerFactory t = new DefaultTokenizerFactory();
 			t.setTokenPreProcessor(new CommonPreprocessor() {
@@ -55,7 +54,8 @@ public class Word2VecTest {
 			logger.info("Writing word vectors to text file....");
 	
 			WordVectorSerializer.writeWordVectors(vec, new File("D:/final/userText/" + userId + "_training.txt"));
-	
+			WordVectorSerializer.writeWord2VecModel(vec, new File("D:/final/userText/" + userId + "_trainingModel.vec"));
+
 			/*
 			 * PLEASE NOTE: after model is restored, it's still required to set
 			 * SentenceIterator and TokenizerFactory, if you're going to train this model

@@ -19,7 +19,8 @@
 		<input id="jkapi_j" type="button" name="search" value="기수(제주)" /> <br>
 		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
 		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
-		<input id="trapi_j" type="button" name="search" value="조교(제주)" />
+		<input id="trapi_j" type="button" name="search" value="조교(제주)" /> <br>
+		<input id="word2vec" type="button" name="search" value="단어 학습" />
 	</div>
 
 	<div id="API">
@@ -195,7 +196,24 @@
 
 			});
 		};
-	</script>
+		
+		$("#word2vec").click(function(){
+			$.ajax({
+				url : "/nonUserWord2Vec",
+				type : "POST",
+                dataType : "text",
+				success : function(retVal) {
+					console.log(retVal);
+					$("#API").val("");
+					$("#API").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
 
+			});
+		});
+		
+	</script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.majin.bit.dto.YundoDto;
+import com.majin.bit.dto.YundoJpaKey;
 
 public class YundoCrawling {
 	public List<YundoDto> yundoCrwaling() {
@@ -27,6 +28,8 @@ public class YundoCrawling {
 
 		List<String> datas = new ArrayList();
 		YundoDto yundo;
+		YundoJpaKey yundojpakey;
+
 		List<YundoDto> yundos = new ArrayList();
 
 		Elements ele = doc.getElementsByTag("table");
@@ -48,8 +51,10 @@ public class YundoCrawling {
 			// 여기서 dto 생성 data
 			while (ie1.hasNext()) {
 				data = "";
-				yundo.setMeet("1");
-				yundo.setYear(ie1.next().text());
+				yundojpakey = new YundoJpaKey("1",ie1.next().text());
+				yundo.setMeet(yundojpakey);
+//				yundo.setMeet("1");
+//				yundo.setYear(ie1.next().text());
 
 				ie2 = ie1.next();
 				m = p.matcher(ie2.toString());

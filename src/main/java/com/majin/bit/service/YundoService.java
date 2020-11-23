@@ -22,7 +22,8 @@ public class YundoService {
 		List<YundoDto> yundos = yundoCrawling.yundoCrwaling();
 
 		for (YundoDto yundo : yundos) {
-			
+			System.out.println(yundo);
+			yundoDao.save(yundo);
 		}
 	}
 }

@@ -3,10 +3,14 @@ package com.majin.bit.controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.majin.bit.word2vecTest.Word2VecTest;
 
 
 
@@ -48,5 +52,14 @@ public class Wrod2VecController {
 
 		return re;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/nonUserWord2Vec", method = RequestMethod.POST)
+	public String nonUserWord2Vec() throws Exception {
+		Word2VecTest word2Vec = new Word2VecTest();
+		word2Vec.training("anonymousUser");
+		return "학습완료";
+	}
+	
 	
 }

@@ -1,5 +1,6 @@
 package com.majin.bit.controller;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class SearchController {
 	@Autowired
 	private TrainerService trainerService;
 	
+//	
 //	@RequestMapping(value="/mulSearch")
 //    public String training(){
 //        return "/MultiCheck";
@@ -71,8 +73,8 @@ public class SearchController {
 //		
 //	}
 	
-	@RequestMapping(value="/recommendWord", method = RequestMethod.POST)
-	public String recommendWord(String search, Model model){
+	@RequestMapping(value="/search/recommendWord", method = RequestMethod.POST)
+	public String recommendWord(String search, Model model) throws FileNotFoundException{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		RecommendProcess recommend = new RecommendProcess();
 		List<String> returnRecommend = new ArrayList<String>();
@@ -89,15 +91,17 @@ public class SearchController {
 		return "index :: #recommendWord";
 	}
 	
-	@RequestMapping(value="/searchTest", method = RequestMethod.POST)
-    public String searchTest(@RequestParam String search, Model model){
+	@RequestMapping(value="/search", method = RequestMethod.POST)
+    public String search(@RequestParam String search, Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		FileWriter userText;
 		try {
-			userText = new FileWriter("D:/final/userText/" + auth.getName() + "_save.txt", true); // 파일 이어쓰기
-			userText.write(search + "\n");
-			userText.close();
+			if(auth.getName() != "anonymousUser") {
+				userText = new FileWriter("D:/final/userText/" + auth.getName() + "_save.txt", true); // 파일 이어쓰기
+				userText.write(search + "\n");
+				userText.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

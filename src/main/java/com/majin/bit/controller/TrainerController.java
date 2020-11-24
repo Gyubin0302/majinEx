@@ -89,8 +89,8 @@ public class TrainerController {
 			trDto.setTrNo(jsonItem.get("trNo").toString());
 			trDto.setPart(jsonItem.get("part").toString());
 			trDto.setDebut(jsonItem.get("stDate").toString());
-			trDto.settYearTotal(trainer.get("tAllTotal").toString());
-			trDto.settAllTotal(trainer.get("tYearTotal").toString());
+			trDto.settYearTotal(trainer.get("tYearTotal").toString());
+			trDto.settAllTotal(trainer.get("tAllTotal").toString());
 			trDto.settConsecutiveWinningP(trainer.get("ConsecutiveWinningP").toString());
 			trDto.settComplementRyRate(trainer.get("ComplementaryRate").toString());
 			trDto.settWinningP(trainer.get("WinningP").toString());

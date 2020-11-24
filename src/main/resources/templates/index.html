@@ -8,173 +8,78 @@
   layout:decorator="layout/layout"
 >
 	<main layout:fragment="content">
-	<!-- Navigation -->
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" th:href="@{/}">Start Bootstrap</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" th:href="@{#none}">About</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{#none}">Services</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{#none}">Contact</a>
-					</li>
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Portfolio </a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-							<a class="dropdown-item" th:href="@{#none}">1 Column Portfolio</a> 
-							<a class="dropdown-item" th:href="@{#none}">2 Column Portfolio</a> 
-							<a class="dropdown-item" th:href="@{#none}">3 Column Portfolio</a> 
-							<a class="dropdown-item" th:href="@{#none}">4 Column Portfolio</a> 
-							<a class="dropdown-item" th:href="@{#none}">Single Portfolio Item</a>
-						</div></li>
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" th:href="@{#none}" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Blog </a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" th:href="@{#none}">Blog Home 1</a>
-							<a class="dropdown-item" th:href="@{#none}">Blog Home 2</a>
-							<a class="dropdown-item" th:href="@{#none}">Blog Post</a>
-						</div></li>
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Other Pages </a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
-							<a class="dropdown-item" th:href="@{/home}">login</a> 
-							<a class="dropdown-item" th:href="@{#none}">SidebarPage</a> 
-							<a class="dropdown-item" th:href="@{#none}">FAQ</a> 
-							<a class="dropdown-item" th:href="@{#none}">404</a> 
-							<a class="dropdown-item" th:href="@{#none}">Pricing Table</a>
-						</div></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<div class="input-group mb-3">
-		<input id="search" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-		<div class="input-group-prepend">
-			<button type="button" class="btn btn-outline-primary">
-				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  			<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"></path>
- 			<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"></path>
-		  </svg>
-			</button>
-		</div>
-		
-		<div class="container" id="recommendWord">
-			<th:block th:unless="${#lists.isEmpty(recommendWord)} ">
-				<ul id="recommendList">
-					<li style="list-style: none" th:each="recommend: ${recommendWord}" th:text=${recommend}></li>
-				</ul>
-			</th:block>
-		</div>
+	<!-- Page Content container -->
+	<div class="gride">
+	<div id="information" class="container">
+		 <th:block th:unless="${#lists.isEmpty(searchHorse)}">
+		  	<h1 class="my-4">경주마 정보</h1>
+		  	<div class="row justify-content-md-center">
+				<div class="col-sm-top">마명</div>
+				<div class="col-sm-top">레이팅</div>
+				<div class="col-sm-top">등급</div>
+				<div class="col-sm-top">산지</div>
+				<div class="col-sm-top">성별</div>
+				<div class="col-sm-3-top">전적</div>
+		    </div>	
+			<!-- Marketing Icons Section -->
+		    <div class="row justify-content-md-center" th:each="horse : ${searchHorse}">
+				<div class="col-sm"><a th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.trNo}]])' th:text="${horse.hrName}" href="#KRA" ></a></div>
+				<div class="col-sm" th:text="${horse.rating}"></div>
+				<div class="col-sm" th:text="${horse.ranks}"></div>
+				<div class="col-sm" th:text="${horse.nation}"></div>
+				<div class="col-sm" th:text="${horse.sex}"></div>
+				<div class="col-sm-3" th:text="${horse.totalRecords}"></div>
+		    </div>	
+		 </th:block>
+		 
+		 <th:block th:unless="${#lists.isEmpty(searchTrainer)}">
+		  	<h1 class="my-4">조교사 정보</h1>
+		  	<div class="row justify-content-md-center">
+				<div class="col-sm-top">조교사 이름</div>
+				<div class="col-sm-top">소속조</div>
+				<div class="col-sm-top">데뷔 날짜</div>
+				<div class="col-md-4-top">통산 전적</div>
+				<div class="col-sm-top">연승률</div>
+				<div class="col-sm-top">복승률</div>
+				<div class="col-sm-top">승률</div>  
+		    </div>	
+			<!-- Marketing Icons Section -->
+		    <div class="row justify-content-md-center" th:each="tr : ${searchTrainer}">
+				<div class="col-sm"><a th:onclick='trainerDetail([[${tr.trNo}]])' th:text="${tr.trName}" href="#KRA" ></a></div>
+				<div class="col-sm" th:text="${tr.part}"></div>
+				<div class="col-sm" th:text="${tr.debut}"></div>
+				<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
+				<div class="col-sm" th:text="${tr.tConsecutiveWinningP}"></div>
+				<div class="col-sm" th:text="${tr.tComplementRyRate}"></div>
+				<div class="col-sm" th:text="${tr.tWinningP}"></div>  
+		    </div>	
+		 </th:block>
+		 
+		  <th:block th:unless="${#lists.isEmpty(searchJockey)}">
+		  	<h1 class="my-4">기수 정보</h1>
+		  	<div class="row justify-content-md-center">
+				<div class="col-sm-top">기수 이름</div>
+				<div class="col-sm-top">소속조</div>
+				<div class="col-sm-top">데뷔 날짜</div>
+				<div class="col-md-4-top">통산 전적</div>
+				<div class="col-sm-top">연승률</div>
+				<div class="col-sm-top">복승률</div>
+				<div class="col-sm-top">승률</div>  
+		    </div>	
+			<!-- Marketing Icons Section -->
+		    <div class="row justify-content-md-center" th:each="jk : ${searchJockey}">
+				<div class="col-sm"><a th:onclick='jockeyDetail([[${jk.jkNo}]])' th:text="${jk.jkName}" href="#KRA"></a></div>
+				<div class="col-sm" th:text="${jk.part}"></div>
+				<div class="col-sm" th:text="${jk.debut}"></div>
+				<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
+				<div class="col-sm" th:text="${jk.jConsecutiveWinningP}"></div>
+				<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
+				<div class="col-sm" th:text="${jk.jWinningP}"></div>  
+		    </div>	
+		 </th:block>
 	</div>
-
-	<!-- test sheet -->
-	<div id="information">
-		<th:block th:unless="${#lists.isEmpty(searchHorse)}">
-			<h3>말 목록</h3>
-			<table border=1>
-				<tr>
-					<th>말 번호</th>
-					<th>말 이름</th>
-					<th>말 성별</th>
-					<th>말 등급</th>
-					<th>말 국가</th>
-					<th>말 출생년도</th>
-					<th>레이팅</th>
-					<th>조교사 번호</th>
-					<th>통산전적</th>
-					<th>승률</th>
-					<th>복승률</th>
-					<th>연승률</th>
-				</tr>
-				<tr th:each="horse : ${searchHorse}">
-					<td th:text="${horse.hrNo}"></td>
-					<td th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.trNo}]])'
-						th:text="${horse.hrName}"></td>
-					<td th:text="${horse.sex}"></td>
-					<td th:text="${horse.ranks}"></td>
-					<td th:text="${horse.nation}"></td>
-					<td th:text="${horse.birthDay}"></td>
-					<td th:text="${horse.rating}"></td>
-					<td th:text="${horse.trNo}"></td>
-					<td th:text="${horse.totalRecords}"></td>
-					<td th:text="${horse.WinningP}"></td>
-					<td th:text="${horse.ComplementaryRate}"></td>
-					<td th:text="${horse.ConsecutiveWinningP}"></td>
-				</tr>
-			</table>
-		</th:block>
-
-		<th:block th:unless="${#lists.isEmpty(searchTrainer)}">
-			<h3>조교사 목록</h3>
-			<table border=1>
-				<tr>
-					<th>조교사 번호</th>
-					<th>조교사 이름</th>
-					<th>소속조</th>
-					<th>데뷔일자</th>
-					<th>최근 1년 전적</th>
-					<th>통산 전적</th>
-					<th>통산 승률</th>
-					<th>통산 복승률</th>
-					<th>통산 연승률</th>
-				</tr>
-				<tr th:each="tr : ${searchTrainer}">
-					<td th:text="${tr.trNo}"></td>
-					<td th:onclick='trainerDetail([[${tr.trNo}]])'
-						th:text="${tr.trName}"></td>
-					<td th:text="${tr.part}"></td>
-					<td th:text="${tr.debut}"></td>
-					<td th:text="${tr.tYearTotal}"></td>
-					<td th:text="${tr.tAllTotal}"></td>
-					<td th:text="${tr.tWinningP}"></td>
-					<td th:text="${tr.tComplementRyRate}"></td>
-					<td th:text="${tr.tConsecutiveWinningP}"></td>
-				</tr>
-			</table>
-		</th:block>
-
-		<th:block th:unless="${#lists.isEmpty(searchJockey)}">
-			<h3>기수 목록</h3>
-			<table border=1>
-				<tr>
-					<th>기수 번호</th>
-					<th>기수 이름</th>
-					<th>조교 번호</th>
-					<th>소속조</th>
-					<th>기능가능중량(소속조)</th>
-					<th>데뷔일자</th>
-					<th>최근 1년 전적</th>
-					<th>통산 전적</th>
-					<th>통산 승률</th>
-					<th>통산 복승률</th>
-					<th>통산 연승률</th>
-					<th>은퇴 날짜</th>
-				</tr>
-				<tr th:each="jk : ${searchJockey}">
-					<td th:text="${jk.jkNo}"></td>
-					<td th:onclick='jockeyDetail([[${jk.jkNo}]])'
-						th:text="${jk.jkName}"></td>
-					<td th:text="${jk.trNo}"></td>
-					<td th:text="${jk.part}"></td>
-					<td th:text="${jk.jRweight}"></td>
-					<td th:text="${jk.debut}"></td>
-					<td th:text="${jk.jYearTotal}"></td>
-					<td th:text="${jk.jAllTotal}"></td>
-					<td th:text="${jk.jConsecutiveWinningP}"></td>
-					<td th:text="${jk.jComplementRyRate}"></td>
-					<td th:text="${jk.jWinningP}"></td>
-					<td th:text="${jk.spDate}"></td>
-				</tr>
-			</table>
 	</div>
-	<!-- test sheet end -->
+	<!-- Page Content container -->
 </main>
 	<th:block layout:fragment="script">
 		<!-- Bootstrap core JavaScript -->
@@ -235,6 +140,28 @@
 				}
 				;
 			});
+			
+			$("#searchBtn").bind("click", function(){
+				let search = $("#search").val();
+				console.log(search);
+				$.ajax({
+					url : "/search",
+					type : "POST",
+					data : {
+						"search" : search
+					},
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#recommendWord").val("");
+						$("#recommendList").remove();
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+			})
 	
 			function horseDetail(hrNo, trNo) {
 	

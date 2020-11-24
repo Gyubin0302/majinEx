@@ -108,7 +108,7 @@ public class SearchController {
 		model.addAttribute("searchHorse", horseService.searchHorse(search));
 		model.addAttribute("searchTrainer", trainerService.searchTrainer(search));
 		model.addAttribute("searchJockey", jockeyService.searchJockey(search));
-		
+
         return "index :: #information";
     }
 }

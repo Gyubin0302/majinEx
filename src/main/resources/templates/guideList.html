@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+li {
+	list-style: none;
+	float: left;
+}
+</style>
+</head>
+<body>
+<div>
+	<div style="padding: 10px; text-align: center;">
+		<h1>
+			<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
+		</h1>
+	</div>
+	<div style="text-align: right;">
+		<a th:href="@{/admin/guideInsert}" sec:authorize="hasRole('ROLE_ADMIN')">글작성</a>
+	</div>
+	<div>
+		<table>
+			<thead style="text-align: center;">
+				<tr>
+					<th style="text-align: center;">순서</th>
+					<th style="text-align: center;">제목</th>
+					<th style="text-align: center;">내용</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="data : ${guideList}"
+					th:onclick="'window.location.href = \'' + @{/guideDetail/{g_no}(g_no=${data.guideNo})} + '\''">
+					<td th:text="${data.guideNo}"
+						style="cursor: pointer; text-align: center;"></td>
+					<td th:text="${data.title}"
+						style="cursor: pointer; text-align: center;"></td>
+					<td th:text="${data.content}"
+						style="cursor: pointer; text-align: center;"></td>
+				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+</div>
+</body>
+</html>

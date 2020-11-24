@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<div style="padding: 10px; text-align: center;">
+		<h1>
+			<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
+		</h1>
+	</div>
+	
+	<div>
+	  <form role="form" th:object=${guideDto} th:action="@{/admin/guideInsertProc}" method="post" enctype="multipart/form-data">
+		<div>
+			<label for="title" style="font-weight: bolder">제목</label>
+			<input type="text" th:field="*{title}" id="title"  placeholder="제목을 입력하세요!!!" required="required">
+		</div>
+ 		<div style="font-weight: bolder">
+			<label for="content">내용가리</label><br/>
+			<textarea th:field="*{content}" id="content" name="content" rows="50" cols="100" placeholder="내용을 입력하세욥~!" required="required"></textarea>
+		</div>
+
+		<div style="text-align: right;">
+			<input type="submit" th:value="목록" th:formaction="@{/guideList}">
+			<input type="submit" th:value="작성">
+			<input type="submit" th:value="취소">
+		</div>
+	</form> 
+	</div>
+	<br/><br/><br/>
+</body>
+</html>

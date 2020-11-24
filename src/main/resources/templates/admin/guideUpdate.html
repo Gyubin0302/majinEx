@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+		<div>
+			<div style="padding: 10px; text-align: center;">
+				<h1>
+					<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
+				</h1>
+			</div>
+			<div>
+				<form role="form" th:object="${guideDto}" th:action="@{/admin/guideUpdateProc}" method="post">
+					<div>
+						<label for="title" style="font-weight: bolder;">제목</label>
+						<input type="text" id="title" name="title" th:value="${detail.title}">
+					</div>
+					<div>
+						<label for="content" style="font-weight: bolder;">내용</label><dr/>
+						<textarea id="content" name="content" rows="50" cols="100">
+						[[${detail.content}]]
+						</textarea>
+					</div>
+					<div style="text-align: right;">
+						<input type="hidden" name="guideNo" th:value="${detail.guideNo}">
+						<input type="submit" th:value="목록" th:formaction="@{/guideList}">
+						<input type="submit" th:value="저장 " sec:authorize="hasRole('ROLE_ADMIN')">
+						<input type="submit" th:value="삭제" th:formaction="@{/admin/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+					</div>
+				</form>
+			</div>
+		<br/><br/><br/>
+		</div>
+	</body>
+</html>

@@ -20,6 +20,7 @@ public class MailController {
     public boolean execMail(MailDto mailDto) {
     	mailDto.setTitle("제목입니다");
     	mailDto.setMessage(MailService.createKey());
+    	System.out.println(mailDto.getMessage());
     	if(!mailService.chkDuplicate(mailDto.getAddress())) {
     		mailService.save(mailDto);
     	} else {

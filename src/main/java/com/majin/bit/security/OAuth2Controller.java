@@ -39,7 +39,7 @@ public class OAuth2Controller {
 		File userText = new File(path + auth.getName() + "_save.txt");
 		if(!folder.exists()) { // 폴더가 없으면 폴더 생성
 			try {
-				folder.mkdir();
+				folder.mkdirs();
 	
 				if(!userText.exists()) { // 파일이 없으면 파일 생성
 					userText.createNewFile();

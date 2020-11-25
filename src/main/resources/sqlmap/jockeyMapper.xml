@@ -5,11 +5,11 @@
 
 <mapper namespace="com.majin.bit.dao.JockeyDao">
 	<insert id="jockeyInsert" parameterType="java.util.Map">
-		INSERT INTO JOCKEYSKINNY(JKNO, JKNAME, TRNO, PART, JRWEIGHT, DEBUT, JYEARTOTAL, JALLTOTAL, JCONSECUTIVEWINNINGP, JCOMPLEMENTRYRATE, JWINNINGP, SPDATE)
+		INSERT INTO JOCKEYSKINNY(JKNO, JKNAME, TRNO, PART, JRWEIGHT, DEBUT, JYEARTOTAL, JALLTOTAL, JCONSECUTIVEWINNINGP, JCOMPLEMENTRYRATE, JWINNINGP, SPDATE, MEET, ACT)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.jkNo}, #{item.jkName}, #{item.trNo}, #{item.part}, #{item.jRweight}, #{item.debut}, #{item.jYearTotal}, #{item.jAllTotal},
-			 #{item.jConsecutiveWinningP}, #{item.jComplementRyRate}, #{item.jWinningP}, #{item.spDate})
+			 #{item.jConsecutiveWinningP}, #{item.jComplementRyRate}, #{item.jWinningP}, #{item.spDate}, #{item.meet}, #{item.act})
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 			JKNO = values(JKNO),
@@ -23,7 +23,9 @@
 			JCONSECUTIVEWINNINGP = values(JCONSECUTIVEWINNINGP), 
 			JCOMPLEMENTRYRATE = values(JCOMPLEMENTRYRATE),
 			JWINNINGP = values(JWINNINGP), 
-			SPDATE = values(SPDATE)
+			SPDATE = values(SPDATE),
+			MEET = values(MEET),
+			ACT = values(ACT)
 	</insert>
 	
 	<select id="searchJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">

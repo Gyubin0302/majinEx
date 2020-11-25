@@ -19,7 +19,7 @@ public class RecommendProcess {
         	return null;
         }else {
         	if(userId.equals("anonymousUser")) {
-            	word2Vec = WordVectorSerializer.readWord2VecModel("D:/final/userText/anonymousUser_trainingModel.vec");
+//            	word2Vec = WordVectorSerializer.readWord2VecModel("D:/final/userText/anonymousUser_trainingModel.vec");
             	//word2Vec = WordVectorSerializer.loadFullModel("D:/final/userText/anonymousUser_trainingModel.vec");
             }else {
             	word2Vec = WordVectorSerializer.readWord2VecModel(path + userId + "_trainingModel.vec");

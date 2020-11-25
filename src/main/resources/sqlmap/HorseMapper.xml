@@ -5,11 +5,11 @@
 
 <mapper namespace="com.majin.bit.dao.HorseDao">
 	<insert id="horseInsert" parameterType="java.util.Map">
-		INSERT INTO HORSESKINNY(HRNO, HRNAME, TRNO, RATING, RANKS, NATION, SEX, BIRTHDAY, TOTALRECORDS, CONSECUTIVEWINNINGP, COMPLEMENTARYRATE, WINNINGP)
+		INSERT INTO HORSESKINNY(HRNO, HRNAME, TRNO, RATING, RANKS, NATION, SEX, BIRTHDAY, TOTALRECORDS, CONSECUTIVEWINNINGP, COMPLEMENTARYRATE, WINNINGP, MEET, ACT)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.hrNo}, #{item.hrName}, #{item.trNo}, #{item.rating}, #{item.ranks}, #{item.nation}, #{item.sex}, #{item.birthDay}, 
-			 #{item.totalRecords}, #{item.ConsecutiveWinningP}, #{item.ComplementaryRate}, #{item.WinningP})
+			 #{item.totalRecords}, #{item.ConsecutiveWinningP}, #{item.ComplementaryRate}, #{item.WinningP}, #{item.meet}, #{item.act})
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 			HRNO = values(HRNO), 
@@ -23,14 +23,20 @@
 			TOTALRECORDS = values(TOTALRECORDS), 
 			CONSECUTIVEWINNINGP = values(CONSECUTIVEWINNINGP), 
 			COMPLEMENTARYRATE = values(COMPLEMENTARYRATE),
-			WINNINGP = values(WINNINGP)
+			WINNINGP = values(WINNINGP),
+			MEET = values(MEET),
+			ACT = values(ACT)
 	</insert>
 	
 	<select id="searchHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
 		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%')  
 	</select>
 	
-	<select id="searchOneHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
-		SELECT * FROM HORSESKINNY WHERE HRNO = #{hrNo}
+	<select id="searchOneHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.HorseDto">
+		SELECT * FROM HORSESKINNY WHERE HRNO = #{hrNo} AND MEET = #{meet}
+	</select>
+	
+	<select id="searchPagingHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.Pagination">
+		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC LIMIT #{startIndex}, #{pageSize}
 	</select>
 </mapper>

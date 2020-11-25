@@ -3636,6 +3636,7 @@ input[type="button"].btn-block {
   text-align: center;
   width: 60%;
   margin: auto;
+  margin-top: 15px;
 }
 
 .input-group > .form-control,
@@ -4801,10 +4802,11 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #f8f9fa;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  align-content: center;
+  width: 100%;
 }
 
 .card > hr {
@@ -4837,7 +4839,7 @@ input[type="button"].btn-block {
 .card-body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  min-height: 1px;
+  /* min-height: 1px; */
   padding: 1.25rem;
 }
 
@@ -5084,6 +5086,7 @@ input[type="button"].btn-block {
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem;
+  align-content: center;
 }
 
 .page-link {
@@ -7612,8 +7615,16 @@ button.bg-dark:focus {
   .justify-content-md-center {
     -ms-flex-pack: center !important;
     justify-content: center !important;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
     text-align: center;
+  }
+  
+  .justify-content-md-center-paging {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    text-align: center;
+    margin-top: 15px;
   }
   
   .justify-content-md-between {

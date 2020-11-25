@@ -31,7 +31,7 @@
 				<th>산지</th>
 				<td>[[${horse.nation}]]</td>
 				<th>조교사</th>
-				<td th:onclick='trainerDetail([[${trainer.trNo}]])'>[[${trainer.trName}]]</td>
+				<td th:onclick='trainerDetail([[${trainer.trNo}]], [[${trainer.meet}]])'>[[${trainer.trName}]]</td>
 			</tr>
 			<tr>
 				<th>통산전적</th>
@@ -55,7 +55,7 @@
 	    });
 	});
 	
-	function trainerDetail(trNo){
+	function trainerDetail(trNo, meet){
 		if(trNo != "0AAAAA" && trNo != "0BBBBB" && trNo != "프리기수" ){
 			let form = document.createElement("form");
 			form.setAttribute("method", "POST");
@@ -66,6 +66,11 @@
 			hiddenField1.setAttribute("name", "trNo");
 			hiddenField1.setAttribute("value", trNo);
 			
+			let hiddenField2 = document.createElement("input");
+			hiddenField2.setAttribute("type", "hidden");
+			hiddenField2.setAttribute("name", "meet");
+			hiddenField2.setAttribute("value", meet);
+			
 			let csrf1 = document.createElement("input");
 			csrf1.setAttribute("type", "hidden");
 			csrf1.setAttribute("name", "_csrf");
@@ -73,7 +78,7 @@
 	
 			form.appendChild(csrf1);
 			form.appendChild(hiddenField1);
-			
+			form.appendChild(hiddenField2);
 			document.body.appendChild(form);
 			form.submit();
 		}

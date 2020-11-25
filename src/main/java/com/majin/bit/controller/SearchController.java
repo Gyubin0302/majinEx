@@ -31,6 +31,8 @@ import com.majin.bit.service.TrainerService;
 import com.majin.bit.service.jockeyService;
 import com.majin.bit.util.RecommendProcess;
 
+import oshi.jna.platform.linux.Libc.Sysinfo;
+
 @Controller
 public class SearchController {
 	
@@ -79,16 +81,15 @@ public class SearchController {
 		RecommendProcess recommend = new RecommendProcess();
 		List<String> returnRecommend = new ArrayList<String>();
 		Collection<String> recommendWord =  recommend.recommender(auth.getName(), search);
-
+		
 		if(recommendWord != null) {
 			returnRecommend = recommendWord.stream().collect(Collectors.toList()); // String[] test = recommendWord.toArray(new String[0]);
-			model.addAttribute("recommendWord", returnRecommend);
-			
+			model.addAttribute("recommendWord", returnRecommend);	
 		} else {
 			model.addAttribute("recommendWord", "추천단어가 없습니다.");
 		}
 		
-		return "index :: #recommendWord";
+		return "/fragments/header :: #recommendWord";
 	}
 	
 	@RequestMapping(value="/search", method = RequestMethod.POST)

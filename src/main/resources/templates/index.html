@@ -7,77 +7,145 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="layout/layout"
 >
-	<main layout:fragment="content">
+<main layout:fragment="content">
+
+	   <!-- slide -->
+	   <div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+		<div class="carousel-inner" role="listbox">
+			<!-- Slide One - Set the background image for this slide in the line below -->
+			<div class="carousel-item active"
+					style="background-image: url('http://placehold.it/1900x1080')">
+				<div class="carousel-caption d-none d-md-block">
+											<h3>First Slide</h3>
+					<p>This is a description for the first slide.</p>
+				</div>
+			</div>
+			<!-- Slide Two - Set the background image for this slide in the line below -->
+			<div class="carousel-item"
+					style="background-image: url('http://placehold.it/1900x1080')">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Second Slide</h3>
+					<p>This is a description for the second slide.</p>
+				</div>
+			</div>
+				<!-- Slide Three - Set the background image for this slide in the line below -->
+			<div class="carousel-item"
+					style="background-image: url('http://placehold.it/1900x1080')">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Third Slide</h3>
+					<p>This is a description for the third slide.</p>
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+		</a>
+	</div>
+	
 	<!-- Page Content container -->
 	<div class="gride">
-	<div id="information" class="container">
-		 <th:block th:unless="${#lists.isEmpty(searchHorse)}">
-		  	<h1 class="my-4">경주마 정보</h1>
-		  	<div class="row justify-content-md-center">
-				<div class="col-sm-top">마명</div>
-				<div class="col-sm-top">레이팅</div>
-				<div class="col-sm-top">등급</div>
-				<div class="col-sm-top">산지</div>
-				<div class="col-sm-top">성별</div>
-				<div class="col-sm-3-top">전적</div>
-		    </div>	
-			<!-- Marketing Icons Section -->
-		    <div class="row justify-content-md-center" th:each="horse : ${searchHorse}">
-				<div class="col-sm"><a th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.trNo}]])' th:text="${horse.hrName}" href="#KRA" ></a></div>
-				<div class="col-sm" th:text="${horse.rating}"></div>
-				<div class="col-sm" th:text="${horse.ranks}"></div>
-				<div class="col-sm" th:text="${horse.nation}"></div>
-				<div class="col-sm" th:text="${horse.sex}"></div>
-				<div class="col-sm-3" th:text="${horse.totalRecords}"></div>
-		    </div>	
-		 </th:block>
-		 
-		 <th:block th:unless="${#lists.isEmpty(searchTrainer)}">
-		  	<h1 class="my-4">조교사 정보</h1>
-		  	<div class="row justify-content-md-center">
-				<div class="col-sm-top">조교사 이름</div>
-				<div class="col-sm-top">소속조</div>
-				<div class="col-sm-top">데뷔 날짜</div>
-				<div class="col-md-4-top">통산 전적</div>
-				<div class="col-sm-top">연승률</div>
-				<div class="col-sm-top">복승률</div>
-				<div class="col-sm-top">승률</div>  
-		    </div>	
-			<!-- Marketing Icons Section -->
-		    <div class="row justify-content-md-center" th:each="tr : ${searchTrainer}">
-				<div class="col-sm"><a th:onclick='trainerDetail([[${tr.trNo}]])' th:text="${tr.trName}" href="#KRA" ></a></div>
-				<div class="col-sm" th:text="${tr.part}"></div>
-				<div class="col-sm" th:text="${tr.debut}"></div>
-				<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
-				<div class="col-sm" th:text="${tr.tConsecutiveWinningP}"></div>
-				<div class="col-sm" th:text="${tr.tComplementRyRate}"></div>
-				<div class="col-sm" th:text="${tr.tWinningP}"></div>  
-		    </div>	
-		 </th:block>
-		 
-		  <th:block th:unless="${#lists.isEmpty(searchJockey)}">
-		  	<h1 class="my-4">기수 정보</h1>
-		  	<div class="row justify-content-md-center">
-				<div class="col-sm-top">기수 이름</div>
-				<div class="col-sm-top">소속조</div>
-				<div class="col-sm-top">데뷔 날짜</div>
-				<div class="col-md-4-top">통산 전적</div>
-				<div class="col-sm-top">연승률</div>
-				<div class="col-sm-top">복승률</div>
-				<div class="col-sm-top">승률</div>  
-		    </div>	
-			<!-- Marketing Icons Section -->
-		    <div class="row justify-content-md-center" th:each="jk : ${searchJockey}">
-				<div class="col-sm"><a th:onclick='jockeyDetail([[${jk.jkNo}]])' th:text="${jk.jkName}" href="#KRA"></a></div>
-				<div class="col-sm" th:text="${jk.part}"></div>
-				<div class="col-sm" th:text="${jk.debut}"></div>
-				<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
-				<div class="col-sm" th:text="${jk.jConsecutiveWinningP}"></div>
-				<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
-				<div class="col-sm" th:text="${jk.jWinningP}"></div>  
-		    </div>	
-		 </th:block>
-	</div>
+		<div id="information" class="container">
+			 <th:block th:unless="${#lists.isEmpty(searchHorse)}">
+			  	<h1 class="my-4">경주마 정보</h1>
+			  	<div class="row justify-content-md-center">
+					<div class="col-sm-top">마명</div>
+					<div class="col-sm-top">레이팅</div>
+					<div class="col-sm-top">등급</div>
+					<div class="col-sm-top">산지</div>
+					<div class="col-sm-top">성별</div>
+					<div class="col-sm-3-top">전적</div>
+			    </div>	
+				<!-- Marketing Icons Section -->
+			    <div class="row justify-content-md-center" th:each="horse, index : ${searchHorse}" th:if="${index.index} < 10 ">
+					<div class="col-sm"><a th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.trNo}]], [[${horse.meet}]])' th:text="${horse.hrName}" href="#KRA" ></a></div>
+					<div class="col-sm" th:text="${horse.rating}"></div>
+					<div class="col-sm" th:text="${horse.ranks}"></div>
+					<div class="col-sm" th:text="${horse.nation}"></div>
+					<div class="col-sm" th:text="${horse.sex}"></div>
+					<div class="col-sm-3" th:text="${horse.totalRecords}"></div>
+			    </div>
+			    <div class="row justify-content-md-center">
+				    <div class="card" th:if="${#lists.size(searchHorse) > 10}">
+						<div class="card-body">
+					         <a th:onclick="horseSearch()"> 경주마 정보 더보기..</a><!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+						</div>
+					</div>
+				</div>
+			 </th:block>
+			 
+			 <th:block th:unless="${#lists.isEmpty(searchTrainer)}">
+			  	<h1 class="my-4">조교사 정보</h1>
+			  	<div class="row justify-content-md-center">
+					<div class="col-sm-top">조교사 이름</div>
+					<div class="col-sm-top">소속조</div>
+					<div class="col-sm-top">데뷔 날짜</div>
+					<div class="col-md-4-top">통산 전적</div>
+					<div class="col-sm-top">연승률</div>
+					<div class="col-sm-top">복승률</div>
+					<div class="col-sm-top">승률</div>  
+			    </div>	
+				<!-- Marketing Icons Section -->
+			    <div class="row justify-content-md-center" th:each="tr, index : ${searchTrainer}" th:if="${index.index} < 10">
+					<div class="col-sm"><a th:onclick='trainerDetail([[${tr.trNo}]])' th:text="${tr.trName}" href="#KRA" ></a></div>
+					<div class="col-sm" th:text="${tr.part}"></div>
+					<div class="col-sm" th:text="${tr.debut}"></div>
+					<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
+					<div class="col-sm" th:text="${tr.tConsecutiveWinningP}"></div>
+					<div class="col-sm" th:text="${tr.tComplementRyRate}"></div>
+					<div class="col-sm" th:text="${tr.tWinningP}"></div>  
+			    </div>	
+			    <div class="row justify-content-md-center">
+				    <div class="card" th:if="${#lists.size(searchTrainer) > 10}">
+						<div class="card-body">
+						   조교사 정보 더보기..
+						</div>
+					</div>
+				</div>
+			 </th:block>
+			 
+			  <th:block th:unless="${#lists.isEmpty(searchJockey)}">
+			  	<h1 class="my-4">기수 정보</h1>
+			  	<div class="row justify-content-md-center">
+					<div class="col-sm-top">기수 이름</div>
+					<div class="col-sm-top">소속조</div>
+					<div class="col-sm-top">데뷔 날짜</div>
+					<div class="col-md-4-top">통산 전적</div>
+					<div class="col-sm-top">연승률</div>
+					<div class="col-sm-top">복승률</div>
+					<div class="col-sm-top">승률</div>  
+			    </div>	
+				<!-- Marketing Icons Section -->
+			    <div class="row justify-content-md-center" th:each="jk, index : ${searchJockey}" th:if="${index.index} < 10">
+					<div class="col-sm"><a th:onclick='jockeyDetail([[${jk.jkNo}]])' th:text="${jk.jkName}" href="#KRA"></a></div>
+					<div class="col-sm" th:text="${jk.part}"></div>
+					<div class="col-sm" th:text="${jk.debut}"></div>
+					<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
+					<div class="col-sm" th:text="${jk.jConsecutiveWinningP}"></div>
+					<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
+					<div class="col-sm" th:text="${jk.jWinningP}"></div>  
+			    </div>	
+			    <div class="row justify-content-md-center">
+				    <div class="card" th:if="${#lists.size(searchJockey) > 10}">
+						<div class="card-body">
+						   기수 정보 더보기..
+						</div>
+					</div>
+				</div>
+			 </th:block>
+		</div>
 	</div>
 	<!-- Page Content container -->
 </main>
@@ -85,7 +153,7 @@
 		<!-- Bootstrap core JavaScript -->
 		<script src="/static/vendor/jquery/jquery.min.js"></script>
 		<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<script>
+		<script th:inline="javascript">
 			let token = $("meta[name='_csrf']").attr("content");
 			let header = $("meta[name='_csrf_header']").attr("content");
 	
@@ -97,11 +165,7 @@
 	
 			$("#search").bind("keyup input", function(key) {
 				let search = $("#search").val();
-				let last_char = search.charAt(search.length - 1);
-				console.log(last_char);
 				if (key.keyCode !== 13) {
-					console.log("recommend");
-					console.log(key.keyCode);
 					$.ajax({
 						url : "/search/recommendWord",
 						type : "POST",
@@ -118,8 +182,6 @@
 						}
 					});
 				} else if (search !== "") {
-					console.log("search");
-					console.log(key.keyCode);
 					$.ajax({
 						url : "/search",
 						type : "POST",
@@ -163,7 +225,7 @@
 				});
 			})
 	
-			function horseDetail(hrNo, trNo) {
+			function horseDetail(hrNo, trNo, meet) {
 	
 				let form = document.createElement("form");
 				form.setAttribute("method", "POST");
@@ -178,6 +240,11 @@
 				hiddenField2.setAttribute("type", "hidden");
 				hiddenField2.setAttribute("name", "trNo");
 				hiddenField2.setAttribute("value", trNo);
+				
+				let hiddenField3 = document.createElement("input");
+				hiddenField3.setAttribute("type", "hidden");
+				hiddenField3.setAttribute("name", "meet");
+				hiddenField3.setAttribute("value", meet);
 	
 				let csrf1 = document.createElement("input");
 				csrf1.setAttribute("type", "hidden");
@@ -187,7 +254,7 @@
 				form.appendChild(csrf1);
 				form.appendChild(hiddenField1);
 				form.appendChild(hiddenField2);
-	
+				form.appendChild(hiddenField3);
 				document.body.appendChild(form);
 				form.submit();
 			}
@@ -237,6 +304,37 @@
 				document.body.appendChild(form);
 				form.submit();
 			}
+			
+			function horseSearch(){
+ 		 		let search = $("#search").val();
+				let form = document.createElement("form");
+				
+				form.setAttribute("method", "POST");
+				form.setAttribute("action", "/search/horseSearch");
+	
+				let hiddenField1 = document.createElement("input");
+				hiddenField1.setAttribute("type", "hidden");
+				hiddenField1.setAttribute("name", "search");
+				hiddenField1.setAttribute("value", search);
+				
+				let hiddenField2 = document.createElement("input");
+				hiddenField2.setAttribute("type", "hidden");
+				hiddenField2.setAttribute("name", "pageNo");
+				hiddenField2.setAttribute("value", 1);
+	
+			 	let csrf1 = document.createElement("input");
+				csrf1.setAttribute("type", "hidden");
+				csrf1.setAttribute("name", "_csrf");
+				csrf1.setAttribute("value", token);
+	
+				form.appendChild(csrf1); 
+				form.appendChild(hiddenField1);
+				form.appendChild(hiddenField2);
+				document.body.appendChild(form);
+				form.submit();
+				
+			}
+
 		</script>
 	</th:block>
 

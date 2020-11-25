@@ -30,7 +30,7 @@ public class TrainerCrawling {
 			map.put("WinningP", document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(3)").text().substring(4));
 			map.put("ComplementaryRate", document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(4)").text().substring(5));
 			map.put("ConsecutiveWinningP",  document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(5)").text().substring(5));
-
+			map.put("meet", meet);
 								
 		} catch (Exception e) {
 			System.out.println(e);

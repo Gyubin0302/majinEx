@@ -19,7 +19,8 @@
 		<input id="jkapi_j" type="button" name="search" value="기수(제주)" /> <br>
 		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
 		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
-		<input id="trapi_j" type="button" name="search" value="조교(제주)" />
+		<input id="trapi_j" type="button" name="search" value="조교(제주)" /> <br>
+		<input id="word2vec" type="button" name="search" value="단어 학습" />
 	</div>
 
 	<div id="API">
@@ -39,6 +40,8 @@
 					<th>승률</th>
 					<th>복승률</th>
 					<th>연승률</th>
+					<th>meet</th>
+					<th>act</th>
 				</tr>
 				<tr th:each="horse : ${horseList}">
 					<td th:text="${horse.hrNo}"></td>
@@ -53,6 +56,8 @@
 					<td th:text="${horse.WinningP}"></td>
 					<td th:text="${horse.ComplementaryRate}"></td>
 					<td th:text="${horse.ConsecutiveWinningP}"></td>
+					<td th:text="${horse.meet}"></td>
+					<td th:text="${horse.act}"></td>
 				</tr>
 			</table>
 		</th:block>
@@ -70,6 +75,8 @@
 					<th>통산 승률</th>
 					<th>통산 복승률</th>
 					<th>통산 연승률</th>
+					<th>meet</th>
+					<th>act</th>
 				</tr>
 				<tr th:each="tr : ${trList}">
 					<td th:text="${tr.trNo}"></td>
@@ -81,6 +88,8 @@
 					<td th:text="${tr.tWinningP}"></td>
 					<td th:text="${tr.tComplementRyRate}"></td>
 					<td th:text="${tr.tConsecutiveWinningP}"></td>
+					<td th:text="${tr.meet}"></td>
+					<td th:text="${tr.act}"></td>
 				</tr>
 			</table>
 		</th:block>
@@ -101,6 +110,8 @@
 					<th>통산 복승률</th>
 					<th>통산 연승률</th>
 					<th>은퇴 날짜 </th>
+					<th>meet</th>
+					<th>act</th>
 				</tr>
 				<tr th:each="jk : ${jkList}">
 					<td th:text="${jk.jkNo}"></td>
@@ -115,6 +126,8 @@
 					<td th:text="${jk.jComplementRyRate}"></td>
 					<td th:text="${jk.jWinningP}"></td>
 					<td th:text="${jk.spDate}"></td>
+					<td th:text="${jk.meet}"></td>
+					<td th:text="${jk.act}"></td>
 				</tr>
 			</table>
 		</th:block>
@@ -195,7 +208,23 @@
 
 			});
 		};
-	</script>
+		
+		$("#word2vec").click(function(){
+			$.ajax({
+				url : "/nonUserWord2Vec",
+				type : "POST",
+                dataType : "text",
+				success : function(retVal) {
+					console.log(retVal);
+					$("#API").val("");
+					$("#API").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
 
+			});
+		});
+	</script>
 </body>
 </html>

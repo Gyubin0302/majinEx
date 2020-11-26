@@ -30,6 +30,7 @@ public class JockeyCrawling {
 			map.put("jWinningP", document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(3)").text().substring(4));
 			map.put("jComplementRyRate", document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(4)").text().substring(5));
 			map.put("jConsecutiveWinningP",  document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(1) > td:nth-child(5)").text().substring(5));
+			map.put("meet", meet);
 			
 			response = Jsoup.connect("http://race.kra.co.kr/jockey/ProfileContractByeondong.do")
 					.userAgent("Mozilla/5.0")

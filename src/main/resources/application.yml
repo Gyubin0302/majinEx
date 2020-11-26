@@ -46,3 +46,10 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
+      
+  mvc:
+    static-path-pattern: static/**
+  resources:
+    static-locations:
+    - classpath:/static/
+    add-mappings: true

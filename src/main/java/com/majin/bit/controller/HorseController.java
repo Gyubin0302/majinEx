@@ -20,10 +20,14 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.majin.bit.dto.HorseDto;
+import com.majin.bit.dto.Pagination;
+import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.HorseService;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.util.HorseCrawling;
@@ -50,7 +54,7 @@ public class HorseController {
 		
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551015/API8/raceHorseInfo");
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=YsfeAQ1K0KPH1fOqYRLcvfqOP2P6Mo2iQOiZSumF4bMSlfyWjdPg4NWPu7Y5ms%2Fql9n2oi4dQbNq2bISj%2Bi4Hg%3D%3D");
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("25186", "UTF-8")); /*한 페이지 결과 수 25186 */
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("30000", "UTF-8")); /*한 페이지 결과 수 25186 */
 		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
 		
@@ -81,55 +85,9 @@ public class HorseController {
 		
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(buffer);
-		JSONObject jsonObject2 = (JSONObject) jsonObject.get("response");
-		JSONObject jsonObject3 = (JSONObject) jsonObject2.get("body");
-		JSONObject jsonObject4 = (JSONObject) jsonObject3.get("items");
-		JSONArray jsonArray = (JSONArray) jsonObject4.get("item");
 		
-
-		List<HorseDto> horseList = new ArrayList<>();
-		JSONObject jsonItem = null;
-		for (int i = 0; i < jsonArray.size(); i++) {
-			HorseDto horseDto = new HorseDto();
-			jsonItem = (JSONObject)jsonArray.get(i);
-			if(jsonItem.get("owName").equals("-") == false) {
-				HorseCrawling javaCrawling = new HorseCrawling();
-				Map<String, Object> horse = javaCrawling.javaCrawling(jsonItem.get("hrNo").toString(), meet);
-				
-				horseDto.setHrNo(jsonItem.get("hrNo").toString());
-				horseDto.setTrNo(jsonItem.get("trNo").toString());
-				horseDto.setHrName(jsonItem.get("hrName").toString());
-				horseDto.setSex(jsonItem.get("sex").toString());
-				horseDto.setNation(jsonItem.get("name").toString());
-				horseDto.setBirthDay(jsonItem.get("birthday").toString());
-				horseDto.setRating(horse.get("rating").toString());
-				horseDto.setTotalRecords(horse.get("totalRecords").toString());
-				horseDto.setConsecutiveWinningP(horse.get("ConsecutiveWinningP").toString());
-				horseDto.setComplementaryRate(horse.get("ComplementaryRate").toString());
-				horseDto.setWinningP(horse.get("WinningP").toString());
-				
-				if(jsonItem.get("rank") == null) {
-					horseDto.setRanks("-");
-				}else {
-					horseDto.setRanks(jsonItem.get("rank").toString());
-				}
-				horseList.add(horseDto);
-			}
-			
-		}
+		List<HorseDto> horseList = horseService.horseInsert(jsonObject, meet);
 		
-		System.out.println("가져온 말의 사이즈 : " + horseList.size());
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", horseList);
-		
-		boolean insertStatus = horseService.horseInsert(map);
-		
-		if(insertStatus == true) {
-			System.out.println("insert 성공");
-		}else {
-			System.out.println("insert 실패");
-		}
 		
 		model.addAttribute("horseList", horseList);
 		
@@ -138,12 +96,49 @@ public class HorseController {
 	}
 	
 	@RequestMapping(value = "/horseDetail", method = RequestMethod.POST)
-	public String horseDetail(String hrNo, String trNo, Model model) {
+	public String horseDetail(String hrNo, String trNo, Model model, String meet) {
 		
-		model.addAttribute("horse", horseService.searchOneHorse(hrNo));
-		model.addAttribute("trainer",trainerService.searchOneTrainer(trNo));
+		HorseDto horseDto = new HorseDto();
+		horseDto.setHrNo(hrNo);
+		horseDto.setMeet(meet);
+		
+		TrDto trDto = new TrDto();
+		trDto.setTrNo(trNo);
+		trDto.setMeet(meet);
+
+		model.addAttribute("horse", horseService.searchOneHorse(horseDto));
+		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
 		
 		return "horseDetail";
+	}
+	
+	@RequestMapping(value = "/search/horseSearch", method = RequestMethod.POST)
+	public String horseSearch(Model model, int pageNo, String search) {
+		List<HorseDto> horseList = horseService.searchHorse(search);
+
+		Pagination pagination = new Pagination(horseList.size(), pageNo, search);
+		
+		List<HorseDto> horsePaging = horseService.searchPagingHorse(pagination);
+
+		model.addAttribute("horsePaging", horsePaging);
+		model.addAttribute("pagination", pagination);
+		
+		return "horseSearch";
+		
+	}
+	
+	@RequestMapping(value = "/search/horseSearchPaging", method = RequestMethod.POST)
+	public String horseSearchPaging(Model model, int pageNo, String search) {
+		List<HorseDto> horseList = horseService.searchHorse(search);
+
+		Pagination pagination = new Pagination(horseList.size(), pageNo, search);
+		
+		List<HorseDto> horsePaging = horseService.searchPagingHorse(pagination);
+
+		model.addAttribute("horsePaging", horsePaging);
+		model.addAttribute("pagination", pagination);
+		
+		return "horseSearch :: #information";
 	}
 
 }

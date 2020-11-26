@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head th:fragment="configFragment">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<title>마진</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+<!-- 	<link href="/static/vendor/bootstrap/css/bootstrap-grid.css" rel="stylesheet">
+	<link href="/static/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet"> -->
+	
+	<!-- Custom styles for this template -->
+	<link href="/static/css/modern-business.css" rel="stylesheet">
+  </head>
+</html>

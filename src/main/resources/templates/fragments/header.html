@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <header th:fragment="headerFragment">
+  	  <!-- Navigation -->
+	  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" th:href="@{/}">마진</a>
+				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" th:href="@{#none}">공지사항</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" th:href="@{#none}">초보자 가이드</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" th:href="@{#none}">연도별 대표마</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" th:href="@{#none}">순위 예측</a>
+						</li>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Other Pages </a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
+							<a class="dropdown-item" th:href="@{/home}">로그인</a> <!-- 로그인 하면 로그아웃으로 변경되고 회원가입이 사라지고 마이페이지 생겨야 함-->
+							<a class="dropdown-item" th:href="@{#none}">회원가입</a> 
+						</div></li>
+					</ul>
+				</div>
+			</div>
+	  </nav>
+	  <div class="input-group mb-3">
+			<input id="search" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+			<div class="input-group-prepend">
+				<button id="searchBtn" type="button" class="btn btn-outline-primary">
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  			<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"></path>
+	 			<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"></path>
+			  </svg>
+				</button>
+			</div>
+			
+			<div class="container" id="recommendWord">
+				<th:block th:unless="${#lists.isEmpty(recommendWord)} ">
+					<ul id="recommendList">
+						<li style="list-style: none" th:each="recommend: ${recommendWord}" th:text=${recommend}></li>
+					</ul>
+				</th:block>
+			</div>
+	   </div>
+	</header>
+</html>

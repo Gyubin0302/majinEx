@@ -10,9 +10,11 @@ import lombok.Data;
 @Entity
 public class YundoDto{
 	@EmbeddedId
-	private YundoJpaKey meet;
+	private YundoJpaKey yundoJpaKey;
 	@Column(name = "idSeq")
 	private String idSeq;
+	@Column(name = "name")
+	private String name;
 	@Column(name = "jo")
 	private String jo;
 }

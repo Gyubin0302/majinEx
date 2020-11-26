@@ -20,6 +20,22 @@ public class YundoJpaKey implements Serializable{
 		this.year = year;
 	}
 	
+	public String getMeet() {
+		return meet;
+	}
+
+	public void setMeet(String meet) {
+		this.meet = meet;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -102,12 +102,12 @@ public class HorseController {
 		horseDto.setHrNo(hrNo);
 		horseDto.setMeet(meet);
 		
-		TrDto trDto = new TrDto();
-		trDto.setTrNo(trNo);
-		trDto.setMeet(meet);
+//		TrDto trDto = new TrDto();
+//		trDto.setTrNo(trNo);
+//		trDto.setMeet(meet);
 
 		model.addAttribute("horse", horseService.searchOneHorse(horseDto));
-		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
+//		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
 		
 		return "horseDetail";
 	}

@@ -23,7 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.majin.bit.dto.Pagination;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.util.TrainerCrawling;
@@ -81,16 +81,29 @@ public class TrainerController {
 		
 	}
 	
-	@RequestMapping(value = "/trainerDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/search/trainerDetail", method = RequestMethod.POST)
 	public String trainerDetail(String trNo, String meet, Model model) {
 		
 		TrDto trDto = new TrDto();
 		trDto.setTrNo(trNo);
 		trDto.setMeet(meet);
 		
-		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
+		model.addAttribute("trainerDetail",trainerService.searchOneTrainer(trDto));
 		
-		return "trainerDetail";
+		return "index :: #information";
+	}
+	
+	@RequestMapping(value = "/search/trainerSearchPaging", method = RequestMethod.POST)
+	public String horseSearchPaging(Model model, int pageNo, String search) {
+		
+		List<TrDto> trainerList = trainerService.searchTrainer(search);
+		Pagination trainerPagination = new Pagination(trainerList.size(), pageNo, search);
+		List<TrDto> trainerPaging = trainerService.searchPagingTrainer(trainerPagination);
+
+		model.addAttribute("searchTrainer", trainerPaging);
+		model.addAttribute("trainerPagination", trainerPagination);
+
+		return "index :: #information";
 	}
 	
 }

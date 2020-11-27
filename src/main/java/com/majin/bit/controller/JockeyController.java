@@ -23,7 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.majin.bit.dto.HorseDto;
 import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.Pagination;
+import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.jockeyService;
 import com.majin.bit.util.JockeyCrawling;
 
@@ -80,11 +83,29 @@ public class JockeyController {
 		
 	}
 	
-	@RequestMapping(value = "/jockeyDetail", method = RequestMethod.POST)
-	public String jockeyDetail(String jkNo, Model model) {
-
-		model.addAttribute("jockey",jockeyService.searchOneJockey(jkNo));
+	@RequestMapping(value = "/search/jockeyDetail", method = RequestMethod.POST)
+	public String jockeyDetail(String jkNo, String meet, Model model) {
 		
-		return "jockeyDetail";
+		JkDto jkDto = new JkDto();
+		jkDto.setJkNo(jkNo);
+		jkDto.setMeet(meet);
+		
+		model.addAttribute("jockeyDetail",jockeyService.searchOneJockey(jkDto));
+		
+		return "index :: #information";
 	}
+	
+	@RequestMapping(value = "/search/jockeySearchPaging", method = RequestMethod.POST)
+	public String horseSearchPaging(Model model, int pageNo, String search) {
+		
+		List<JkDto> jockeyList = jockeyService.searchJockey(search);
+		Pagination jockeyPagination = new Pagination(jockeyList.size(), pageNo, search);
+		List<JkDto> jockeyPaging = jockeyService.searchPagingJockey(jockeyPagination);
+		
+		model.addAttribute("searchJockey", jockeyPaging);
+		model.addAttribute("jockeyPagination", jockeyPagination);
+
+		return "index :: #information";
+	}
+
 }

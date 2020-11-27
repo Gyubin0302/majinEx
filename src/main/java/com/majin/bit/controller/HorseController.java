@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.majin.bit.dto.HorseDto;
@@ -95,50 +96,29 @@ public class HorseController {
 				
 	}
 	
-	@RequestMapping(value = "/horseDetail", method = RequestMethod.POST)
-	public String horseDetail(String hrNo, String trNo, Model model, String meet) {
+	@RequestMapping(value = "/search/horseDetail", method = RequestMethod.POST)
+	public String horseDetail(String hrNo, String meet, Model model) {
 		
 		HorseDto horseDto = new HorseDto();
 		horseDto.setHrNo(hrNo);
 		horseDto.setMeet(meet);
-		
-//		TrDto trDto = new TrDto();
-//		trDto.setTrNo(trNo);
-//		trDto.setMeet(meet);
 
-		model.addAttribute("horse", horseService.searchOneHorse(horseDto));
-//		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
+		model.addAttribute("horseDetail", horseService.searchOneHorse(horseDto));
 		
-		return "horseDetail";
-	}
-	
-	@RequestMapping(value = "/search/horseSearch", method = RequestMethod.POST)
-	public String horseSearch(Model model, int pageNo, String search) {
-		List<HorseDto> horseList = horseService.searchHorse(search);
-
-		Pagination pagination = new Pagination(horseList.size(), pageNo, search);
-		
-		List<HorseDto> horsePaging = horseService.searchPagingHorse(pagination);
-
-		model.addAttribute("horsePaging", horsePaging);
-		model.addAttribute("pagination", pagination);
-		
-		return "horseSearch";
-		
+		return "index :: #information";
 	}
 	
 	@RequestMapping(value = "/search/horseSearchPaging", method = RequestMethod.POST)
-	public String horseSearchPaging(Model model, int pageNo, String search) {
+	public String horseSearchPaging(Model model, @RequestParam(defaultValue = "1")int pageNo, String search) {
+
 		List<HorseDto> horseList = horseService.searchHorse(search);
+		Pagination horsePagination = new Pagination(horseList.size(), pageNo, search);
+		List<HorseDto> horsePaging = horseService.searchPagingHorse(horsePagination);
 
-		Pagination pagination = new Pagination(horseList.size(), pageNo, search);
-		
-		List<HorseDto> horsePaging = horseService.searchPagingHorse(pagination);
+		model.addAttribute("searchHorse", horsePaging);
+		model.addAttribute("horsePagination", horsePagination);
 
-		model.addAttribute("horsePaging", horsePaging);
-		model.addAttribute("pagination", pagination);
-		
-		return "horseSearch :: #information";
+		return "index :: #information";
 	}
 
 }

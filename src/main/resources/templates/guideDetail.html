@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
-<meta charset="UTF-8">
-</head>
-
-<body>
-	<div>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout2">
+<main layout:fragment="content">
+	<div class="container">
 		<div style="padding: 10px; text-align: center;">
 			<h1>
 				<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
 			</h1>
 		</div>
 
-		<div>
-			<div>
+		<div class="row" >
+			<div class="col-lg-8-ex" >
 				<form role="form" th:object=${guideDto}
 					th:action="@{/guideList}" method="post">
-					  	<div>
+
+				        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+					  	<hr>
+					 <div>
 						<label style="font-weight: bolder;">제목</label>
 						<p th:text="${detail.title}"></p>
 						<input type="hidden" th:field="${detail.title}">
 					</div>
 					<div>
 						<label for="" style="font-weight: bolder;">내용</label>
-						<p th:text="${detail.content}"></p>
-						<input type="hidden" th:field="${detail.content}">
+						<!-- <p th:text="${detail.content}"></p> -->
+						<span th:utext=${detail.content}></span>
+						<!-- <input type="hidden" th:field="${detail.content}"> -->
 					</div>
 					 <div style="text-align: right;">
 						<input type="submit" th:value="목록" th:formaction="@{/guideList}">
@@ -42,5 +45,5 @@
 		<br />
 
 	</div>
-</body>
+	</main>
 </html>

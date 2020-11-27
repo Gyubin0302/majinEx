@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -14,13 +16,16 @@
 		<input id="horseapi_s" type="button" name="search" value="말(서울)" />
 		<input id="horseapi_b" type="button" name="search" value="말(부산)" />
 		<input id="horseapi_j" type="button" name="search" value="말(제주)" /> <br>
-		<input id="jkapi_s" type="button" name="search" value="기수(서울)" /> 
-		<input id="jkapi_b" type="button" name="search" value="기수(부산)" /> 
+		<input id="jkapi_s" type="button" name="search" value="기수(서울)" />
+		<input id="jkapi_b" type="button" name="search" value="기수(부산)" />
 		<input id="jkapi_j" type="button" name="search" value="기수(제주)" /> <br>
 		<input id="trapi_s" type="button" name="search" value="조교(서울)" />
 		<input id="trapi_b" type="button" name="search" value="조교(부산)" />
 		<input id="trapi_j" type="button" name="search" value="조교(제주)" /> <br>
-		<input id="word2vec" type="button" name="search" value="단어 학습" />
+		<input id="word2vec" type="button" name="search" value="단어 학습" /> <br>
+		<input id="yundo_s" type="button" name="search" value="서울의 전당" />
+		<input id="yundo_j" type="button" name="search" value="제주의 전당" />
+		<input id="yundo_b" type="button" name="search" value="부산의 전당" />
 	</div>
 
 	<div id="API">
@@ -61,7 +66,7 @@
 				</tr>
 			</table>
 		</th:block>
-		
+
 		<th:block th:if="${trList != null} ">
 			<h3>조교사 목록</h3>
 			<table border=1>
@@ -93,7 +98,7 @@
 				</tr>
 			</table>
 		</th:block>
-		
+
 		<th:block th:if="${jkList != null} ">
 			<h3>기수 목록</h3>
 			<table border=1>
@@ -109,7 +114,7 @@
 					<th>통산 승률</th>
 					<th>통산 복승률</th>
 					<th>통산 연승률</th>
-					<th>은퇴 날짜 </th>
+					<th>은퇴 날짜</th>
 					<th>meet</th>
 					<th>act</th>
 				</tr>
@@ -188,7 +193,42 @@
 			meet = {"meet" : "2"}
 			api(url, meet)
 		});
-
+		$("#yundo_s").click(function() {
+			$.ajax({
+				url : "/yundo/seoul",
+				type : "GET",
+				success : function(retVal) {
+					console.log(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+		});
+		$("#yundo_j").click(function() {
+			$.ajax({
+				url : "/yundo/jeju",
+				type : "GET",
+				success : function(retVal) {
+					console.log(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+		});
+		$("#yundo_b").click(function() {
+			$.ajax({
+				url : "/yundo/busan",
+				type : "GET",
+				success : function(retVal) {
+					console.log(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+		});
 		function api(mapping, meet) {
 			console.log(mapping);
 			console.log(meet);

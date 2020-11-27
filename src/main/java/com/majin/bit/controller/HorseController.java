@@ -103,11 +103,10 @@ public class HorseController {
 		horseDto.setHrNo(hrNo);
 		horseDto.setMeet(meet);
 
-		model.addAttribute("horseDetail", horseService.searchOneHorse(horseDto));
-
-		return "index :: #information";
+		model.addAttribute("horse", horseService.searchOneHorse(horseDto));
+		
+		return "horseDetail";
 	}
-	
 	
 	@RequestMapping(value = "/search/horseSearchPaging", method = RequestMethod.POST)
 	public String horseSearchPaging(Model model, @RequestParam(defaultValue = "1")int pageNo, String search) {

@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.majin.bit.dto.YundoDto;
 import com.majin.bit.service.YundoService;
-import com.majin.bit.util.YundoCrawling;
 
 @Controller
 public class YundoController {
@@ -17,15 +17,42 @@ public class YundoController {
 	
 	@GetMapping("/yundo/seoul")
 	public String YundoCrawlSeoul() {
-		yundoService.yundoCrawling();
+		yundoService.yundoCrawling("1");
 		return "home";
 	}
 	@GetMapping("/yundo/jeju")
-	public void YundoCrawlJeju() {
-		
+	public String YundoCrawlJeju() {
+		yundoService.yundoCrawling("2");
+		return "home";
 	}
 	@GetMapping("/yundo/busan")
-	public void YundoCrawlBusan() {
-		
+	public String YundoCrawlBusan() {
+		yundoService.yundoCrawling("3");
+		return "home";
 	}	
+	@GetMapping("/yundo/view")
+	public String ShowYundo(Model model) {
+		List<YundoDto> yundos;
+		String[][] list;
+		/*
+		 * 여기 실행하기 전에 db에서
+		 * create view findname as select hrno as 'seq',hrname as 'name' from horseskinny union select jkno as 'seq',jkname as 'name' from jockeyskinny union select trno as 'seq',trname as 'name' from trainerskinny;
+		 */
+		yundos = yundoService.showYundo("1");
+		model.addAttribute("seoul", yundos);
+		model.addAttribute("seoulSeq", yundoService.splitFun(yundos,1));
+		model.addAttribute("seoulName", yundoService.splitFun(yundos,2));
+		
+		yundos = yundoService.showYundo("2");
+		model.addAttribute("jeju", yundos);
+		model.addAttribute("jejuSeq", yundoService.splitFun(yundos,1));
+		model.addAttribute("jejuName", yundoService.splitFun(yundos,2));
+		
+		yundos = yundoService.showYundo("3");
+		model.addAttribute("busan", yundos);
+		model.addAttribute("busanSeq", yundoService.splitFun(yundos,1));
+		model.addAttribute("busanName", yundoService.splitFun(yundos,2));
+		
+		return "yundo";
+	}
 }

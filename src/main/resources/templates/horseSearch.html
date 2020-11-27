@@ -43,7 +43,7 @@
 					    <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
 						    <li class="page-item" th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" 
 						    th:each="pageButton : ${#numbers.sequence(start, end)}" th:class="${pageButton == pagination.page} ? 'page-item active'">
-						    		<a class="page-link" th:onclick="current([[${pageButton}]],[[${pagination.search}]])" href="#"  th:text=${pageButton}></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+						    		<a class="page-link" th:onclick="current([[${pageButton}]],[[${pagination.search}]])"  th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
 						    </li>
 					    </th:block>
 					    <li class="page-item" th:class="${pagination.totalPageCnt == pagination.page} ? 'page-item disabled'">
@@ -68,7 +68,14 @@
 	<script th:inline="javascript">
 		let token = $("meta[name='_csrf']").attr("content");
 		let header = $("meta[name='_csrf_header']").attr("content");
-	
+		
+		if([[${pagination.page}]] == 1){
+			history.pushState(
+					{pageNo : [[${pagination.page}]], 
+					 search : [[${pagination.search}]]},
+					 null, null);
+		}
+		
 		$(function() {
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(header, token);
@@ -98,6 +105,7 @@
 		function horseSearchPaging(pageNo, search){
 			console.log(pageNo);
 			console.log(search);
+			let data;
 			$.ajax({
 				url : "/search/horseSearchPaging",
 				type : "POST",
@@ -108,15 +116,43 @@
                 dataType : "text",
 				success : function(retVal) {
 					$("#information").val("");
-					$("#information").replaceWith(retVal);
+					$("#information").replaceWith(retVal);	
+					data = retVal;
 				},
 				error : function(retVal) {
 					alert("error");
 				}
-
 			});
+			history.pushState(
+					{pageNo : pageNo, 
+					 search : search},
+					 null, null);	
 		}
 		
+		/* $(window).on('popstate', function(event) {
+	        window.location = document.location.href;
+	    }); */
+	    $(window).on('popstate', function(event) {
+	    	  let data = event.originalEvent.state;
+	    	  console.log(data);
+	    	  $.ajax({
+					url : "/search/horseSearchPaging",
+					type : "POST",
+					data : {
+							"pageNo" : data.pageNo,
+							"search" : data.search
+							},
+	                dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function(retVal) {
+						alert("error");
+					}
+				});
+	    }); 
+	    
 		function horseDetail(hrNo, trNo, meet) {
 			
 			let form = document.createElement("form");

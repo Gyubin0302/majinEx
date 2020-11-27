@@ -26,10 +26,14 @@
 	</insert>
 	
 	<select id="searchTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="java.lang.String">
-		SELECT * FROM TRAINERSKINNY WHERE TRNAME LIKE CONCAT('%',#{search},'%') 
+		SELECT * FROM TRAINERSKINNY WHERE TRNAME LIKE CONCAT('%',#{search},'%') ORDER BY TRNAME ASC 
 	</select>
 	
 	<select id="searchOneTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="com.majin.bit.dto.TrDto">
 		SELECT * FROM TRAINERSKINNY WHERE TRNO = #{trNo} AND MEET = #{meet}
+	</select>
+	
+	<select id="searchPagingTrainer" resultType="com.majin.bit.dto.TrDto" parameterType="com.majin.bit.dto.Pagination">
+		SELECT * FROM TRAINERSKINNY WHERE TRNAME LIKE CONCAT('%',#{search},'%') ORDER BY TRNAME ASC LIMIT #{startIndex}, #{pageSize}
 	</select>
 </mapper>

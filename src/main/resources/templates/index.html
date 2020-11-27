@@ -10,55 +10,53 @@
 <main layout:fragment="content">
 
 	   <!-- slide -->
-	   <div id="carouselExampleIndicators" class="carousel slide"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-		<div class="carousel-inner" role="listbox">
-			<!-- Slide One - Set the background image for this slide in the line below -->
-			<div class="carousel-item active"
-					style="background-image: url('http://placehold.it/1900x1080')">
-				<div class="carousel-caption d-none d-md-block">
-											<h3>First Slide</h3>
-					<p>This is a description for the first slide.</p>
+	   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	   		<div id="slideSection">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleIndicators" data-slide-to="0"
+						class="active"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<!-- Slide One - Set the background image for this slide in the line below -->
+					<div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+													<h3>First Slide</h3>
+							<p>This is a description for the first slide.</p>
+						</div>
+					</div>
+					<!-- Slide Two - Set the background image for this slide in the line below -->
+					<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+							<h3>Second Slide</h3>
+							<p>This is a description for the second slide.</p>
+						</div>
+					</div>
+						<!-- Slide Three - Set the background image for this slide in the line below -->
+					<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+							<h3>Third Slide</h3>
+							<p>This is a description for the third slide.</p>
+						</div>
+					</div>
 				</div>
+				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> 
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+					<span class="sr-only">Previous</span>
+				</a> 
+				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> 
+					<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+					<span class="sr-only">Next</span>
+				</a>
 			</div>
-			<!-- Slide Two - Set the background image for this slide in the line below -->
-			<div class="carousel-item"
-					style="background-image: url('http://placehold.it/1900x1080')">
-				<div class="carousel-caption d-none d-md-block">
-					<h3>Second Slide</h3>
-					<p>This is a description for the second slide.</p>
-				</div>
-			</div>
-				<!-- Slide Three - Set the background image for this slide in the line below -->
-			<div class="carousel-item"
-					style="background-image: url('http://placehold.it/1900x1080')">
-				<div class="carousel-caption d-none d-md-block">
-					<h3>Third Slide</h3>
-					<p>This is a description for the third slide.</p>
-				</div>
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-		</a>
 	</div>
 	
-	<!-- Page Content container -->
+	<!-- Page Content container start-->
 	<div class="gride">
 		<div id="information" class="container">
 			 <th:block th:unless="${#lists.isEmpty(searchHorse)}">
+			 	<div id="horseP">
 			  	<h1 class="my-4">경주마 정보</h1>
 			  	<div class="row justify-content-md-center">
 					<div class="col-sm-top">마명</div>
@@ -70,7 +68,7 @@
 			    </div>	
 				<!-- Marketing Icons Section -->
 			    <div class="row justify-content-md-center" th:each="horse, index : ${searchHorse}" th:if="${index.index} < 10 ">
-					<div class="col-sm"><a th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.trNo}]], [[${horse.meet}]])' th:text="${horse.hrName}" href="#KRA" ></a></div>
+					<div class="col-sm"><a th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.meet}]], [[${search}]])' th:text="${horse.hrName}"></a></div>
 					<div class="col-sm" th:text="${horse.rating}"></div>
 					<div class="col-sm" th:text="${horse.ranks}"></div>
 					<div class="col-sm" th:text="${horse.nation}"></div>
@@ -80,13 +78,49 @@
 			    <div class="row justify-content-md-center">
 				    <div class="card" th:if="${#lists.size(searchHorse) > 10}">
 						<div class="card-body">
-					         <a th:onclick="horseSearch()"> 경주마 정보 더보기..</a><!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+					         <a th:onclick="horseSearchPaging(1,[[${search}]])"> 경주마 정보 더보기..</a><!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
 						</div>
 					</div>
 				</div>
+				
+				<!-- horsePagination -->
+				<th:block th:unless="${#lists.isEmpty(horsePagination)}">
+			     <div id="horsePaging" class="row justify-content-md-center-paging" aria-label="Page navigation example">
+				  <ul class="pagination">
+					  <li class="page-item" th:class="${1 == horsePagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="hfirst(1,[[${horsePagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=1, search=${pagination.search})}" -->
+					        <span aria-hidden="true">처음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${1 == horsePagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="hprevious([[${horsePagination.prevBlock}]],[[${horsePagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.prevBlock}, search=${pagination.search})}"  -->
+					        <span aria-hidden="true">이전</span>
+					      </a>
+					    </li>
+					    <th:block  th:with="start = ${horsePagination.startPage}, end = ${horsePagination.endPage}">
+						    <li class="page-item" th:with="start = ${horsePagination.startPage}, end = ${horsePagination.endPage}" 
+						    th:each="pageButton : ${#numbers.sequence(start, end)}" th:class="${pageButton == horsePagination.page} ? 'page-item active'">
+						    		<a class="page-link" th:onclick="hcurrent([[${pageButton}]],[[${horsePagination.search}]])"  th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+						    </li>
+					    </th:block>
+					    <li class="page-item" th:class="${horsePagination.totalPageCnt == horsePagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="hnext([[${horsePagination.nextBlock}]],[[${horsePagination.search}]])" aria-label="Next"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.nextBlock}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">다음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${horsePagination.totalPageCnt == horsePagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="hend([[${horsePagination.totalPageCnt}]],[[${horsePagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.totalPageCnt}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">끝</span>
+					      </a>
+					   </li>
+				  </ul>
+			   </div>
+			   </th:block>
+			   </div>
 			 </th:block>
 			 
 			 <th:block th:unless="${#lists.isEmpty(searchTrainer)}">
+			 <div id="trainerP">
 			  	<h1 class="my-4">조교사 정보</h1>
 			  	<div class="row justify-content-md-center">
 					<div class="col-sm-top">조교사 이름</div>
@@ -99,7 +133,7 @@
 			    </div>	
 				<!-- Marketing Icons Section -->
 			    <div class="row justify-content-md-center" th:each="tr, index : ${searchTrainer}" th:if="${index.index} < 10">
-					<div class="col-sm"><a th:onclick='trainerDetail([[${tr.trNo}]])' th:text="${tr.trName}" href="#KRA" ></a></div>
+					<div class="col-sm"><a th:onclick='trainerDetail([[${tr.trNo}]], [[${tr.meet}]], [[${search}]])' th:text="${tr.trName}"></a></div>
 					<div class="col-sm" th:text="${tr.part}"></div>
 					<div class="col-sm" th:text="${tr.debut}"></div>
 					<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
@@ -110,13 +144,49 @@
 			    <div class="row justify-content-md-center">
 				    <div class="card" th:if="${#lists.size(searchTrainer) > 10}">
 						<div class="card-body">
-						   조교사 정보 더보기..
+					         <a th:onclick="trainerSearchPaging(1,[[${search}]])"> 조교사 정보 더보기..</a><!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
 						</div>
 					</div>
 				</div>
+				
+				<!-- trainerPagination -->
+				<th:block th:unless="${#lists.isEmpty(trainerPagination)}">
+			    <div id="trainerPaging" class="row justify-content-md-center-paging" aria-label="Page navigation example">
+				  <ul class="pagination">
+					  <li class="page-item" th:class="${1 == trainerPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="tfirst(1,[[${trainerPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=1, search=${pagination.search})}" -->
+					        <span aria-hidden="true">처음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${1 == trainerPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="tprevious([[${trainerPagination.prevBlock}]],[[${trainerPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.prevBlock}, search=${pagination.search})}"  -->
+					        <span aria-hidden="true">이전</span>
+					      </a>
+					    </li>
+					    <th:block  th:with="start = ${trainerPagination.startPage}, end = ${trainerPagination.endPage}">
+						    <li class="page-item" th:with="start = ${trainerPagination.startPage}, end = ${trainerPagination.endPage}" 
+						    th:each="pageButton : ${#numbers.sequence(start, end)}" th:class="${pageButton == trainerPagination.page} ? 'page-item active'">
+						    		<a class="page-link" th:onclick="tcurrent([[${pageButton}]],[[${trainerPagination.search}]])"  th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+						    </li>
+					    </th:block>
+					    <li class="page-item" th:class="${trainerPagination.totalPageCnt == trainerPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="tnext([[${trainerPagination.nextBlock}]],[[${trainerPagination.search}]])" aria-label="Next"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.nextBlock}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">다음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${trainerPagination.totalPageCnt == trainerPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="tend([[${trainerPagination.totalPageCnt}]],[[${trainerPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.totalPageCnt}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">끝</span>
+					      </a>
+					   </li>
+				  </ul>
+			   </div>
+			   </th:block>
+			  </div>
 			 </th:block>
 			 
 			  <th:block th:unless="${#lists.isEmpty(searchJockey)}">
+			  	<div id="jockeyP">
 			  	<h1 class="my-4">기수 정보</h1>
 			  	<div class="row justify-content-md-center">
 					<div class="col-sm-top">기수 이름</div>
@@ -129,7 +199,7 @@
 			    </div>	
 				<!-- Marketing Icons Section -->
 			    <div class="row justify-content-md-center" th:each="jk, index : ${searchJockey}" th:if="${index.index} < 10">
-					<div class="col-sm"><a th:onclick='jockeyDetail([[${jk.jkNo}]])' th:text="${jk.jkName}" href="#KRA"></a></div>
+					<div class="col-sm"><a th:onclick='jockeyDetail([[${jk.jkNo}]], [[${jk.meet}]],[[${search}]])' th:text="${jk.jkName}"></a></div>
 					<div class="col-sm" th:text="${jk.part}"></div>
 					<div class="col-sm" th:text="${jk.debut}"></div>
 					<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
@@ -137,23 +207,146 @@
 					<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
 					<div class="col-sm" th:text="${jk.jWinningP}"></div>  
 			    </div>	
+			    
 			    <div class="row justify-content-md-center">
 				    <div class="card" th:if="${#lists.size(searchJockey) > 10}">
 						<div class="card-body">
-						   기수 정보 더보기..
+					         <a th:onclick="jockeySearchPaging(1,[[${search}]])"> 기수 정보 더보기..</a><!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
 						</div>
 					</div>
 				</div>
+				
+				<!-- jockeyPagination -->
+				<th:block th:unless="${#lists.isEmpty(jockeyPagination)}">
+				<div id="jockeyPaging" class="row justify-content-md-center-paging" aria-label="Page navigation example">
+				  <ul class="pagination">
+					  <li class="page-item" th:class="${1 == jockeyPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="jfirst(1,[[${jockeyPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=1, search=${pagination.search})}" -->
+					        <span aria-hidden="true">처음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${1 == jockeyPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="jprevious([[${jockeyPagination.prevBlock}]],[[${jockeyPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.prevBlock}, search=${pagination.search})}"  -->
+					        <span aria-hidden="true">이전</span>
+					      </a>
+					    </li>
+					    <th:block  th:with="start = ${jockeyPagination.startPage}, end = ${jockeyPagination.endPage}">
+						    <li class="page-item" th:with="start = ${jockeyPagination.startPage}, end = ${jockeyPagination.endPage}" 
+						    th:each="pageButton : ${#numbers.sequence(start, end)}" th:class="${pageButton == jockeyPagination.page} ? 'page-item active'">
+						    		<a class="page-link" th:onclick="jcurrent([[${pageButton}]],[[${jockeyPagination.search}]])"  th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+						    </li>
+					    </th:block>
+					    <li class="page-item" th:class="${jockeyPagination.totalPageCnt == jockeyPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="jnext([[${jockeyPagination.nextBlock}]],[[${jockeyPagination.search}]])" aria-label="Next"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.nextBlock}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">다음</span>
+					      </a>
+					    </li>
+					    <li class="page-item" th:class="${jockeyPagination.totalPageCnt == jockeyPagination.page} ? 'page-item disabled'">
+					      <a class="page-link" th:onclick="jend([[${jockeyPagination.totalPageCnt}]],[[${jockeyPagination.search}]])" aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.totalPageCnt}, search=${pagination.search})}" -->
+					        <span aria-hidden="true">끝</span>
+					      </a>
+					   </li>
+				  </ul>
+			   </div>
+			   </th:block>
+			   </div>
 			 </th:block>
+			 <th:block th:unless="${#lists.isEmpty(horseDetail)}">
+				<h1 class="my-4">경주마 프로필</h1>
+				<table border=1>
+					<tr>
+						<th>마명</th>
+						<td>[[${horseDetail.hrName}]]</td>
+						<th>생년월일</th>
+						<td>[[${horseDetail.birthDay}]]</td>
+						<th>레이팅</th>
+						<td>[[${horseDetail.rating}]]</td>
+						<th>마번</th>
+						<td>[[${horseDetail.hrNo}]]</td>
+					</tr>
+					<tr>
+						<th>등급</th>
+						<td>[[${horseDetail.ranks}]]</td>
+						<th>성별</th>
+						<td>[[${horseDetail.sex}]]</td>
+						<th>산지</th>
+						<td>[[${horseDetail.nation}]]</td>
+						<th>조교사</th>
+						<td >qfqwf</td>
+					</tr>
+					<tr>
+						<th>통산전적</th>
+						<td>[[${horseDetail.totalRecords}]]</td>
+						<th>승률</th>
+						<td>[[${horseDetail.WinningP}]]</td>
+						<th>복승률</th>
+						<td>[[${horseDetail.ComplementaryRate}]]</td>
+						<th>연승률</th>
+						<td>[[${horseDetail.ConsecutiveWinningP}]]</td>
+					</tr>
+				</table>
+			</th:block>
+			
+			<th:block th:unless="${#lists.isEmpty(trainerDetail)}">
+			<h1 class="my-4">조교사 프로필</h1>
+				<table border=1>
+					<tr>
+						<th>성명</th>
+						<td>[[${trainerDetail.trName}]]</td>
+						<th>소속조</th>
+						<td>[[${trainerDetail.part}]]</td>
+						<th>데뷔날짜</th>
+						<td>[[${trainerDetail.debut}]]</td>
+						<th>최근 1년 전적</th>
+						<td>[[${trainerDetail.tYearTotal}]]</td>
+					</tr>
+					<tr>
+						<th>통산 전적</th>
+						<td>[[${trainerDetail.tAllTotal}]]</td>
+						<th>승률</th>
+						<td>[[${trainerDetail.tWinningP}]]</td>
+						<th>복승률</th>
+						<td>[[${trainerDetail.tComplementRyRate}]]</td>
+						<th>연승률</th>
+						<td>[[${trainerDetail.tConsecutiveWinningP}]]</td>
+					</tr>
+				</table>
+			</th:block>
+			
+			<th:block th:unless="${#lists.isEmpty(jockeyDetail)}">
+			<h1 class="my-4">기수 프로필</h1>
+				<table border=1>
+					<tr>
+						<th>성명</th>
+						<td>[[${jockeyDetail.jkName}]]</td>
+						<th>소속조</th>
+						<td>[[${jockeyDetail.part}]]</td>
+						<th>데뷔날짜</th>
+						<td>[[${jockeyDetail.debut}]]</td>
+						<th>기승 가능 중량</th>
+						<td>[[${jockeyDetail.jRweight}]]</td>
+						<th>은퇴날짜</th>
+						<td>[[${jockeyDetail.spDate}]]</td>
+					</tr>
+					<tr>
+						<th>최근 1년 전적</th>
+						<td>[[${jockeyDetail.jYearTotal}]]</td>
+						<th>통산 전적</th>
+						<td>[[${jockeyDetail.jAllTotal}]]</td>
+						<th>승률</th>
+						<td>[[${jockeyDetail.jWinningP}]]</td>
+						<th>복승률</th>
+						<td>[[${jockeyDetail.jComplementRyRate}]]</td>
+						<th>연승률</th>
+						<td>[[${jockeyDetail.jConsecutiveWinningP}]]</td>
+					</tr>
+				</table>
+			</th:block>
 		</div>
 	</div>
-	<!-- Page Content container -->
-</main>
-	<th:block layout:fragment="script">
-		<!-- Bootstrap core JavaScript -->
-		<script src="/static/vendor/jquery/jquery.min.js"></script>
-		<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<script th:inline="javascript">
+	<!-- Page Content container end-->
+	
+	<script th:inline="javascript">
 			let token = $("meta[name='_csrf']").attr("content");
 			let header = $("meta[name='_csrf_header']").attr("content");
 	
@@ -166,7 +359,7 @@
 			$("#search").bind("keyup input", function(key) {
 				let search = $("#search").val();
 				if (key.keyCode !== 13) {
-					$.ajax({
+					/* $.ajax({
 						url : "/search/recommendWord",
 						type : "POST",
 						data : {
@@ -180,13 +373,15 @@
 						error : function() {
 							alert("error");
 						}
-					});
+					}); */
 				} else if (search !== "") {
 					$.ajax({
 						url : "/search",
 						type : "POST",
+						async: false,
 						data : {
-							"search" : search
+							"search" : search,
+							"pageNo" : 1
 						},
 						dataType : "text",
 						success : function(retVal) {
@@ -194,13 +389,19 @@
 							$("#recommendWord").val("");
 							$("#recommendList").remove();
 							$("#information").replaceWith(retVal);
+							
 						},
 						error : function() {
 							alert("error");
 						}
 					});
-				}
-				;
+					
+					history.pushState(
+							{pageNo : 1, 
+							 search : search,
+							 url : "/search"},
+							 null, null);
+				};
 			});
 			
 			$("#searchBtn").bind("click", function(){
@@ -210,7 +411,8 @@
 					url : "/search",
 					type : "POST",
 					data : {
-						"search" : search
+						"search" : search,
+						"pageNo" : 1
 					},
 					dataType : "text",
 					success : function(retVal) {
@@ -223,118 +425,286 @@
 						alert("error");
 					}
 				});
-			})
-	
-			function horseDetail(hrNo, trNo, meet) {
-	
-				let form = document.createElement("form");
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "/horseDetail");
-	
-				let hiddenField1 = document.createElement("input");
-				hiddenField1.setAttribute("type", "hidden");
-				hiddenField1.setAttribute("name", "hrNo");
-				hiddenField1.setAttribute("value", hrNo);
-	
-				let hiddenField2 = document.createElement("input");
-				hiddenField2.setAttribute("type", "hidden");
-				hiddenField2.setAttribute("name", "trNo");
-				hiddenField2.setAttribute("value", trNo);
 				
-				let hiddenField3 = document.createElement("input");
-				hiddenField3.setAttribute("type", "hidden");
-				hiddenField3.setAttribute("name", "meet");
-				hiddenField3.setAttribute("value", meet);
+				history.pushState(
+						{pageNo : 1, 
+						 search : search,
+						 url : "/search"},
+						 null, null);
 	
-				let csrf1 = document.createElement("input");
-				csrf1.setAttribute("type", "hidden");
-				csrf1.setAttribute("name", "_csrf");
-				csrf1.setAttribute("value", token);
+			});
 	
-				form.appendChild(csrf1);
-				form.appendChild(hiddenField1);
-				form.appendChild(hiddenField2);
-				form.appendChild(hiddenField3);
-				document.body.appendChild(form);
-				form.submit();
+			function horseDetail(hrNo, meet, search, pageNo) {
+
+				$.ajax({
+					url : "/search/horseDetail",
+					type : "POST",
+					data : {
+						"hrNo" : hrNo,
+						"meet" : meet
+					},
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+				
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/horseDetail",
+						 meet : meet,
+						 hrNo : hrNo},
+						 null, null);
+	
 			}
 	
-			function trainerDetail(trNo) {
-	
-				let form = document.createElement("form");
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "/trainerDetail");
-	
-				let hiddenField1 = document.createElement("input");
-				hiddenField1.setAttribute("type", "hidden");
-				hiddenField1.setAttribute("name", "trNo");
-				hiddenField1.setAttribute("value", trNo);
-	
-				let csrf1 = document.createElement("input");
-				csrf1.setAttribute("type", "hidden");
-				csrf1.setAttribute("name", "_csrf");
-				csrf1.setAttribute("value", token);
-	
-				form.appendChild(csrf1);
-				form.appendChild(hiddenField1);
-	
-				document.body.appendChild(form);
-				form.submit();
+			function trainerDetail(trNo, meet, search, pageNo) {
+
+				$.ajax({
+					url : "/search/trainerDetail",
+					type : "POST",
+					data : {
+						"trNo" : trNo,
+						"meet" : meet
+					},
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+				
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/trainerDetail",
+						 meet : meet,
+						 trNo : trNo},
+						 null, null);
 			}
 	
-			function jockeyDetail(jkNo) {
-	
-				let form = document.createElement("form");
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "/jockeyDetail");
-	
-				let hiddenField1 = document.createElement("input");
-				hiddenField1.setAttribute("type", "hidden");
-				hiddenField1.setAttribute("name", "jkNo");
-				hiddenField1.setAttribute("value", jkNo);
-	
-				let csrf1 = document.createElement("input");
-				csrf1.setAttribute("type", "hidden");
-				csrf1.setAttribute("name", "_csrf");
-				csrf1.setAttribute("value", token);
-	
-				form.appendChild(csrf1);
-				form.appendChild(hiddenField1);
-	
-				document.body.appendChild(form);
-				form.submit();
+			function jockeyDetail(jkNo, meet, search, pageNo) {
+
+				$.ajax({
+					url : "/search/jockeyDetail",
+					type : "POST",
+					data : {
+						"jkNo" : jkNo,
+						"meet" : meet
+					},
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+				
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/jockeyDetail",
+						 meet : meet,
+						 jkNo : jkNo},
+						 null, null);
 			}
 			
-			function horseSearch(){
- 		 		let search = $("#search").val();
-				let form = document.createElement("form");
-				
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "/search/horseSearch");
-	
-				let hiddenField1 = document.createElement("input");
-				hiddenField1.setAttribute("type", "hidden");
-				hiddenField1.setAttribute("name", "search");
-				hiddenField1.setAttribute("value", search);
-				
-				let hiddenField2 = document.createElement("input");
-				hiddenField2.setAttribute("type", "hidden");
-				hiddenField2.setAttribute("name", "pageNo");
-				hiddenField2.setAttribute("value", 1);
-	
-			 	let csrf1 = document.createElement("input");
-				csrf1.setAttribute("type", "hidden");
-				csrf1.setAttribute("name", "_csrf");
-				csrf1.setAttribute("value", token);
-	
-				form.appendChild(csrf1); 
-				form.appendChild(hiddenField1);
-				form.appendChild(hiddenField2);
-				document.body.appendChild(form);
-				form.submit();
-				
+			function hfirst(pageNo, search){
+				horseSearchPaging(pageNo, search);
 			}
-
+			
+			function hprevious(pageNo, search){
+				horseSearchPaging(pageNo, search);
+			}
+			
+			function hcurrent(pageNo, search){
+				horseSearchPaging(pageNo, search);
+			}
+			
+			function hnext(pageNo, search){
+				horseSearchPaging(pageNo, search);
+			}
+			
+			function hend(pageNo, search){
+				horseSearchPaging(pageNo, search);
+			}
+			
+			function tfirst(pageNo, search){
+				trainerSearchPaging(pageNo, search);
+			}
+			
+			function tprevious(pageNo, search){
+				trainerSearchPaging(pageNo, search);
+			}
+			
+			function tcurrent(pageNo, search){
+				trainerSearchPaging(pageNo, search);
+			}
+			
+			function tnext(pageNo, search){
+				trainerSearchPaging(pageNo, search);
+			}
+			
+			function tend(pageNo, search){
+				trainerSearchPaging(pageNo, search);
+			}
+			
+			function jfirst(pageNo, search){
+				jockeySearchPaging(pageNo, search);
+			}
+			
+			function jprevious(pageNo, search){
+				jockeySearchPaging(pageNo, search);
+			}
+			
+			function jcurrent(pageNo, search){
+				jockeySearchPaging(pageNo, search);
+			}
+			
+			function jnext(pageNo, search){
+				jockeySearchPaging(pageNo, search);
+			}
+			
+			function jend(pageNo, search){
+				jockeySearchPaging(pageNo, search);
+			}
+			
+			function horseSearchPaging(pageNo, search){
+				$.ajax({
+					url : "/search/horseSearchPaging",
+					type : "POST",
+					data : {
+							"pageNo" : pageNo,
+							"search" : search
+							},
+	                dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function(retVal) {
+						alert("error");
+					}
+				});
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/horseSearchPaging",
+						 fragment : "#horseP"},
+						 null, null);	
+			}
+			
+			function trainerSearchPaging(pageNo, search){
+				$.ajax({
+					url : "/search/trainerSearchPaging",
+					type : "POST",
+					data : {
+							"pageNo" : pageNo,
+							"search" : search
+							},
+	                dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function(retVal) {
+						alert("error");
+					}
+				});
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/trainerSearchPaging",
+						 fragment : "#trainerP"},
+						 null, null);	
+			}
+			
+			function jockeySearchPaging(pageNo, search){
+				$.ajax({
+					url : "/search/jockeySearchPaging",
+					type : "POST",
+					data : {
+							"pageNo" : pageNo,
+							"search" : search
+							},
+	                dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function(retVal) {
+						alert("error");
+					}
+				});
+				history.pushState(
+						{pageNo : pageNo, 
+						 search : search,
+						 url : "/search/jockeySearchPaging",
+						 fragment : "#jockeyP"},
+						 null, null);	
+			}
+			
+			$(window).on('popstate', function(event) {
+		    	  let data = event.originalEvent.state;
+		    	  console.log(data);
+		    	  /* if(data == null){
+		    		  location.href="/"
+		    	  } */
+		    	  if(data.url !== "/search"){
+			    	  $.ajax({
+							url : data.url,
+							type : "POST",
+							data : {
+									"pageNo" : data.pageNo,
+									"search" : data.search
+									},
+			                dataType : "text",
+							success : function(retVal) {
+								$("#information").val("");
+								$("#information").replaceWith(retVal);
+							},
+							error : function(retVal) {
+								alert("error");
+							}
+						});
+		    	  } else {
+		    		  $.ajax({
+							url : "/search",
+							type : "POST",
+							data : {
+								"search" : data.search,
+								"pageNo" : data.pageNo
+							},
+							dataType : "text",
+							success : function(retVal) {
+								$("#information").val("");
+								$("#recommendWord").val("");
+								$("#recommendList").remove();
+								$("#information").replaceWith(retVal);
+							},
+							error : function() {
+								alert("error");
+							}
+						});
+		    	  }
+		    }); 
+				 
 		</script>
+</main>
+	<th:block layout:fragment="script">
+		<!-- Bootstrap core JavaScript -->
+		<script src="/static/vendor/jquery/jquery.min.js"></script>
+		<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		
 	</th:block>
 

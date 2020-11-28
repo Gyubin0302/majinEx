@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div id="information" class="container">
+	<h1 class="my-4">경주마 프로필</h1>
+	<table border=1>
+		<tr>
+			<th>마명</th>
+			<td>[[${horseDetail.hrName}]]</td>
+			<th>생년월일</th>
+			<td>[[${horseDetail.birthDay}]]</td>
+			<th>레이팅</th>
+			<td>[[${horseDetail.rating}]]</td>
+			<th>마번</th>
+			<td>[[${horseDetail.hrNo}]]</td>
+		</tr>
+		<tr>
+			<th>등급</th>
+			<td>[[${horseDetail.ranks}]]</td>
+			<th>성별</th>
+			<td>[[${horseDetail.sex}]]</td>
+			<th>산지</th>
+			<td>[[${horseDetail.nation}]]</td>
+			<th>조교사</th>
+			<td>qfqwf</td>
+		</tr>
+		<tr>
+			<th>통산전적</th>
+			<td>[[${horseDetail.totalRecords}]]</td>
+			<th>승률</th>
+			<td>[[${horseDetail.WinningP}]]</td>
+			<th>복승률</th>
+			<td>[[${horseDetail.ComplementaryRate}]]</td>
+			<th>연승률</th>
+			<td>[[${horseDetail.ConsecutiveWinningP}]]</td>
+		</tr>
+	</table>
+</div>

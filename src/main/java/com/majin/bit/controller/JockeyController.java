@@ -36,6 +36,15 @@ public class JockeyController {
 	@Autowired
 	private jockeyService jockeyService;
 	
+	/**
+	 * 기수 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/jkapi", method = {RequestMethod.GET, RequestMethod.POST})
 	public String jk(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;
@@ -83,6 +92,13 @@ public class JockeyController {
 		
 	}
 	
+	/**
+	 * 기수 상세 정보
+	 * @param jkNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/search/jockeyDetail", method = RequestMethod.POST)
 	public String jockeyDetail(String jkNo, String meet, Model model) {
 		
@@ -92,9 +108,16 @@ public class JockeyController {
 		
 		model.addAttribute("jockeyDetail",jockeyService.searchOneJockey(jkDto));
 		
-		return "index :: #information";
+		return "jockeyDetail";
 	}
 	
+	/**
+	 * 기수 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
 	@RequestMapping(value = "/search/jockeySearchPaging", method = RequestMethod.POST)
 	public String horseSearchPaging(Model model, int pageNo, String search) {
 		
@@ -105,7 +128,7 @@ public class JockeyController {
 		model.addAttribute("searchJockey", jockeyPaging);
 		model.addAttribute("jockeyPagination", jockeyPagination);
 
-		return "index :: #information";
+		return "jockeyPaging";
 	}
 
 }

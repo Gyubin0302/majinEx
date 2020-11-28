@@ -128,6 +128,6 @@ public class SearchController {
 //		model.addAttribute("jockeyPagination", jockeyPagination);
 		model.addAttribute("search", search);
 
-        return "index :: #information";
+        return "mainSearch";
     }
 }

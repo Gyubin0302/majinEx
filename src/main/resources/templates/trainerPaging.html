@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div id="information" class="container">
+	<div id="trainerP">
+		<h1 class="my-4">조교사 정보</h1>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-top">조교사 이름</div>
+			<div class="col-sm-top">소속조</div>
+			<div class="col-sm-top">데뷔 날짜</div>
+			<div class="col-md-4-top">통산 전적</div>
+			<div class="col-sm-top">연승률</div>
+			<div class="col-sm-top">복승률</div>
+			<div class="col-sm-top">승률</div>
+		</div>
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center"
+			th:each="tr, index : ${searchTrainer}" th:if="${index.index} < 10">
+			<div class="col-sm">
+				<a
+					th:onclick='trainerDetail([[${tr.trNo}]], [[${tr.meet}]], [[${search}]])'
+					th:text="${tr.trName}"></a>
+			</div>
+			<div class="col-sm" th:text="${tr.part}"></div>
+			<div class="col-sm" th:text="${tr.debut}"></div>
+			<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
+			<div class="col-sm" th:text="${tr.tConsecutiveWinningP}"></div>
+			<div class="col-sm" th:text="${tr.tComplementRyRate}"></div>
+			<div class="col-sm" th:text="${tr.tWinningP}"></div>
+		</div>
+
+		<!-- trainerPagination -->
+		<div id="trainerPaging" class="row justify-content-md-center-paging"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${1 == trainerPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="tfirst(1,[[${trainerPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=1, search=${pagination.search})}" -->
+						<span aria-hidden="true">처음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${1 == trainerPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="tprevious([[${trainerPagination.prevBlock}]],[[${trainerPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.prevBlock}, search=${pagination.search})}"  -->
+						<span aria-hidden="true">이전</span>
+				</a>
+				</li>
+				<th:block
+					th:with="start = ${trainerPagination.startPage}, end = ${trainerPagination.endPage}">
+					<li class="page-item"
+						th:with="start = ${trainerPagination.startPage}, end = ${trainerPagination.endPage}"
+						th:each="pageButton : ${#numbers.sequence(start, end)}"
+						th:class="${pageButton == trainerPagination.page} ? 'page-item active'">
+						<a class="page-link"
+						th:onclick="tcurrent([[${pageButton}]],[[${trainerPagination.search}]])"
+						th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+					</li>
+				</th:block>
+				<li class="page-item"
+					th:class="${trainerPagination.totalPageCnt == trainerPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="tnext([[${trainerPagination.nextBlock}]],[[${trainerPagination.search}]])"
+					aria-label="Next"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.nextBlock}, search=${pagination.search})}" -->
+						<span aria-hidden="true">다음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${trainerPagination.totalPageCnt == trainerPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="tend([[${trainerPagination.totalPageCnt}]],[[${trainerPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.totalPageCnt}, search=${pagination.search})}" -->
+						<span aria-hidden="true">끝</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

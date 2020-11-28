@@ -34,6 +34,15 @@ public class TrainerController {
 	@Autowired
 	private TrainerService trainerService;
 	
+	/**
+	 * 조교 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/trapi", method = {RequestMethod.GET, RequestMethod.POST})
 	public String tr(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;
@@ -81,6 +90,13 @@ public class TrainerController {
 		
 	}
 	
+	/**
+	 * 조교 상세 정보
+	 * @param trNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/search/trainerDetail", method = RequestMethod.POST)
 	public String trainerDetail(String trNo, String meet, Model model) {
 		
@@ -90,9 +106,16 @@ public class TrainerController {
 		
 		model.addAttribute("trainerDetail",trainerService.searchOneTrainer(trDto));
 		
-		return "index :: #information";
+		return "trainerDetail";
 	}
 	
+	/**
+	 * 조교 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
 	@RequestMapping(value = "/search/trainerSearchPaging", method = RequestMethod.POST)
 	public String horseSearchPaging(Model model, int pageNo, String search) {
 		
@@ -103,7 +126,7 @@ public class TrainerController {
 		model.addAttribute("searchTrainer", trainerPaging);
 		model.addAttribute("trainerPagination", trainerPagination);
 
-		return "index :: #information";
+		return "trainerPaging";
 	}
 	
 }

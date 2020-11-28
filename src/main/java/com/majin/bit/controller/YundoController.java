@@ -54,6 +54,6 @@ public class YundoController {
 		model.addAttribute("busanSeq", yundoService.splitFun(yundos,1));
 		model.addAttribute("busanName", yundoService.splitFun(yundos,2));
 		
-		return "index :: #information";
+		return "yundo";
 	}
 }

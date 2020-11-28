@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div id="information" class="container">
+	<div id="jockeyP">
+		<h1 class="my-4">기수 정보</h1>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-top">기수 이름</div>
+			<div class="col-sm-top">소속조</div>
+			<div class="col-sm-top">데뷔 날짜</div>
+			<div class="col-md-4-top">통산 전적</div>
+			<div class="col-sm-top">연승률</div>
+			<div class="col-sm-top">복승률</div>
+			<div class="col-sm-top">승률</div>
+		</div>
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center"
+			th:each="jk, index : ${searchJockey}" th:if="${index.index} < 10">
+			<div class="col-sm">
+				<a
+					th:onclick='jockeyDetail([[${jk.jkNo}]], [[${jk.meet}]],[[${search}]])'
+					th:text="${jk.jkName}"></a>
+			</div>
+			<div class="col-sm" th:text="${jk.part}"></div>
+			<div class="col-sm" th:text="${jk.debut}"></div>
+			<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
+			<div class="col-sm" th:text="${jk.jConsecutiveWinningP}"></div>
+			<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
+			<div class="col-sm" th:text="${jk.jWinningP}"></div>
+		</div>
+		
+		<!-- jockeyPagination -->
+		<div id="jockeyPaging" class="row justify-content-md-center-paging"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${1 == jockeyPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="jfirst(1,[[${jockeyPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=1, search=${pagination.search})}" -->
+						<span aria-hidden="true">처음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${1 == jockeyPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="jprevious([[${jockeyPagination.prevBlock}]],[[${jockeyPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.prevBlock}, search=${pagination.search})}"  -->
+						<span aria-hidden="true">이전</span>
+				</a>
+				</li>
+				<th:block
+					th:with="start = ${jockeyPagination.startPage}, end = ${jockeyPagination.endPage}">
+					<li class="page-item"
+						th:with="start = ${jockeyPagination.startPage}, end = ${jockeyPagination.endPage}"
+						th:each="pageButton : ${#numbers.sequence(start, end)}"
+						th:class="${pageButton == jockeyPagination.page} ? 'page-item active'">
+						<a class="page-link"
+						th:onclick="jcurrent([[${pageButton}]],[[${jockeyPagination.search}]])"
+						th:text=${pageButton} id="page"></a> <!-- th:href="@{/search/horseSearch(pageNo=${pageButton}, search=${pagination.search})}" -->
+					</li>
+				</th:block>
+				<li class="page-item"
+					th:class="${jockeyPagination.totalPageCnt == jockeyPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="jnext([[${jockeyPagination.nextBlock}]],[[${jockeyPagination.search}]])"
+					aria-label="Next"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.nextBlock}, search=${pagination.search})}" -->
+						<span aria-hidden="true">다음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${jockeyPagination.totalPageCnt == jockeyPagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="jend([[${jockeyPagination.totalPageCnt}]],[[${jockeyPagination.search}]])"
+					aria-label="Previous"> <!-- th:href="@{/search/horseSearch(pageNo=${pagination.totalPageCnt}, search=${pagination.search})}" -->
+						<span aria-hidden="true">끝</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

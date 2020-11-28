@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div id="information" class="container">
+	<!-- 명예의 전당 -->
+	<h1 class="my-4">서울 명예의 전당</h1>
+	<div class="row justify-content-md-center">
+		<div class="col-sm-top">해당연도</div>
+		<div class="col-sm-top">연도 대표마</div>
+		<div class="col-sm-top">최우수 국내산마</div>
+		<div class="col-sm-top">최우수 국내산 3세마</div>
+		<div class="col-sm-top">최우수 조교사</div>
+		<div class="col-sm-top">최우수 기수</div>
+		<div class="col-sm-top">페어플레이 기수</div>
+		<div class="col-sm-top">최우수 신인기수</div>
+		<div class="col-sm-top">최우수 관리조</div>
+	</div>
+	<th:block th:each="yundo : ${seoul}">
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center">
+			<div class="col-sm" th:text="${yundo.yundoJpaKey.getYear()}"></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${seoulSeq[yundoStat.index][0]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][0]}></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${seoulSeq[yundoStat.index][1]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][1]}></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${seoulSeq[yundoStat.index][2]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][2]}></div>
+			<div class="col-sm"
+				th:onclick="trainerDetail([[${seoulSeq[yundoStat.index][3]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][3]}></div> 
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${seoulSeq[yundoStat.index][4]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][4]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${seoulSeq[yundoStat.index][5]}]], [[\'1\']], 0 , 0)"
+				th:text=${seoulName[yundoStat.index][5]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${seoulSeq[yundoStat.index][6]}]], [[\'1\']], 0 ,0)"
+				th:text=${seoulName[yundoStat.index][6]}></div>
+			<div class="col-sm" th:text="${yundo.jo}"></div>
+		</div>
+	</th:block>
+
+	<h1 class="my-4">제주 명예의 전당</h1>
+	<div class="row justify-content-md-center">
+		<div class="col-sm-top">해당연도</div>
+		<div class="col-sm-top">최우수 제주마</div>
+		<div class="col-sm-top">최우수 한라마</div>
+		<div class="col-sm-top">최우수 마주</div>
+		<div class="col-sm-top">최우수 조교사</div>
+		<div class="col-sm-top">최우수 기수</div>
+		<div class="col-sm-top">인기 기수</div>
+		<div class="col-sm-top">페어플레이 기수</div>
+		<div class="col-sm-top">최우수 관리조</div>
+	</div>
+	<th:block th:each="yundo : ${jeju}">
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center">
+			<div class="col-sm" th:text="${yundo.yundoJpaKey.getYear()}"></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${jejuSeq[yundoStat.index][0]}]], [[\'2\']], 0 , 0)"
+				th:text=${jejuName[yundoStat.index][0]}></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${jejuSeq[yundoStat.index][0]}]], [[\'2\']], 0 , 0)"
+				th:text=${jejuName[yundoStat.index][0]}></div>
+			<div class="col-sm" th:text=${jejuName[yundoStat.index][2]}></div>
+			<div class="col-sm"
+				th:onclick="trainerDetail([[${jejuSeq[yundoStat.index][3]}]], [[\'2\']], 0 ,0)"
+				th:text=${jejuName[yundoStat.index][3]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${jejuSeq[yundoStat.index][4]}]], [[\'2\']], 0 , 0)"
+				th:text=${jejuName[yundoStat.index][4]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${jejuSeq[yundoStat.index][5]}]], [[\'2\']], 0 , 0)"
+				th:text=${jejuName[yundoStat.index][5]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${jejuSeq[yundoStat.index][6]}]], [[\'2\']], 0 , 0)"
+				th:text=${jejuName[yundoStat.index][6]}></div>
+			<div class="col-sm" th:text="${yundo.jo}"></div>
+		</div>
+	</th:block>
+
+	<h1 class="my-4">부산경남 명예의 전당</h1>
+	<div class="row justify-content-md-center">
+		<div class="col-sm-top">해당연도</div>
+		<div class="col-sm-top">연도 대표마</div>
+		<div class="col-sm-top">최우수 국내산마</div>
+		<div class="col-sm-top">최우수 국내산 3세마</div>
+		<div class="col-sm-top">최우수 조교사</div>
+		<div class="col-sm-top">최우수 기수</div>
+		<div class="col-sm-top">페어플레이 기수</div>
+		<div class="col-sm-top">최우수 신인기수</div>
+		<div class="col-sm-top">최우수 관리조</div>
+	</div>
+	<th:block th:each="yundo : ${busan}">
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center">
+			<div class="col-sm" th:text="${yundo.yundoJpaKey.getYear()}"></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${busanSeq[yundoStat.index][0]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][0]}></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${busanSeq[yundoStat.index][1]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][1]}></div>
+			<div class="col-sm"
+				th:onclick="horseDetail([[${busanSeq[yundoStat.index][2]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][2]}></div> 
+			<div class="col-sm"
+				th:onclick="trainerDetail([[${busanSeq[yundoStat.index][3]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][3]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${busanSeq[yundoStat.index][4]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][4]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${busanSeq[yundoStat.index][5]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][5]}></div>
+			<div class="col-sm"
+				th:onclick="jockeyDetail([[${busanSeq[yundoStat.index][6]}]], [[\'3\']], 0 , 0)"
+				th:text=${busanName[yundoStat.index][6]}></div>
+			<div class="col-sm" th:text="${yundo.jo}"></div>
+		</div>
+	</th:block>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div id="information" class="container">
+	<h1 class="my-4">조교사 프로필</h1>
+	<table border=1>
+		<tr>
+			<th>성명</th>
+			<td>[[${trainerDetail.trName}]]</td>
+			<th>소속조</th>
+			<td>[[${trainerDetail.part}]]</td>
+			<th>데뷔날짜</th>
+			<td>[[${trainerDetail.debut}]]</td>
+			<th>최근 1년 전적</th>
+			<td>[[${trainerDetail.tYearTotal}]]</td>
+		</tr>
+		<tr>
+			<th>통산 전적</th>
+			<td>[[${trainerDetail.tAllTotal}]]</td>
+			<th>승률</th>
+			<td>[[${trainerDetail.tWinningP}]]</td>
+			<th>복승률</th>
+			<td>[[${trainerDetail.tComplementRyRate}]]</td>
+			<th>연승률</th>
+			<td>[[${trainerDetail.tConsecutiveWinningP}]]</td>
+		</tr>
+	</table>
+</div>

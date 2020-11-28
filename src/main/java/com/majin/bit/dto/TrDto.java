@@ -29,5 +29,4 @@ public class TrDto {
 	private String tConsecutiveWinningP; // 연승률
 	private String tComplementRyRate; // 복승률
 	private String tWinningP; // 승률
-	
 }

@@ -48,6 +48,15 @@ public class HorseController {
         return "admin/APIInsert";
     }
 	
+	/**
+	 * 경주마 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/horseapi", method = {RequestMethod.GET, RequestMethod.POST})
 	public String horse(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;
@@ -95,7 +104,13 @@ public class HorseController {
 		return "admin/APIInsert :: #API";
 				
 	}
-	
+	/**
+	 * 경주마 상세 정보
+	 * @param hrNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/search/horseDetail", method = RequestMethod.POST)
 	public String horseDetail(String hrNo, String meet, Model model) {
 		
@@ -105,9 +120,16 @@ public class HorseController {
 
 		model.addAttribute("horseDetail", horseService.searchOneHorse(horseDto));
 		
-		return "index :: #information";
+		return "horseDetail";
 	}
 	
+	/**
+	 * 경주마 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
 	@RequestMapping(value = "/search/horseSearchPaging", method = RequestMethod.POST)
 	public String horseSearchPaging(Model model, @RequestParam(defaultValue = "1")int pageNo, String search) {
 
@@ -118,7 +140,7 @@ public class HorseController {
 		model.addAttribute("searchHorse", horsePaging);
 		model.addAttribute("horsePagination", horsePagination);
 
-		return "index :: #information";
+		return "horsePaging";
 	}
 
 }

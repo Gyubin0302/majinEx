@@ -14,7 +14,7 @@
 
 	<div>
 		<form role="form" th:object=${guideDto}
-			th:action="@{/static/sample/viewer/index.php}" method="GET"
+			th:action="@{/static/sample/viewer/index.php}" method="POST"
 			enctype="multipart/form-data" onsubmit="return info_chk()">
 			<!--  /admin/guideInsertProc-->
 			<div>
@@ -33,26 +33,34 @@
 
 			<div style="text-align: right;">
 				<input type="submit" th:value="목록" th:formaction="@{/guideList}">
-				<input type="button" th:value="작성" onclick='return info_chk2(this.form);'> 
-				<input type="submit" th:value="취소">
+				<input type="button" th:value="작성"
+					onclick='return info_chk2(this.form);'> <input
+					type="submit" th:value="취소">
 			</div>
 		</form>
 	</div>
-	<br />
-	<br />
-	<br />
+	<br /> <br /> <br />
 </main>
 <th:block layout:fragment="script">
-	<script type="text/javascript" th:src="@{/static/js/HuskyEZCreator.js}"
-		charset="utf-8"></script>
+	
 	<script>
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+		localStorage.setItem("token", token);
+		localStorage.setItem("header", header);
+		$(function() {
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+		});
+		
 		function info_chk() {
 			return true;
 		}
 
 		function info_chk2(frm) {
-			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD",[]);
-			frm.action = '/admin/guideInsertProc';
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+			frm.action = '/guideInsertProc';
 			frm.submit();
 			return true;
 		}
@@ -62,10 +70,10 @@
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder : "content",
-			sSkinURI : "/static/SmartEditor2Skin.html",
+			sSkinURI : "static/resources/editor/SmartEditor2Skin.html",
 			htParams : {
 				bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-				bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : false, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
 				//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
 				//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
@@ -80,10 +88,10 @@
 			fCreator : "createSEditor2"
 		});
 
-		function pasteHTML() {
-			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-			oEditors.getById["content"].exec("PASTE_HTML", [ sHTML ]);
-		}
+		function pasteHTML(filepath){
+	        var sHTML = '<img src="<%=ctx%>/se2/upload/'+filepath+'">';
+	        editor_object.getById["smarteditor"].exec("PASTE_HTML", [sHTML]);
+	    }
 
 		function showHTML() {
 			var sHTML = oEditors.getById["content"].getIR();

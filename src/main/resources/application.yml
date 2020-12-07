@@ -19,6 +19,7 @@ spring:
       file-size-threshold: 1MB
       max-file-size: 100MB
       max-request-size: 100MB
+          
       
   jpa:
     hibernate:
@@ -53,3 +54,4 @@ spring:
     static-locations:
     - classpath:/static/
     add-mappings: true
+  

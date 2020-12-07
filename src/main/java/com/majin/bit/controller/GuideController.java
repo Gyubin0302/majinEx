@@ -58,14 +58,14 @@ public class GuideController {
 	}
 
 	// 게시물 등록 컨트롤러
-	@RequestMapping(value = "/admin/guideInsert")
+	@RequestMapping(value = "/guideInsert")
 	private String GuideBoardInsert(@ModelAttribute GuideDto guideDto) {
 
 		return "admin/guideInsert";
 	}
 
 	// 게시물 등록 폼
-	@RequestMapping(value = "/admin/guideInsertProc")
+	@RequestMapping(value = "/guideInsertProc")
 	private String GuideBoardInsertProc(@ModelAttribute GuideDto guideBoard, HttpServletRequest request) {
 		System.out.println(guideBoard);
 		guideservice.GuideBoardInsert(guideBoard);
@@ -74,7 +74,7 @@ public class GuideController {
 	}
 
 	// 엄데이트 컨트롤러
-	@RequestMapping(value = "/admin/guideUpdate/{g_no}")
+	@RequestMapping(value = "/guideUpdate/{g_no}")
 	private String GuideBoardUpdateForm(@PathVariable("g_no") int g_no, Model model) {
 		model.addAttribute("detail", guideservice.GuideBoardDetail(g_no));
 		System.out.println("돌아돌아돌림판: " + g_no);
@@ -82,7 +82,7 @@ public class GuideController {
 	}
 
 	// 업데이트 폼
-	@RequestMapping(value = "/admin/guideUpdateProc")
+	@RequestMapping(value = "/guideUpdateProc")
 	private String GuideBoardUpdateProc(@ModelAttribute GuideDto guideBoard) {
 
 		System.out.println("업대이트 되니? ");
@@ -95,28 +95,29 @@ public class GuideController {
 	}
 
 	// 삭제 컨트롤러
-	@RequestMapping(value = "/admin/guideDelete/{g_no}")
+	@RequestMapping(value = "/guideDelete/{g_no}")
 	private String GuideBoardDelete(@PathVariable("g_no") int g_no) {
 		guideservice.GuideBoardDelete(g_no);
 		return "redirect:/guideList";
 	}
 
 	 // 다중파일업로드 에디터
-    @RequestMapping(value = "/file_uploader_DEXT.asp", method = RequestMethod.POST)
-    @ResponseBody
+	@ResponseBody
+    @RequestMapping(value = "/file_uploader_DEXT", method = RequestMethod.POST)
     public String multiplePhotoUpload(HttpServletRequest request) {
-
+		// 파일정보
         StringBuffer sb = new StringBuffer();
         try {
-
+        	// 파일명을 받는다- 일반 원본파일명
             String oldName = request.getHeader("file-name");
-
-            String filePath = request.getSession().getServletContext().getRealPath("*/resources/templates/img/");
+            System.out.println(oldName);
+            // 파일 기본경로_ 상세경로
+            String filePath = request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
             System.err.println(filePath);
             String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
-                    .append(UUID.randomUUID().toString())
-                    .append(oldName.substring(oldName.lastIndexOf("."))).toString();
-            System.err.println(filePath + saveName);
+                    			.append(UUID.randomUUID().toString())
+                    			.append(oldName.substring(oldName.lastIndexOf("."))).toString();
+            System.err.println("=======>"+filePath + saveName);
             InputStream is = request.getInputStream();
 
             OutputStream os = new FileOutputStream(filePath + saveName);
@@ -127,11 +128,11 @@ public class GuideController {
             }
             os.flush();
             os.close();
-
+            //정보출력
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
                     .append("&sFileName=").append(oldName)
-                    .append("&sFileURL=").append("*/resources/templates/img/").append(saveName);
+                    .append("&sFileURL=").append("").append(filePath).append(saveName);
             System.out.println(sb);
         } catch (Exception e) {
             e.printStackTrace();

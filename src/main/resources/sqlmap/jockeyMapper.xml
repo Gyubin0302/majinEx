@@ -29,10 +29,14 @@
 	</insert>
 	
 	<select id="searchJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">
-		SELECT * FROM JOCKEYSKINNY WHERE JKNAME LIKE CONCAT('%',#{search},'%') 
+		SELECT * FROM JOCKEYSKINNY WHERE JKNAME LIKE CONCAT('%',#{search},'%') ORDER BY JKNAME ASC 
 	</select>
 	
-	<select id="searchOneJockey" resultType="com.majin.bit.dto.JkDto" parameterType="java.lang.String">
-		SELECT * FROM JOCKEYSKINNY WHERE JKNO = #{jkNo}
+	<select id="searchOneJockey" resultType="com.majin.bit.dto.JkDto" parameterType="com.majin.bit.dto.JkDto">
+		SELECT * FROM JOCKEYSKINNY WHERE JKNO = #{jkNo} AND MEET = #{meet}
+	</select>
+	
+	<select id="searchPagingJockey" resultType="com.majin.bit.dto.JkDto" parameterType="com.majin.bit.dto.Pagination">
+		SELECT * FROM JOCKEYSKINNY WHERE JKNAME LIKE CONCAT('%',#{search},'%') ORDER BY JKNAME ASC LIMIT #{startIndex}, #{pageSize}
 	</select>
 </mapper>

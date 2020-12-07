@@ -9,9 +9,10 @@ import lombok.Data;
 @Data
 @IdClass(HorseDtoId.class)
 public class HorseDto {
+	
 	@Id
 	@Column
-	private String hrNo;
+	private String hrNo; // 마번호
 	
 	@Id
 	@Column
@@ -31,6 +32,4 @@ public class HorseDto {
 	private String ConsecutiveWinningP; // 연승률
 	private String ComplementaryRate; // 복승률
 	private String WinningP; // 승률
-	
-
 }

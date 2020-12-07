@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.majin.bit.dto.HorseDto;
 import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.Pagination;
 import com.majin.bit.dto.SearchDto;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.HorseService;
@@ -93,7 +94,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/search", method = RequestMethod.POST)
-    public String search(@RequestParam String search, Model model){
+    public String search(@RequestParam String search, @RequestParam int pageNo, Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		FileWriter userText;
@@ -106,10 +107,27 @@ public class SearchController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("searchHorse", horseService.searchHorse(search));
-		model.addAttribute("searchTrainer", trainerService.searchTrainer(search));
-		model.addAttribute("searchJockey", jockeyService.searchJockey(search));
+		
+		List<HorseDto> horseList = horseService.searchHorse(search);
+//		Pagination horsePagination = new Pagination(horseList.size(), pageNo, search);
+//		List<HorseDto> horsePaging = horseService.searchPagingHorse(horsePagination);
+		
+		List<TrDto> trainerList = trainerService.searchTrainer(search);
+//		Pagination trainerPagination = new Pagination(trainerList.size(), pageNo, search);
+//		List<TrDto> trainerPaging = trainerService.searchPagingTrainer(trainerPagination);
+//		
+		List<JkDto> jockeyList = jockeyService.searchJockey(search);
+//		Pagination jockeyPagination = new Pagination(jockeyList.size(), pageNo, search);
+//		List<JkDto> jockeyPaging = jockeyService.searchPagingJockey(jockeyPagination);
+		
+		model.addAttribute("searchHorse", horseList);
+//		model.addAttribute("horsePagination", horsePagination);
+		model.addAttribute("searchTrainer", trainerList);
+//		model.addAttribute("trainerPagination", trainerPagination);
+		model.addAttribute("searchJockey", jockeyList);
+//		model.addAttribute("jockeyPagination", jockeyPagination);
+		model.addAttribute("search", search);
 
-        return "index :: #information";
+        return "mainSearch";
     }
 }

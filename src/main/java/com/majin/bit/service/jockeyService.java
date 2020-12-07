@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.majin.bit.dao.JockeyDao;
 import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.Pagination;
 import com.majin.bit.util.JockeyCrawling;
 
 @Service
@@ -82,7 +83,11 @@ public class jockeyService {
 		return jockeyDao.searchJockey(search);
 	}
 
-	public JkDto searchOneJockey(String jkNo) {
-		return jockeyDao.searchOneJockey(jkNo);
+	public JkDto searchOneJockey(JkDto jkDto) {
+		return jockeyDao.searchOneJockey(jkDto);
+	}
+	
+	public List<JkDto> searchPagingJockey(Pagination pagination) {
+		return jockeyDao.searchPagingJockey(pagination);
 	}
 }

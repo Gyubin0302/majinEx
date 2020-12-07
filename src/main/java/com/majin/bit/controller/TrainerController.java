@@ -23,7 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.majin.bit.dto.Pagination;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.util.TrainerCrawling;
@@ -34,6 +34,15 @@ public class TrainerController {
 	@Autowired
 	private TrainerService trainerService;
 	
+	/**
+	 * 조교 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/trapi", method = {RequestMethod.GET, RequestMethod.POST})
 	public String tr(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
 		String inputLine;
@@ -81,16 +90,43 @@ public class TrainerController {
 		
 	}
 	
-	@RequestMapping(value = "/trainerDetail", method = RequestMethod.POST)
+	/**
+	 * 조교 상세 정보
+	 * @param trNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/search/trainerDetail", method = RequestMethod.POST)
 	public String trainerDetail(String trNo, String meet, Model model) {
 		
 		TrDto trDto = new TrDto();
 		trDto.setTrNo(trNo);
 		trDto.setMeet(meet);
 		
-		model.addAttribute("trainer",trainerService.searchOneTrainer(trDto));
+		model.addAttribute("trainerDetail",trainerService.searchOneTrainer(trDto));
 		
 		return "trainerDetail";
+	}
+	
+	/**
+	 * 조교 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
+	@RequestMapping(value = "/search/trainerSearchPaging", method = RequestMethod.POST)
+	public String horseSearchPaging(Model model, int pageNo, String search) {
+		
+		List<TrDto> trainerList = trainerService.searchTrainer(search);
+		Pagination trainerPagination = new Pagination(trainerList.size(), pageNo, search);
+		List<TrDto> trainerPaging = trainerService.searchPagingTrainer(trainerPagination);
+
+		model.addAttribute("searchTrainer", trainerPaging);
+		model.addAttribute("trainerPagination", trainerPagination);
+
+		return "trainerPaging";
 	}
 	
 }

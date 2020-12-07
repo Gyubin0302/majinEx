@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.majin.bit.dto.YundoDto;
 import com.majin.bit.service.YundoService;
@@ -30,7 +31,7 @@ public class YundoController {
 		yundoService.yundoCrawling("3");
 		return "home";
 	}	
-	@GetMapping("/yundo/view")
+	@PostMapping("/yundo/view")
 	public String ShowYundo(Model model) {
 		List<YundoDto> yundos;
 		String[][] list;

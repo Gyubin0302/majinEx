@@ -29,7 +29,7 @@
 	</insert>
 	
 	<select id="searchHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
-		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%')  
+		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC
 	</select>
 	
 	<select id="searchOneHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.HorseDto">

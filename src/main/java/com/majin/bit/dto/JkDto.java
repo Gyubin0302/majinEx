@@ -32,5 +32,4 @@ public class JkDto {
 	private String jConsecutiveWinningP; // 연승률
 	private String jComplementRyRate; // 복승률
 	private String jWinningP; // 승률
-
 }

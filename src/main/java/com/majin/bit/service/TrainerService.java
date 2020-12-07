@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.majin.bit.dao.TrainerDao;
+import com.majin.bit.dto.Pagination;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.util.TrainerCrawling;
 
@@ -80,5 +81,9 @@ public class TrainerService {
 
 	public TrDto searchOneTrainer(TrDto trDto) {
 		return trainerDao.searchOneTrainer(trDto);
+	}
+	
+	public List<TrDto> searchPagingTrainer(Pagination pagination) {
+		return trainerDao.searchPagingTrainer(pagination);
 	}
 }

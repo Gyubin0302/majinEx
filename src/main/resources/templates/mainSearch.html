@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div id="information" class="container">
+	<th:block th:unless="${#lists.isEmpty(searchHorse)}">
+	<div id="horseP">
+		<h1 class="my-4">경주마 정보</h1>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-top">마명</div>
+			<div class="col-sm-top">레이팅</div>
+			<div class="col-sm-top">등급</div>
+			<div class="col-sm-top">산지</div>
+			<div class="col-sm-top">성별</div>
+			<div class="col-sm-3-top">전적</div>
+		</div>
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center"
+			th:each="horse, index : ${searchHorse}" th:if="${index.index} < 10 ">
+			<div class="col-sm">
+				<a
+					th:onclick='horseDetail([[${horse.hrNo}]], [[${horse.meet}]], [[${search}]])'
+					th:text="${horse.hrName}"></a>
+			</div>
+			<div class="col-sm" th:text="${horse.rating}"></div>
+			<div class="col-sm" th:text="${horse.ranks}"></div>
+			<div class="col-sm" th:text="${horse.nation}"></div>
+			<div class="col-sm" th:text="${horse.sex}"></div>
+			<div class="col-sm-3" th:text="${horse.totalRecords}"></div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="card" th:if="${#lists.size(searchHorse) > 10}">
+				<div class="card-body">
+					<a th:onclick="horseSearchPaging(1,[[${search}]])"> 경주마 정보
+						더보기..</a>
+					<!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+	
+	<th:block th:unless="${#lists.isEmpty(searchTrainer)}">
+	<div id="trainerP">
+		<h1 class="my-4">조교사 정보</h1>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-top">조교사 이름</div>
+			<div class="col-sm-top">소속조</div>
+			<div class="col-sm-top">데뷔 날짜</div>
+			<div class="col-md-4-top">통산 전적</div>
+			<div class="col-sm-top">연승률</div>
+			<div class="col-sm-top">복승률</div>
+			<div class="col-sm-top">승률</div>
+		</div>
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center"
+			th:each="tr, index : ${searchTrainer}" th:if="${index.index} < 10">
+			<div class="col-sm">
+				<a
+					th:onclick='trainerDetail([[${tr.trNo}]], [[${tr.meet}]], [[${search}]])'
+					th:text="${tr.trName}"></a>
+			</div>
+			<div class="col-sm" th:text="${tr.part}"></div>
+			<div class="col-sm" th:text="${tr.debut}"></div>
+			<div class="col-md-4" th:text="${tr.tAllTotal}"></div>
+			<div class="col-sm" th:text="${tr.tConsecutiveWinningP}"></div>
+			<div class="col-sm" th:text="${tr.tComplementRyRate}"></div>
+			<div class="col-sm" th:text="${tr.tWinningP}"></div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="card" th:if="${#lists.size(searchTrainer) > 10}">
+				<div class="card-body">
+					<a th:onclick="trainerSearchPaging(1,[[${search}]])"> 조교사 정보
+						더보기..</a>
+					<!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+
+	<th:block th:unless="${#lists.isEmpty(searchJockey)}">
+	<div id="jockeyP">
+		<h1 class="my-4">기수 정보</h1>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-top">기수 이름</div>
+			<div class="col-sm-top">소속조</div>
+			<div class="col-sm-top">데뷔 날짜</div>
+			<div class="col-md-4-top">통산 전적</div>
+			<div class="col-sm-top">연승률</div>
+			<div class="col-sm-top">복승률</div>
+			<div class="col-sm-top">승률</div>
+		</div>
+		<!-- Marketing Icons Section -->
+		<div class="row justify-content-md-center"
+			th:each="jk, index : ${searchJockey}" th:if="${index.index} < 10">
+			<div class="col-sm">
+				<a
+					th:onclick='jockeyDetail([[${jk.jkNo}]], [[${jk.meet}]],[[${search}]])'
+					th:text="${jk.jkName}"></a>
+			</div>
+			<div class="col-sm" th:text="${jk.part}"></div>
+			<div class="col-sm" th:text="${jk.debut}"></div>
+			<div class="col-md-4" th:text="${jk.jAllTotal}"></div>
+			<div class="col-sm" th:text="${jk.jConsecutiveWinningP}"></div>
+			<div class="col-sm" th:text="${jk.jComplementRyRate}"></div>
+			<div class="col-sm" th:text="${jk.jWinningP}"></div>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="card" th:if="${#lists.size(searchJockey) > 10}">
+				<div class="card-body">
+					<a th:onclick="jockeySearchPaging(1,[[${search}]])"> 기수 정보
+						더보기..</a>
+					<!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+</div>

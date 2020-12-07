@@ -25,7 +25,13 @@
 		<input id="word2vec" type="button" name="search" value="단어 학습" /> <br>
 		<input id="yundo_s" type="button" name="search" value="서울의 전당" />
 		<input id="yundo_j" type="button" name="search" value="제주의 전당" />
-		<input id="yundo_b" type="button" name="search" value="부산의 전당" />
+		<input id="yundo_b" type="button" name="search" value="부산의 전당" /> <br>
+		<input id="raceHorse_s" type="button" name="search" value="경주기록 (서울)" />
+		<input id="raceHorse_b" type="button" name="search" value="경주기록 (부산)" />
+		<input id="raceHorse_j" type="button" name="search" value="경주기록 (제주)" /> <br>
+		<input id="raceHorseNew_s" type="button" name="search" value="출전마 (서울)" />
+		<input id="raceHorseNew_b" type="button" name="search" value="출전마 (부산)" />
+		<input id="raceHorseNew_j" type="button" name="search" value="출전마 (제주)" />
 	</div>
 
 	<div id="API">
@@ -264,6 +270,42 @@
 				}
 
 			});
+		});
+		
+		$("#raceHorse_s").click(function() {
+			url = "/admin/raceHorse";
+			meet = {"meet" : "1"}
+			api(url, meet)
+		});
+		
+		$("#raceHorse_b").click(function() {
+			url = "/admin/raceHorse";
+			meet = {"meet" : "3"}
+			api(url, meet)
+		});
+		
+		$("#raceHorse_j").click(function() {
+			url = "/admin/raceHorse";
+			meet = {"meet" : "2"}
+			api(url, meet)
+		});
+		
+		$("#raceHorseNew_s").click(function() {
+			url = "/admin/raceHorseNew";
+			meet = {"meet" : "1"}
+			api(url, meet)
+		});
+		
+		$("#raceHorseNew_b").click(function() {
+			url = "/admin/raceHorseNew";
+			meet = {"meet" : "3"}
+			api(url, meet)
+		});
+		
+		$("#raceHorseNew_j").click(function() {
+			url = "/admin/raceHorseNew";
+			meet = {"meet" : "2"}
+			api(url, meet)
 		});
 	</script>
 </body>

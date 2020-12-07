@@ -42,16 +42,19 @@ public class YundoController {
 		model.addAttribute("seoul", yundos);
 		model.addAttribute("seoulSeq", yundoService.splitFun(yundos,1));
 		model.addAttribute("seoulName", yundoService.splitFun(yundos,2));
+		model.addAttribute("seoulMeet", yundoService.splitFun(yundos,3));
 		
 		yundos = yundoService.showYundo("2");
 		model.addAttribute("jeju", yundos);
 		model.addAttribute("jejuSeq", yundoService.splitFun(yundos,1));
 		model.addAttribute("jejuName", yundoService.splitFun(yundos,2));
+		model.addAttribute("jejuMeet", yundoService.splitFun(yundos,3));
 		
 		yundos = yundoService.showYundo("3");
 		model.addAttribute("busan", yundos);
 		model.addAttribute("busanSeq", yundoService.splitFun(yundos,1));
 		model.addAttribute("busanName", yundoService.splitFun(yundos,2));
+		model.addAttribute("busanMeet", yundoService.splitFun(yundos,3));
 		
 		return "yundo";
 	}

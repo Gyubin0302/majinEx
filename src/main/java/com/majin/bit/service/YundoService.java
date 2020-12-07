@@ -43,6 +43,8 @@ public class YundoService {
 				list[count]=yundo.getIdSeq().split("/");
 			else if(key==2)
 				list[count]=yundo.getName().split("/");
+			else if(key==3)
+				list[count]=yundo.getMeetSeq().split("/");
 			count++;
 		}
 		for(int i=0;i<list.length;i++) {

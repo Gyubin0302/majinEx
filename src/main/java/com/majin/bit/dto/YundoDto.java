@@ -11,6 +11,8 @@ import lombok.Data;
 public class YundoDto{
 	@EmbeddedId
 	private YundoJpaKey yundoJpaKey;
+	@Column(name = "meetSeq")
+	private String meetSeq;
 	@Column(name = "idSeq")
 	private String idSeq;
 	@Column(name = "name")

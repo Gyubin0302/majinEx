@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout2">
+<main layout:fragment="content">
+		<div>
+			<div style="padding: 10px; text-align: center;">
+				<h1>
+					<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
+				</h1>
+			</div>
+			<div>
+				<form role="form" th:object="${guideDto}" th:action="@{/static/sample/viewer/index.php}" method="GET" enctype="multipart/form-data" onsubmit="return info_chk()">
+					<div>
+						<label for="title" style="font-weight: bolder;">제목</label>
+						<input type="text" id="title" name="title" th:value="${detail.title}">
+					</div>
+					
+				 	<div style="font-weight: bolder">
+						<textarea name="content" id="content" rows="10" cols="100"
+								  style="width: 766px; height: 412px; display: none;"
+							  	  placeholder="내용을 입력하세욥~!">
+						[[${detail.content}]]
+						</textarea>
+					</div> 
+					
+					 <!-- <div>
+						<label for="content" style="font-weight: bolder;">내용</label><dr/>
+						<dr/>
+						<textarea id="content" name="content" rows="50" cols="100" >
+						[[${detail.content}]]
+						</textarea>
+					</div> --> 
+					
+					<div style="text-align: right;">
+						<input type="hidden" name="guideNo" th:value="${detail.guideNo}">
+						<input type="submit" th:value="목록" th:formaction="@{/guideList}">
+						<input type="submit" th:value="저장 " sec:authorize="hasRole('ROLE_ADMIN')" onclick='return info_chk2(this.form);'>   
+						<input type="submit" th:value="삭제" th:formaction="@{/admin/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+					</div>
+				</form>
+			</div>
+		<br/><br/><br/>
+		</div>
+	</main>
+	 <th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/static/js/HuskyEZCreator.js}"
+		charset="utf-8"></script>
+	<script>
+		function info_chk() {
+			return true;
+		}
+
+		function info_chk2(frm) {
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD",[]);
+			frm.action = '/admin/guideUpdateProc';
+			frm.submit();
+			return true;
+		}
+
+		var oEditors = [];
+
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "content",
+			sSkinURI : "/static/SmartEditor2Skin.html",
+			htParams : {
+				bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+				//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+				fOnBeforeUnload : function() {
+					//alert("완료!");
+				}
+			}, //boolean
+			fOnAppLoad : function() {
+				//예제 코드
+				//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+			},
+			fCreator : "createSEditor2"
+		});
+
+		function pasteHTML() {
+			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+			oEditors.getById["content"].exec("PASTE_HTML", [ sHTML ]);
+		}
+
+		function showHTML() {
+			var sHTML = oEditors.getById["content"].getIR();
+			alert(sHTML);
+		}
+
+		function submitContents(elClickedObj) {
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+
+			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
+
+			try {
+				elClickedObj.form.submit();
+			} catch (e) {
+			}
+		}
+
+		function setDefaultFont() {
+			var sDefaultFont = '궁서';
+			var nFontSize = 24;
+			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
+		}
+	</script>
+</th:block> 
+</html>

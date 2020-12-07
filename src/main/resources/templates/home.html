@@ -10,6 +10,7 @@
 	<a sec:authorize="isAnonymous()" th:href="@{/login}">로그인 하기</a>
 	<a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
 	<a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+	
 	  
 	 <div sec:authorize="isAuthenticated()">
     	User: <span sec:authentication="name"></span>님 <br>

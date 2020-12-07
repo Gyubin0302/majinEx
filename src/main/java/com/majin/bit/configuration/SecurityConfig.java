@@ -27,7 +27,9 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfAuthenticationStrategy;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import com.majin.bit.security.CustomOAuth2Provider;
 import com.majin.bit.service.CustomOAuth2UserService;
@@ -53,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**").permitAll()
+				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**", "/file_uploader_DEXT").permitAll()
 				.antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
 				.antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
 				.antMatchers("/naver").hasAuthority(NAVER.getRoleType())
@@ -79,7 +81,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("/")
-						.invalidateHttpSession(true);
+						.invalidateHttpSession(true)
+				.and()
+					.headers()
+					.frameOptions()
+					.disable()
+				.and()
+					.csrf()
+					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+				.and()
+					.addFilterAfter(new ExceptionHandlerFilter(), SecurityContextHolderAwareRequestFilter.class);
 						
 	}
 
@@ -111,6 +122,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	 public void configure(WebSecurity webSecurity) throws Exception {
 		 
-	  webSecurity.ignoring().antMatchers("/static/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/images/**", "/webjars/**"); 
+	  webSecurity.ignoring().antMatchers("/static/**", "/css/**", "/fonts/**", "/js/**", "/less/**", "/scss/**", "/images/**", "/webjars/**", "/resources/**"); 
 	 }
+	
+	@Bean		
+	public SpringSecurityDialect springSecurityDialect() {
+	    return new SpringSecurityDialect();
+	}
+	
 }

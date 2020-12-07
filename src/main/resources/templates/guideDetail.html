@@ -32,8 +32,8 @@
 					</div>
 					 <div style="text-align: right;">
 						<input type="submit" th:value="목록" th:formaction="@{/guideList}">
-						<input type="submit" th:value="수정" th:formaction="@{/admin/guideUpdate/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
-						<input type="submit" th:value="삭제" th:formaction="@{/admin/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+						<input type="submit" th:value="수정" th:formaction="@{/guideUpdate/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+						<input type="submit" th:value="삭제" th:formaction="@{/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
 					</div> 
 				</form>
 			</div>

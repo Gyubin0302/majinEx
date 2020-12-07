@@ -42,7 +42,6 @@ public class GuideController {
 
 		List<GuideDto> guideList = new ArrayList<>();
 		guideList = guideservice.getGuideBoardList();
-		System.out.println(guideList);
 		model.addAttribute("guideList", guideList);
 
 		return "guideList";
@@ -51,7 +50,6 @@ public class GuideController {
 	// 게시물 상세보기 컨트롤러
 	@RequestMapping("/guideDetail/{g_no}")
 	private String GuideBoardDetail(@PathVariable("g_no") int g_no, Model model) {
-		System.out.println(g_no);
 		model.addAttribute("detail", guideservice.GuideBoardDetail(g_no));
 
 		return "guideDetail";
@@ -67,9 +65,7 @@ public class GuideController {
 	// 게시물 등록 폼
 	@RequestMapping(value = "/guideInsertProc")
 	private String GuideBoardInsertProc(@ModelAttribute GuideDto guideBoard, HttpServletRequest request) {
-		System.out.println(guideBoard);
 		guideservice.GuideBoardInsert(guideBoard);
-
 		return "forward:/guideList";
 	}
 
@@ -77,7 +73,6 @@ public class GuideController {
 	@RequestMapping(value = "/guideUpdate/{g_no}")
 	private String GuideBoardUpdateForm(@PathVariable("g_no") int g_no, Model model) {
 		model.addAttribute("detail", guideservice.GuideBoardDetail(g_no));
-		System.out.println("돌아돌아돌림판: " + g_no);
 		return "admin/guideUpdate";
 	}
 
@@ -85,9 +80,7 @@ public class GuideController {
 	@RequestMapping(value = "/guideUpdateProc")
 	private String GuideBoardUpdateProc(@ModelAttribute GuideDto guideBoard) {
 
-		System.out.println("업대이트 되니? ");
 		guideservice.GuideBoardUpdate(guideBoard);
-		System.out.println("업대이트 망할것 : " + guideBoard);
 		int guideNo = guideBoard.getGuideNo();
 		String g_no = Integer.toString(guideNo);
 
@@ -112,14 +105,17 @@ public class GuideController {
             String oldName = request.getHeader("file-name");
             System.out.println(oldName);
             // 파일 기본경로_ 상세경로
-            String filePath = request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
+            //String filePath = request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
+            //String filePath = "D:/spring/work/majinEx/src/main/webapp/resources/photoUpload/";
+            String filePath = "D:/spring/work/majinEx/src/main/resources/static/fileupload/";
+            
             System.err.println(filePath);
             String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
                     			.append(UUID.randomUUID().toString())
                     			.append(oldName.substring(oldName.lastIndexOf("."))).toString();
             System.err.println("=======>"+filePath + saveName);
             InputStream is = request.getInputStream();
-
+            
             OutputStream os = new FileOutputStream(filePath + saveName);
             int numRead;
             byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
@@ -137,6 +133,7 @@ public class GuideController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return sb.toString();
     }
 	

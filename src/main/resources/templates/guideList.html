@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/layout">
-<main layout:fragment="content">
-	<!-- Page Content -->
-	<div class="container">
-		<div style="padding: 10px; text-align: center;">
-			<h1 class="mt-4 mb-3">
-				<a th:href="@{/guideList}" style="text-decoration: none;">초보자
-					가이드</a>
-			</h1>
-		</div>
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<!-- Page Content -->
+<div id="information" class="container">
+	<div id="guide">
+		
 		<div style="text-align: right;">
-			
+
 			<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
-				sec:authorize="hasRole('ROLE_ADMIN')" >작성</a>
+				sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
 		</div>
 		<div>
 			<table class="table table-hover">
@@ -24,8 +19,6 @@
 					<tr>
 						<th style="text-align: center;">순서</th>
 						<th style="text-align: center;">제목</th>
-						<th style="text-align: center;">내용</th>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -35,21 +28,59 @@
 							style="cursor: pointer; text-align: center;"></td>
 						<td th:text="${data.title}"
 							style="cursor: pointer; text-align: center;"></td>
-						<td th:utext="${data.content}"
-							style="cursor: pointer; text-align: center;"></td>
+						<!-- <td th:utext="${data.content}"
+							style="cursor: pointer; text-align: center;"></td> -->
 
 					</tr>
+					<tr>
+						<td colspan="2"></td>
+					</tr>
 				</tbody>
+
 			</table>
 		</div>
-		<br /> <br /> <br />
+		<div id="horsePaging" class="row justify-content-md-center-paging"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
+					<a class="page-link" th:onclick="gfirst(1)" aria-label="Previous">
+						<span aria-hidden="true">처음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="gprevious([[${guidePagination.prevBlock}]])"
+					aria-label="Previous"> <span aria-hidden="true">이전</span>
+				</a>
+				</li>
+				<th:block
+					th:with="start = ${guidePagination.startPage}, end = ${guidePagination.endPage}">
+					<li class="page-item"
+						th:with="start = ${guidePagination.startPage}, end = ${guidePagination.endPage}"
+						th:each="pageButton : ${#numbers.sequence(start, end)}"
+						th:class="${pageButton == guidePagination.page} ? 'page-item active'">
+						<a class="page-link" th:onclick="gcurrent([[${pageButton}]])"
+						th:text=${pageButton} id="page"></a>
+					</li>
+				</th:block>
+				<li class="page-item"
+					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="gnext([[${guidePagination.nextBlock}]])"
+					aria-label="Next"> <span aria-hidden="true">다음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="gend([[${guidePagination.totalPageCnt}]])"
+					aria-label="Previous"> <span aria-hidden="true">끝</span>
+				</a>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<!-- /.container -->
-	
-</main>
-<th:block layout:fragment="script">
-<!-- Bootstrap core JavaScript -->
-		<script src="/static/vendor/jquery/jquery.min.js"></script>
-		<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</th:block>
-</html>
+</div>
+<!-- /.container -->

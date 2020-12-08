@@ -6,7 +6,6 @@ spring:
       connection-timeout: 20000
       max-lifetime: 1200000
       maximum-pool-size: 30
-      minimum-idle: 2
       password: 1234
       pool-name: hikari-cp
       username: majin

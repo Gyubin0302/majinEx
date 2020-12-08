@@ -6,10 +6,17 @@
 <mapper namespace="com.majin.bit.dao.RaceHorseDao">
 
 	<insert id="raceHorseInsert" parameterType="java.util.Map" keyProperty="raceHrno">
-		INSERT INTO RACEHORSE(HRNO, JKNO, TRNO, RCDATE, MEET)
+		INSERT INTO RACEHORSE(HRNO, HRNAME, JKNO, JKNAME, TRNO, TRNAME, RCDATE, RCDAY, RCDIST, RCNO, RANKS, WGBUDAM, AGE, SEX, RATING, NATION, CHULNO, MEET)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-			(#{item.hrNo}, #{item.jkNo}, #{item.trNo}, #{item.rcDate}, #{item.meet})
+			(
+			 #{item.hrNo}, #{item.hrName}, #{item.jkNo}, 
+			 #{item.jkName}, #{item.trNo}, #{item.trName}, 
+			 #{item.rcDate}, #{item.rcDay}, #{item.rcDist}, 
+			 #{item.rcNo}, #{item.ranks}, #{item.wgBudam},
+			 #{item.age}, #{item.sex}, #{item.rating}, 
+			 #{item.nation}, #{item.chulNo}, #{item.meet}
+			 )
 		</foreach>
 
 	</insert>

@@ -70,6 +70,7 @@ nhn.husky.SE2M_AttachQuickPhoto = jindo.$Class({
 			sContents = "";
 			for(var i = 0; i <aPhotoData.length; i++){				
 				htData = aPhotoData[i];
+				/*var strTest = htData.sFileURL.substring(41,114);*/
 				
 				if(!htData.sAlign){
 					htData.sAlign = "";
@@ -78,7 +79,7 @@ nhn.husky.SE2M_AttachQuickPhoto = jindo.$Class({
 				aPhotoInfo = {
 				    sName : htData.sFileName || "",
 				    sOriginalImageURL : htData.sFileURL,
-					bNewLine : htData.bNewLine || false 
+					bNewLine : htData.bNewLine || false
 				};
 				
 				sContents += this._getPhotoTag(aPhotoInfo);

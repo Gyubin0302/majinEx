@@ -23,6 +23,7 @@ if(bSuccessUpload) {
 		
 		@move_uploaded_file($tmp_name, $newPath);
 		
+		//이미지경로가 출력될 태그부분
 		$url .= "&bNewLine=true";
 		$url .= "&sFileName=".urlencode(urlencode($name));
 		$url .= "&sFileURL=upload/".urlencode(urlencode($name));

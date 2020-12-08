@@ -18,6 +18,7 @@ spring:
       file-size-threshold: 1MB
       max-file-size: 100MB
       max-request-size: 100MB
+      location: D:/spring/work/majinEx/src/main/resources/static/fileupload/
           
       
   jpa:

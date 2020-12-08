@@ -1,5 +1,6 @@
 package com.majin.bit.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.majin.bit.dao.GuideDao;
 import com.majin.bit.dto.GuideDto;
+import com.majin.bit.dto.Pagination;
 
 @Service
 @Transactional
@@ -16,10 +18,16 @@ public class GuideService {
 	@Autowired
 	GuideDao guidedao;
 	
+	//사이즈 구하기
+	public int getGuideBoardSize() {
+
+		return guidedao.getGuideBoardSize();
+	}
+	
 	// 전체 가이드 리스트
-	public List<GuideDto> getGuideBoardList() {
-		
-		return guidedao.getGuideBoardList();
+	public List<GuideDto> getGuideBoardList(Pagination pagination) {
+
+		return guidedao.getGuideBoardList(pagination);
 	}
 
 	// 가이드 상세보기
@@ -44,5 +52,11 @@ public class GuideService {
 		
 		return guidedao.GuideBoardDelete(g_no);
 	}
+	// 가이드 게시판 페이징징이
+	public List<GuideDto> PagingGuideBoard(Pagination pagination){
+		
+		return guidedao.PagingGuideBoard(pagination);
+	}
+
 
 }

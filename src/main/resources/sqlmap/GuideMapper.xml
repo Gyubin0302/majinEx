@@ -4,9 +4,13 @@
 
 <mapper namespace="com.majin.bit.dao.GuideDao">
 	
-	<select id="getGuideBoardList" resultType="com.majin.bit.dto.GuideDto">
+	<select id="getGuideBoardSize" resultType="int">
+		select count(*) FROM guide where guide_no > 0
+	</select>
+	
+	<select id="getGuideBoardList" resultType="com.majin.bit.dto.GuideDto" parameterType="com.majin.bit.dto.Pagination">
 		SELECT * FROM guide
-		ORDER BY guide_no desc
+		ORDER BY guide_no DESC LIMIT #{startIndex}, #{pageSize}
 	</select>
 
 	<select id="GuideBoardDetail" parameterType="int" resultType="com.majin.bit.dto.GuideDto">
@@ -30,5 +34,9 @@
 	<delete id="GuideBoardDelete" parameterType="int">
 		DELETE FROM guide WHERE guide_no=#{guideNo}
 	</delete>
+		
+	<select id="PagingGuideBoard" resultType="com.majin.bit.dto.GuideDto" parameterType="com.majin.bit.dto.Pagination">
+		SELECT * FROM guide WHERE title LIKE CONCAT('%',#{search},'%') ORDER BY guide_no DESC LIMIT #{startIndex}, #{pageSize}
+	</select>
 
 </mapper>

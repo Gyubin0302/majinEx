@@ -6,11 +6,6 @@
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
 		<div>
-			<div style="padding: 10px; text-align: center;">
-				<h1>
-					<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
-				</h1>
-			</div>
 			<div>
 				<form role="form" th:object="${guideDto}" th:action="@{/static/sample/viewer/index.php}" method="POST" enctype="multipart/form-data" onsubmit="return info_chk()">
 					<div>

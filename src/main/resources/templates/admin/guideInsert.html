@@ -5,13 +5,6 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
-
-	<div style="padding: 10px; text-align: center;">
-		<h1>
-			<a th:href="@{/guideList}" style="text-decoration: none;">초보자 가이드</a>
-		</h1>
-	</div>
-
 	<div>
 		<form role="form" th:object=${guideDto}
 			th:action="@{/static/sample/viewer/index.php}" method="POST"
@@ -44,10 +37,7 @@
 <th:block layout:fragment="script">
 	
 	<script>
-		let token = $("meta[name='_csrf']").attr("content");
-		let header = $("meta[name='_csrf_header']").attr("content");
-		localStorage.setItem("token", token);
-		localStorage.setItem("header", header);
+		
 		$(function() {
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(header, token);
@@ -116,6 +106,7 @@
 			var nFontSize = 24;
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
+ 
 	</script>
 </th:block>
 </html>

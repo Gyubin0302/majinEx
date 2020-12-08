@@ -371,4 +371,54 @@ let token = $("meta[name='_csrf']").attr("content");
 					});
 		    	 }
 		    }); 
+		    
+		    	function gfirst(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gprevious(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gcurrent(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gnext(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gend(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+		
+		function guideList() {
+			GuideBoardPaging(1);
+		}
+		
+
+		function GuideBoardPaging(pageNo) {
+			console.log("test");
+			$.ajax({
+				url : "/guideList",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo
+
+				},
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				url : "/guideList",
+				fragment : "#guide"
+			}, null, null);
+		}
 				 

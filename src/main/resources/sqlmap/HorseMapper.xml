@@ -39,4 +39,5 @@
 	<select id="searchPagingHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.Pagination">
 		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC LIMIT #{startIndex}, #{pageSize}
 	</select>
+
 </mapper>

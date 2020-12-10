@@ -5,5 +5,119 @@
 
 <mapper namespace="com.majin.bit.dao.SearchDao">
 
+	<select id="raceHorseSearchCount" resultType="int" parameterType="com.majin.bit.dto.MultiSearchRaceDto">
+		SELECT COUNT(*)
+		FROM RACEHORSE
+		<where>
+			<if test='meet != null and meet != "전체"'>
+				meet = #{meet}
+			</if> 
+			
+			<if test='rcDate != ","'>
+				AND RCDATE BETWEEN 
+				<foreach item="rcDates" collection="rcDateList" index="index" separator="AND" >
+					#{rcDates}
+				</foreach>
+			</if>
+			
+			<if test="hrName != null and hrName.length != 0">	
+				AND HRNAME LIKE CONCAT('%',#{hrName},'%')
+			</if>
+			
+			<if test="jkName != null and jkName.length != 0">	
+				AND JKNAME LIKE CONCAT('%',#{jkName},'%')
+			</if>
+			
+			<if test="trName != null and trName.length != 0">	
+				AND TRNAME LIKE CONCAT('%',#{trName},'%')
+			</if>
+			
+			<if test='rcDist != ","'>
+				AND (RCDIST+0) BETWEEN 
+				<foreach item="rcDists" collection="rcDistList" index="index" separator="AND" >
+					#{rcDists}
+				</foreach>
+			</if>
+			
+			<if test='ranks != ","'>
+				AND RANKS BETWEEN 
+				<foreach item="ranks" collection="ranksList" index="index" separator="AND" >
+					#{ranks}
+				</foreach>
+			</if>
+			
+			<if test='wgBudam != ","'>
+				AND (WGBUDAM+0) BETWEEN 
+				<foreach item="wgBudams" collection="wgBudamList" index="index" separator="AND" >
+					#{wgBudams}
+				</foreach>
+			</if>
+			
+			<if test='chulNo != ","'>
+				AND CHULNO BETWEEN 
+				<foreach item="chulNos" collection="chulNoList" index="index" separator="AND" >
+					#{chulNos}
+				</foreach>
+			</if>
+		</where> 
+	</select>
+		
+	<select id="multiSearchRace" resultType="com.majin.bit.dto.RaceHorseDto" parameterType="hashmap">
+		SELECT RCDATE, CHULNO, HRNAME, HRNO, NATION,  RANKS, RCDIST, JKNAME, JKNO, WGBUDAM, TRNAME, TRNO, MEET
+		FROM RACEHORSE
+		<where>
+			<if test='meet != null and meet != "전체"'>
+				meet = #{meet}
+			</if> 
+			
+			<if test='rcDate != ","'>
+				AND RCDATE BETWEEN 
+				<foreach item="rcDates" collection="rcDateList" index="index" separator="AND" >
+					#{rcDates}
+				</foreach>
+			</if>
+			
+			<if test="hrName != null and hrName.length != 0">	
+				AND HRNAME LIKE CONCAT('%',#{hrName},'%')
+			</if>
+			
+			<if test="jkName != null and jkName.length != 0">	
+				AND JKNAME LIKE CONCAT('%',#{jkName},'%')
+			</if>
+			
+			<if test="trName != null and trName.length != 0">	
+				AND TRNAME LIKE CONCAT('%',#{trName},'%')
+			</if>
+			
+			<if test='rcDist != ","'>
+				AND (RCDIST+0) BETWEEN 
+				<foreach item="rcDists" collection="rcDistList" index="index" separator="AND" >
+					#{rcDists}
+				</foreach>
+			</if>
+			
+			<if test='ranks != ","'>
+				AND RANKS BETWEEN 
+				<foreach item="ranks" collection="ranksList" index="index" separator="AND" >
+					#{ranks}
+				</foreach>
+			</if>
+			
+			<if test='wgBudam != ","'>
+				AND (WGBUDAM+0) BETWEEN 
+				<foreach item="wgBudams" collection="wgBudamList" index="index" separator="AND" >
+					#{wgBudams}
+				</foreach>
+			</if>
+			
+			<if test='chulNo != ","'>
+				AND CHULNO BETWEEN 
+				<foreach item="chulNos" collection="chulNoList" index="index" separator="AND" >
+					#{chulNos}
+				</foreach>
+			</if>
+		</where> 
+		ORDER BY RCDATE DESC LIMIT #{startIndex}, #{pageSize}
+	</select>
 	
 </mapper>

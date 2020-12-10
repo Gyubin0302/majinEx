@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class GuideController {
 	GuideService guideservice;
 	
 	// 페이징 깐트롤러
-	@RequestMapping(value = "/guideList", method = RequestMethod.GET)
+	@RequestMapping(value = "/guideList", method = {RequestMethod.POST, RequestMethod.GET})
 	public String GuideBoardPaging(Model model, @RequestParam(defaultValue = "1") int pageNo) {
 
 		int guideList = guideservice.getGuideBoardSize();
@@ -54,7 +55,7 @@ public class GuideController {
 	 * // 게시물 전체 컨트롤러
 	 * 
 	 * @RequestMapping("/guideList") private String GuideBoardList(Model model,
-	 * HttpServletRequest request) {
+	 * HttpServletRequest request) { 
 	 * 
 	 * List<GuideDto> guideList = new ArrayList<>(); guideList =
 	 * guideservice.getGuideBoardList(); model.addAttribute("guideList", guideList);
@@ -103,9 +104,9 @@ public class GuideController {
 
 	// 삭제 컨트롤러
 	@RequestMapping(value = "/guideDelete/{g_no}", method = RequestMethod.POST)
-	private String GuideBoardDelete(@PathVariable("g_no") int g_no, RedirectAttributes red) throws Exception{
+	private String GuideBoardDelete(@PathVariable("g_no") int g_no, RedirectAttributes red, HttpServletResponse response) throws Exception{
 		guideservice.GuideBoardDelete(g_no);					  
-		red.addFlashAttribute("pageNo",1);
+
 		return "redirect:/guideList";
 	}
 

@@ -1,6 +1,7 @@
 package com.majin.bit.controller;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -49,12 +50,14 @@ public class AdminController {
 		Calendar calendar = Calendar.getInstance();
 		int nowYear = calendar.get(Calendar.YEAR);
 		int startYear = 0;
-		if ( meet.equals("1") || meet.equals("2") ) {
-			startYear = 1990;
+		if ( meet.equals("1")) {
+			startYear = 1985;
 		} else if (meet.equals("3")) {
 			startYear = 2004;
-		} 
-		
+		} else {
+			startYear = 1990;
+		}
+
 		List<Object> jsonObj = new ArrayList<>();
 		while (startYear <= nowYear) {
 			
@@ -101,11 +104,14 @@ public class AdminController {
 			
 			for (int i = 0; i < jsonArray.size(); i++) {
 				jsonObj.add(jsonArray.get(i));
+				System.out.println(jsonArray.get(i));
+
 			}
+			
 			startYear++;
 		}
 
-		boolean result = raceHorseService.raceHorseInsert(jsonObj, meet);
+		boolean result = raceHorseService.raceHorseInsert(jsonObj, meet, "raceRsult");
 		
 		if(result == true) {
 			return "성공";
@@ -175,7 +181,7 @@ public class AdminController {
 				}
 			}
 			
-			result = raceHorseService.raceHorseInsert(jsonObj, meet);
+			result = raceHorseService.raceHorseInsert(jsonObj, meet, "entrySheet");
 			if(result == true) {
 				return "성공";
 			} else {

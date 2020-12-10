@@ -331,7 +331,54 @@ let token = $("meta[name='_csrf']").attr("content");
 		    	  let data = event.originalEvent.state;
 				if (data == null){
 					location.href="/";
-				}else if(data.url !== "/search"){
+				} else if (data.url === "/yundo/view"){
+		   				yundo();
+		    	  } else if(data.url === "/guideList"){
+		    	  	$.ajax({
+							url : "/guideList",
+							type : "POST",
+							data : {
+								"pageNo" : pageNo
+			
+							},
+							dataType : "text",
+							success : function(retVal) {
+								$("#information").val("");
+								$("#information").replaceWith(retVal);
+							},
+							error : function(retVal) {
+								alert("error");
+							}
+						});
+					
+		    	  } else if(data.url === "/search/check"){
+		    	  		$.ajax({
+							url : "/search/check",
+							type : "GET",
+							data : data.form,
+							dataType : "text",
+							success : function(retVal) {
+								$("#information").val("");
+								$("#information").replaceWith(retVal);
+								$("#startRcDate").val(data.startRcDate);
+								$("#endRcDate").val(data.endRcDate);
+								$("#hrName").val(data.hrName);
+								$("#trName").val(data.trName);
+								$("#jkName").val(data.jkName);
+								$("#startRcDist").val(data.startRcDist);
+								$("#endRcDate").val(data.endRcDate);
+								$("#startWgBudam").val(data.startWgBudam);
+								$("#endWgBudam").val(data.endWgBudam);
+								$("#startRanks").val(data.startRanks);
+								$("#endRanks").val(data.endRanks);
+								$("#startChulNo").val(data.startChulNo);
+								$("#endChulNo").val(data.endChulNo);
+							},
+							error : function(retVal) {
+								alert("error");
+							}
+						});
+		    	  } else if(data.url !== "/search"){
 			    	  $.ajax({
 							url : data.url,
 							type : "POST",
@@ -348,8 +395,6 @@ let token = $("meta[name='_csrf']").attr("content");
 								alert("error");
 							}
 						});
-		    	  } else if (data.url === "/yundo/view"){
-		   				yundo();
 		    	  } else {
 		    		  $.ajax({
 							url : "/search",
@@ -396,12 +441,13 @@ let token = $("meta[name='_csrf']").attr("content");
 			GuideBoardPaging(1);
 		}
 		
+		
+		
 
 		function GuideBoardPaging(pageNo) {
-			console.log("test");
 			$.ajax({
 				url : "/guideList",
-				type : "GET",
+				type : "POST",
 				data : {
 					"pageNo" : pageNo
 
@@ -420,5 +466,113 @@ let token = $("meta[name='_csrf']").attr("content");
 				url : "/guideList",
 				fragment : "#guide"
 			}, null, null);
+		};
+		
+		$("#multiSearchBtn").click(function(){
+			$.ajax({
+				url : "/search/mulSearch",
+				type : "GET",
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({				
+				url : "/search/mulSearch",
+				fragment : "#searchPage"
+			}, null, null);
+		});
+		
+		function multiSearchBtnStart(){
+			multiSearchBtnSend(1);
 		}
+		
+		function raceHfirst(pageNo) {
+			multiSearchBtnSend(pageNo);
+		}
+
+		function raceHprevious(pageNo) {
+			multiSearchBtnSend(pageNo);
+		}
+
+		function raceHcurrent(pageNo) {
+			multiSearchBtnSend(pageNo);
+		}
+
+		function raceHnext(pageNo) {
+			multiSearchBtnSend(pageNo);
+		}
+
+		function raceHend(pageNo) {
+			multiSearchBtnSend(pageNo);
+		}
+		
+		function multiSearchBtnSend(pageNo){
+			let form = $("#searchForm").serialize();
+			form += "&pageNo="+pageNo;
+			
+			let startRcDate = $("#startRcDate").val();
+			let endRcDate =  $("#endRcDate").val();
+			let hrName = $("#hrName").val();
+			let trName = $("#trName").val();
+			let jkName = $("#jkName").val();
+			let startRcDist = $("#startRcDist").val();
+			let endRcDist = $("#endRcDate").val();
+			let startWgBudam = $("#startWgBudam").val();
+			let endWgBudam = $("#endWgBudam").val();
+			let startRanks = $("#startRanks").val();
+			let endRanks = $("#endRanks").val();
+			let startChulNo = $("#startChulNo").val();
+			let endChulNo = $("#endChulNo").val();
+			
+			$.ajax({
+				url : "/search/check",
+				type : "GET",
+				data : form,
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+					$("#startRcDate").val(startRcDate);
+					$("#endRcDate").val(endRcDate);
+					$("#hrName").val(hrName);
+					$("#trName").val(trName);
+					$("#jkName").val(jkName);
+					$("#startRcDist").val(startRcDist);
+					$("#endRcDate").val(endRcDate);
+					$("#startWgBudam").val(startWgBudam);
+					$("#endWgBudam").val(endWgBudam);
+					$("#startRanks").val(startRanks);
+					$("#endRanks").val(endRanks);
+					$("#startChulNo").val(startChulNo);
+					$("#endChulNo").val(endChulNo);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({				
+				url : "/search/check",
+				form : form,
+				startRcDate : startRcDate,
+				endRcDate : endRcDate,
+				hrName : hrName,
+				trName : trName,
+				jkName : jkName,
+				startRcDist : startRcDist,
+				endRcDist : endRcDate,
+				startWgBudam : startWgBudam,
+				endWgBudam : endWgBudam,
+				startRanks : startRanks,
+				endRanks : endRanks,
+				startChulNo : startChulNo,
+				endChulNo : endChulNo,
+				fragment : "#searchPage"
+			}, null, null);
+		};
+	
 				 

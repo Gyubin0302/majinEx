@@ -2,71 +2,646 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <div id="information" class="container">
-		<form action="check.do" method="get" id="searchForm">
-			<div>
-				<div>
-					<ul>
-						<li>주제 :</li>
-						<li><input type="checkbox" id="s1"
-							name=attract value="맛집" /><label for="s1">맛집</label></li>
-						<li><input type="checkbox" id="s3"
-							name="attract" value="명소" /><label for="s3">명소</label></li>
-						<li ><input type="checkbox" id="s2"
-							name="attract" value="숙소" /><label for="s2">숙소</label></li>
-					</ul>
-				</div>
+	<div id="searchPage">
+		<h1 class="my-4">상세검색</h1>
+		<form id="searchForm" th:object="${multiSearchRaceDto}">
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<th>경주일자</th>
+						<td>
+							<input id="startRcDate" type="text" name="rcDate"> ~ <input id="endRcDate" type="text" name="rcDate">
+						</td>
+						
+						<th>지역</th>
+						<th colspan="2">
+							<select id="meet" name="meet">
+								<option value="전체">전체</option>
+								<option value="1">서울</option>
+								<option value="3">부산</option>
+								<option value="2">제주</option>
+							</select>
+						</th>
 
-				<div class="search_div2">
-					<ul>
-						<li class="search_li">지역 :</li>
-					</ul>
-					<ul>
-						<li><input type="checkbox" id="r1" name="area" value="서울" />
-							<label for="r1">서울</label></li>
-						<li><input type="checkbox" id="r2" name="area" value="인천" />
-							<label for="r2">인천</label></li>
-						<li><input type="checkbox" id="r3" name="area" value="대전" />
-							<label for="r3">대전</label></li>
-					</ul>
-					<ul>
-						<li><input type="checkbox" id="r4" name="area" value="광주" />
-							<label for="r4">광주</label></li>
-						<li><input type="checkbox" id="r5" name="area" value="부산" />
-							<label for="r5">부산</label></li>
-						<li><input type="checkbox" id="r6" name="area" value="대구" />
-							<label for="r6">대구</label></li>
-					</ul>
-					<ul>
-						<li><input type="checkbox" id="r7" name="area" value="경기" />
-							<label for="r7">경기</label></li>
-						<li><input type="checkbox" id="r8" name="area" value="강원" />
-							<label for="r8">강원</label></li>
-						<li><input type="checkbox" id="r9" name="area" value="충청" />
-							<label for="r9">충청</label></li>
-					</ul>
-					<ul>
-						<li><input type="checkbox" id="r10" name="area" value="호남" />
-							<label for="r10">호남</label></li>
-						<li><input type="checkbox" id="r11" name="area" value="영남" />
-							<label for="r11">영남</label></li>
-						<li><input type="checkbox" id="r12" name="area" value="제주" />
-							<label for="r12">제주</label></li>
-					</ul>
-				</div>
-			</div>
-			<!-- search_ctn END -->
-			<div>
-		<select name="searchType">
-					<option>선택</option>
-					<option value="id">ID</option>
-					<option value="title">제목</option>
-				</select> <input type="text" class="searchbox" name="searchWord" /> 
+					</tr>
+					<tr>
+						<th scope="row">마명</th>
+						<td colspan="4">
+							<input id="hrName" type="text" name="hrName">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">기수</th>
+						<td colspan="4">
+							<input id="jkName" type="text" name="jkName">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">조교</th>
+						<td colspan="4">
+							<input id="trName" type="text" name="trName">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">거리</th>
+						<th><select id="startRcDist" name="rcDist"title="거리 시작범위">
 
-				<button class="btn" type="submit">전송</button>
-			</div>
-			<!-- search_box END-->
+								<option value="400">400</option>
+								
+								<option value="800">800</option>
+								
+								<option value="900">900</option>
+								
+								<option value="1000">1000</option>
+
+								<option value="1100">1100</option>
+
+								<option value="1200">1200</option>
+
+								<option value="1300">1300</option>
+
+								<option value="1400">1400</option>
+								
+								<option value="1500">1500</option>
+
+								<option value="1600">1600</option>
+
+								<option value="1700">1700</option>
+
+								<option value="1800">1800</option>
+
+								<option value="1900">1900</option>
+
+								<option value="2000">2000</option>
+								
+								<option value="2200">2200</option>
+
+								<option value="2300">2300</option>
+								
+								<option value="2400">2400</option>
+
+						</select> ~ <select id="endRcDist" name="rcDist" title="거리 종료범위">
+								
+								<option value="2400">2400</option>
+								
+								<option value="2300">2300</option>
+								
+								<option value="2200">2200</option>
+
+								<option value="2000">2000</option>
+
+								<option value="1900">1900</option>
+
+								<option value="1800">1800</option>
+
+								<option value="1700">1700</option>
+
+								<option value="1600">1600</option>
+								
+								<option value="1500">1500</option>
+
+								<option value="1400">1400</option>
+
+								<option value="1300">1300</option>
+
+								<option value="1200">1200</option>
+
+								<option value="1100">1100</option>
+
+								<option value="1000">1000</option>
+								
+								<option value="900">900</option>
+								
+								<option value="800">800</option>
+								
+								<option value="400">400</option>
+
+						</select>
+						</th>
+						<th scope="row"><label for="arg_BrdnWeight1">부담중량</label></th>
+						<td colspan="2"><select id="startWgBudam" name="wgBudam"
+							title="부담중량 시작범위">
+								<option value="37">37</option>
+												
+								<option value="38">38</option>
+												
+								<option value="39">39</option>
+												
+								<option value="40">40</option>
+												
+								<option value="41">41</option>
+												
+								<option value="42">42</option>
+												
+								<option value="43">43</option>
+												
+								<option value="44">44</option>
+												   
+								<option value="45">45</option>
+												   
+								<option value="46">46</option>					
+
+								<option value="47">47</option>
+
+								<option value="48">48</option>
+
+								<option value="49">49</option>
+
+								<option value="50">50</option>
+
+								<option value="51">51</option>
+
+								<option value="52">52</option>
+
+								<option value="53">53</option>
+
+								<option value="54">54</option>
+
+								<option value="55">55</option>
+
+								<option value="56">56</option>
+
+								<option value="57">57</option>
+
+								<option value="58">58</option>
+
+								<option value="59">59</option>
+
+								<option value="60">60</option>
+
+								<option value="61">61</option>
+
+								<option value="62">62</option>
+
+								<option value="63">63</option>
+
+								<option value="64">64</option>
+
+								<option value="65">65</option>
+								
+								<option value="66">66</option>
+								
+								<option value="67">67</option>
+								
+								<option value="68">68</option>
+								
+								<option value="69">69</option>
+								
+								<option value="70">70</option>
+
+						</select> ~ <select id="endWgBudam" name="wgBudam"
+							title="부담중량 종료범위">
+								
+								<option value="70">70</option>
+								
+								<option value="69">69</option>
+								
+								<option value="68">68</option>
+								
+								<option value="67">67</option>
+								
+								<option value="66">66</option>
+								
+								<option value="65">65</option>
+
+								<option value="64">64</option>
+
+								<option value="63">63</option>
+
+								<option value="62">62</option>
+
+								<option value="61">61</option>
+
+								<option value="60">60</option>
+
+								<option value="59">59</option>
+
+								<option value="58">58</option>
+
+								<option value="57">57</option>
+
+								<option value="56">56</option>
+
+								<option value="55">55</option>
+
+								<option value="54">54</option>
+
+								<option value="53">53</option>
+
+								<option value="52">52</option>
+
+								<option value="51">51</option>
+
+								<option value="50">50</option>
+
+								<option value="49">49</option>
+
+								<option value="48">48</option>
+
+								<option value="47">47</option>
+								
+								<option value="46">46</option>
+								
+								<option value="45">45</option>
+								
+								<option value="44">44</option>
+								
+								<option value="43">43</option>
+								
+								<option value="42">42</option>
+								
+								<option value="41">41</option>
+								
+								<option value="40">40</option>
+								
+								<option value="39">39</option>
+								
+								<option value="38">38</option>
+								
+								<option value="37">37</option>
+
+						</select></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="arg_Grp1">경주등급</label></th>
+						<td><select id="startRanks" name="ranks" title="경주등급 시작범위">
+
+								<option value="1군">1군</option>
+
+								<option value="1등급">1등급</option>
+
+								<option value="2군">2군</option>
+
+								<option value="2등급">2등급</option>
+
+								<option value="3군">3군</option>
+
+								<option value="4군">4군</option>
+
+								<option value="5군">5군</option>
+
+								<option value="C0">C0</option>
+
+								<option value="C1">C1</option>
+
+								<option value="C10">C10</option>
+
+								<option value="C13">C13</option>
+
+								<option value="C1A">C1A</option>
+
+								<option value="C1B">C1B</option>
+
+								<option value="C2">C2</option>
+
+								<option value="C2A">C2A</option>
+
+								<option value="C2B">C2B</option>
+
+								<option value="C3">C3</option>
+
+								<option value="C4">C4</option>
+
+								<option value="C5">C5</option>
+
+								<option value="C6">C6</option>
+
+								<option value="C7">C7</option>
+
+								<option value="C8">C8</option>
+
+								<option value="C9">C9</option>
+
+								<option value="국1">국1</option>
+
+								<option value="국1-가">국1-가</option>
+
+								<option value="국1-나">국1-나</option>
+
+								<option value="국2">국2</option>
+
+								<option value="국3">국3</option>
+
+								<option value="국3등급">국3등급</option>
+
+								<option value="국4">국4</option>
+
+								<option value="국4등급">국4등급</option>
+
+								<option value="국5">국5</option>
+
+								<option value="국5등급">국5등급</option>
+
+								<option value="국6">국6</option>
+
+								<option value="국6등급">국6등급</option>
+
+								<option value="국OPEN">국OPEN</option>
+
+								<option value="신마">신마</option>
+
+								<option value="외1">외1</option>
+
+								<option value="외1-가">외1-가</option>
+
+								<option value="외1-나">외1-나</option>
+
+								<option value="외2">외2</option>
+
+								<option value="외3">외3</option>
+
+								<option value="외4">외4</option>
+
+								<option value="외5">외5</option>
+
+								<option value="혼1">혼1</option>
+
+								<option value="혼2">혼2</option>
+
+								<option value="혼3">혼3</option>
+
+								<option value="혼3등급">혼3등급</option>
+
+								<option value="혼4">혼4</option>
+
+								<option value="혼4등급">혼4등급</option>
+
+								<option value="혼5">혼5</option>
+
+								<option value="혼OPEN">혼OPEN</option>
+
+						</select> ~ <select id="endRanks" name="ranks" title="경주등급 종료범위">
+
+								<option value="혼OPEN">혼OPEN</option>
+
+								<option value="혼5">혼5</option>
+
+								<option value="혼4등급">혼4등급</option>
+
+								<option value="혼4">혼4</option>
+
+								<option value="혼3등급">혼3등급</option>
+
+								<option value="혼3">혼3</option>
+
+								<option value="혼2">혼2</option>
+
+								<option value="혼1">혼1</option>
+
+								<option value="외5">외5</option>
+
+								<option value="외4">외4</option>
+
+								<option value="외3">외3</option>
+
+								<option value="외2">외2</option>
+
+								<option value="외1-나">외1-나</option>
+
+								<option value="외1-가">외1-가</option>
+
+								<option value="외1">외1</option>
+
+								<option value="신마">신마</option>
+
+								<option value="국OPEN">국OPEN</option>
+
+								<option value="국6등급">국6등급</option>
+
+								<option value="국6">국6</option>
+
+								<option value="국5등급">국5등급</option>
+
+								<option value="국5">국5</option>
+
+								<option value="국4등급">국4등급</option>
+
+								<option value="국4">국4</option>
+
+								<option value="국3등급">국3등급</option>
+
+								<option value="국3">국3</option>
+
+								<option value="국2">국2</option>
+
+								<option value="국1-나">국1-나</option>
+
+								<option value="국1-가">국1-가</option>
+
+								<option value="국1">국1</option>
+
+								<option value="C9">C9</option>
+
+								<option value="C8">C8</option>
+
+								<option value="C7">C7</option>
+
+								<option value="C6">C6</option>
+
+								<option value="C5">C5</option>
+
+								<option value="C4">C4</option>
+
+								<option value="C3">C3</option>
+
+								<option value="C2B">C2B</option>
+
+								<option value="C2A">C2A</option>
+
+								<option value="C2">C2</option>
+
+								<option value="C1B">C1B</option>
+
+								<option value="C1A">C1A</option>
+
+								<option value="C13">C13</option>
+
+								<option value="C10">C10</option>
+
+								<option value="C1">C1</option>
+
+								<option value="C0">C0</option>
+
+								<option value="5군">5군</option>
+
+								<option value="4군">4군</option>
+
+								<option value="3군">3군</option>
+
+								<option value="2등급">2등급</option>
+
+								<option value="2군">2군</option>
+
+								<option value="1등급">1등급</option>
+
+								<option value="1군">1군</option>
+
+						</select></td>
+						<th scope="row"><label for="arg_RHorseNum1">출전번호</label></th>
+						<td><select id="startChulNo" name="chulNo"
+							title="출전번호 시작범위">
+
+								<option value="01">01</option>
+
+								<option value="02">02</option>
+
+								<option value="03">03</option>
+
+								<option value="04">04</option>
+
+								<option value="05">05</option>
+
+								<option value="06">06</option>
+
+								<option value="07">07</option>
+
+								<option value="08">08</option>
+
+								<option value="09">09</option>
+
+								<option value="10">10</option>
+
+								<option value="11">11</option>
+
+								<option value="12">12</option>
+
+								<option value="13">13</option>
+
+								<option value="14">14</option>
+
+								<option value="15">15</option>
+
+								<option value="16">16</option>
+
+						</select> ~ <select id="endChulNo" name="chulNo"
+							title="출전번호 종료범위">
+
+								<option value="16">16</option>
+
+								<option value="15">15</option>
+
+								<option value="14">14</option>
+
+								<option value="13">13</option>
+
+								<option value="12">12</option>
+
+								<option value="11">11</option>
+
+								<option value="10">10</option>
+
+								<option value="09">09</option>
+
+								<option value="08">08</option>
+
+								<option value="07">07</option>
+
+								<option value="06">06</option>
+
+								<option value="05">05</option>
+
+								<option value="04">04</option>
+
+								<option value="03">03</option>
+
+								<option value="02">02</option>
+
+								<option value="01">01</option>
+
+						</select></td>
+						<td><button class="btn btn-light" th:onclick="multiSearchBtnStart()" type="button">전송</button></td>
+					</tr>
+				</tbody>
+			</table>
 		</form>
+
+		<th:block th:unless="${#lists.isEmpty(searchList)}">
+			<h1 class="my-4">검색 결과</h1>
+			<div class="row justify-content-md-center">
+				<div class="col-sm-top">경주일자</div>
+				<div class="col-sm-top">출전번호</div>
+				<div class="col-sm-2-top">마명</div>
+				<div class="col-sm-top">산지</div>
+				<div class="col-sm-top">등급</div>
+				<div class="col-sm-top">거리</div>
+				<div class="col-sm-top">기수</div>
+				<div class="col-sm-top">중량</div>
+				<div class="col-sm-top">조교</div>
+			</div>
+
+			<div class="row justify-content-md-center"
+				th:each="search : ${searchList}">
+				<div class="col-sm" th:text="${search.rcDate}"></div>
+				<div class="col-sm" th:text="${search.chulNo}"></div>
+				<div class="col-sm-2">
+					<a th:onclick='horseDetail([[${search.hrNo}]], [[${search.meet}]])'
+					th:text="${search.hrName}"></a>
+				</div>
+				<div class="col-sm" th:text="${search.nation}"></div>
+				<div class="col-sm" th:text="${search.ranks}"></div>
+				<div class="col-sm" th:text="${search.rcDist}"></div>
+				<div class="col-sm">
+					<a th:onclick='jockeyDetail([[${search.jkNo}]], [[${search.meet}]])'
+					th:text="${search.jkName}"></a>
+				</div>
+				<div class="col-sm" th:text="${search.wgBudam}"></div>
+				<div class="col-sm" >
+					<a th:onclick='trainerDetail([[${search.trNo}]], [[${search.meet}]])'
+					th:text="${search.trName}"></a>
+				</div>
+			</div>
+			
+			<!-- horsePagination -->
+			<div id="raceHorsePaging" class="row justify-content-md-center-paging"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${1 == raceHorsePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="raceHfirst(1)"
+					aria-label="Previous">
+						<span aria-hidden="true">처음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${1 == raceHorsePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="raceHprevious([[${raceHorsePagination.prevBlock}]])"
+					aria-label="Previous">
+						<span aria-hidden="true">이전</span>
+				</a>
+				</li>
+				<th:block
+					th:with="start = ${raceHorsePagination.startPage}, end = ${raceHorsePagination.endPage}">
+					<li class="page-item"
+						th:with="start = ${raceHorsePagination.startPage}, end = ${raceHorsePagination.endPage}"
+						th:each="pageButton : ${#numbers.sequence(start, end)}"
+						th:class="${pageButton == raceHorsePagination.page} ? 'page-item active'">
+						<a class="page-link"
+						th:onclick="raceHcurrent([[${pageButton}]])"
+						th:text=${pageButton} id="page"></a>
+					</li>
+				</th:block>
+				<li class="page-item"
+					th:class="${raceHorsePagination.totalPageCnt == raceHorsePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="raceHnext([[${raceHorsePagination.nextBlock}]])"
+					aria-label="Next">
+						<span aria-hidden="true">다음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${raceHorsePagination.totalPageCnt == raceHorsePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="raceHend([[${raceHorsePagination.totalPageCnt}]],[[${raceHorsePagination.search}]])"
+					aria-label="Previous">
+						<span aria-hidden="true">끝</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+		</th:block>
 	</div>
-</body>
-</html>
+</div>

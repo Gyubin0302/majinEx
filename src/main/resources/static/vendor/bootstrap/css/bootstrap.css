@@ -585,6 +585,15 @@ pre code {
   margin-right: -15px;
   margin-left: -15px;
 }
+.rowCustom {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin: auto;
+}
 
 .no-gutters {
   margin-right: 0;
@@ -922,6 +931,20 @@ pre code {
     -ms-flex: 0 0 16.666667%;
     flex: 0 0 16.666667%;
     max-width: 16.666667%;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: #fff;
+  	border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .col-sm-2-top {
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(0, 0, 0, 0.03);
+  	border: 1px solid rgba(0, 0, 0, 0.125);
   }
   .col-sm-3 {
     -ms-flex: 0 0 25%;
@@ -1182,6 +1205,15 @@ pre code {
     padding-bottom: .75rem;
     background-color: #fff;
   	border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+   .col-mdgy-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+
   }
   
    .col-md-4-top {
@@ -1744,16 +1776,20 @@ pre code {
 }
 
 .table {
-  width: 100%;
+  width: 80%;
   margin-bottom: 1rem;
   color: #212529;
+  /*background-color: rgba(86, 61, 124, 0.15);*/
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
+
 
 .table th,
 .table td {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+
 }
 
 .table thead th {
@@ -2256,6 +2292,7 @@ textarea.form-control {
   flex-wrap: wrap;
   margin-right: -5px;
   margin-left: -5px;
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
 .form-row > .col,
@@ -10366,5 +10403,15 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: rgba(86, 61, 124, 0.15);
   border: 1px solid rgba(86, 61, 124, 0.2);
   }
+
+  .searchBox2 {padding:2px 19px; margin-bottom:20px; border:1px solid #ccc; background:#f7f7f7;}
+  .searchBox2 table th {padding:12px 0 6px 12px;  text-align:left; border-top:1px solid #ccc;}
+  .searchBox2 table td {padding:5px 0;vertical-align:middle; border-top:1px solid #ccc;}
+  .searchBox2 table tbody tr:first-child th, .searchBox2 table tbody tr:first-child td {border:none;}
+  .searchBox2 table td label {margin-right:10px; }
+  .searchBox2 table td select {margin-right:5px; }
+  .searchBox2 table td input {vertical-align:top; }
+  .searchBox2 table td input[type="radio"] {position:relative; top:2px;}
+  .searchBox2 table td input[type="radio"]  + label {position:relative; top:3px; }
 }
 /*# sourceMappingURL=bootstrap.css.map */

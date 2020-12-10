@@ -13,10 +13,10 @@ public class RaceHorseDto {
 	private String trName;
 	private String rcDate;
 	private String rcDay;
-	private String rcDist;
+	private int rcDist;
 	private String rcNo;
 	private String ranks;
-	private String wgBudam;
+	private double wgBudam;
 	private String age;
 	private String sex;
 	private String rating;

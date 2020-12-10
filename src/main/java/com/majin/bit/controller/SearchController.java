@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -16,23 +18,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.majin.bit.dto.HorseDto;
 import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.MultiSearchRaceDto;
 import com.majin.bit.dto.Pagination;
-import com.majin.bit.dto.SearchDto;
+import com.majin.bit.dto.RaceHorseDto;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.HorseService;
 import com.majin.bit.service.SearchService;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.service.jockeyService;
 import com.majin.bit.util.RecommendProcess;
-
-import oshi.jna.platform.linux.Libc.Sysinfo;
 
 @Controller
 public class SearchController {
@@ -49,32 +50,53 @@ public class SearchController {
 	@Autowired
 	private TrainerService trainerService;
 	
-//	
-//	@RequestMapping(value="/mulSearch")
-//    public String training(){
-//        return "/MultiCheck";
-//    }
-//	
-//	@RequestMapping(value = "check.do", method = RequestMethod.GET)
-//	public String checkBoxTest(HttpServletRequest request) throws IOException, ServletException{
-//		SearchDto bs = new SearchDto();
-//		String[] attrList = request.getParameterValues("attract");
-//		String[] areaList = request.getParameterValues("area");
-//		String searchType = request.getParameter("searchType");
-//		String searchWord = request.getParameter("searchWord");
-//		
-//		bs.setAttrList(attrList);
-//		bs.setAreaList(areaList);
-//		bs.setSearchType(searchType);
-//		bs.setSearchWord(searchWord);
-//		System.out.println("BoardSearch : "+ bs);
-//
-//		List<Board> searchList = boardSearchDao.boardSearchList(bs);
-//		System.out.println("Board : "+ searchList);
-//		
-//		return "list";
-//		
-//	}
+	
+	@RequestMapping(value="/search/mulSearch")
+    public String training(@ModelAttribute MultiSearchRaceDto multiSearchRaceDto){
+        return "MultiCheck";
+    }
+	
+	@RequestMapping(value = "/search/check", method = RequestMethod.GET)
+	public String checkBoxTest(MultiSearchRaceDto multiSearchRaceDto, HttpServletRequest request, Model model, @RequestParam(defaultValue = "1")int pageNo) throws IOException, ServletException{
+		
+		multiSearchRaceDto.setRcDateList(request.getParameterValues("rcDate"));
+		multiSearchRaceDto.setRcDistList(request.getParameterValues("rcDist"));
+		multiSearchRaceDto.setRanksList(request.getParameterValues("ranks"));
+		multiSearchRaceDto.setWgBudamList(request.getParameterValues("wgBudam"));
+		multiSearchRaceDto.setChulNoList(request.getParameterValues("chulNo"));
+		
+		System.out.println("BoardSearch : "+ multiSearchRaceDto);
+		
+		int searchCount = searchService.raceHorseSearchCount(multiSearchRaceDto);
+
+		Pagination raceHorsePagination = new Pagination(searchCount, pageNo);
+		
+		Map<String, Object> raceMap = new HashMap<String, Object>();
+		raceMap.put("meet", multiSearchRaceDto.getMeet());
+		raceMap.put("rcDate", multiSearchRaceDto.getRcDate());
+		raceMap.put("rcDateList", multiSearchRaceDto.getRcDateList());
+		raceMap.put("hrName", multiSearchRaceDto.getHrName());
+		raceMap.put("jkName", multiSearchRaceDto.getJkName());
+		raceMap.put("trName", multiSearchRaceDto.getTrName());
+		raceMap.put("rcDist", multiSearchRaceDto.getRcDist());
+		raceMap.put("rcDistList", multiSearchRaceDto.getRcDistList());
+		raceMap.put("ranks", multiSearchRaceDto.getRanks());
+		raceMap.put("ranksList", multiSearchRaceDto.getRanksList());
+		raceMap.put("wgBudam", multiSearchRaceDto.getWgBudam());
+		raceMap.put("wgBudamList", multiSearchRaceDto.getWgBudamList());
+		raceMap.put("chulNo", multiSearchRaceDto.getChulNo());
+		raceMap.put("chulNoList", multiSearchRaceDto.getChulNoList());
+		raceMap.put("startIndex", raceHorsePagination.getStartIndex());
+		raceMap.put("pageSize", raceHorsePagination.getPageSize());
+
+		List<RaceHorseDto> searchListPaging = searchService.multiSearchRace(raceMap);
+
+		model.addAttribute("searchList", searchListPaging);
+		model.addAttribute("raceHorsePagination", raceHorsePagination);
+
+		return "MultiCheck";
+		
+	}
 	
 	@RequestMapping(value="/search/recommendWord", method = RequestMethod.POST)
 	public String recommendWord(String search, Model model) throws FileNotFoundException{
@@ -109,23 +131,12 @@ public class SearchController {
 		}
 		
 		List<HorseDto> horseList = horseService.searchHorse(search);
-//		Pagination horsePagination = new Pagination(horseList.size(), pageNo, search);
-//		List<HorseDto> horsePaging = horseService.searchPagingHorse(horsePagination);
-		
 		List<TrDto> trainerList = trainerService.searchTrainer(search);
-//		Pagination trainerPagination = new Pagination(trainerList.size(), pageNo, search);
-//		List<TrDto> trainerPaging = trainerService.searchPagingTrainer(trainerPagination);
-//		
 		List<JkDto> jockeyList = jockeyService.searchJockey(search);
-//		Pagination jockeyPagination = new Pagination(jockeyList.size(), pageNo, search);
-//		List<JkDto> jockeyPaging = jockeyService.searchPagingJockey(jockeyPagination);
-		
+
 		model.addAttribute("searchHorse", horseList);
-//		model.addAttribute("horsePagination", horsePagination);
 		model.addAttribute("searchTrainer", trainerList);
-//		model.addAttribute("trainerPagination", trainerPagination);
 		model.addAttribute("searchJockey", jockeyList);
-//		model.addAttribute("jockeyPagination", jockeyPagination);
 		model.addAttribute("search", search);
 
         return "mainSearch";

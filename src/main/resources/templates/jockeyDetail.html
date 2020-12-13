@@ -5,30 +5,26 @@
 
 <div id="information" class="container">
 	<h1 class="my-4">기수 프로필</h1>
-	<table border=1>
-		<tr>
-			<th>성명</th>
-			<td>[[${jockeyDetail.jkName}]]</td>
-			<th>소속조</th>
-			<td>[[${jockeyDetail.part}]]</td>
-			<th>데뷔날짜</th>
-			<td>[[${jockeyDetail.debut}]]</td>
-			<th>기승 가능 중량</th>
-			<td>[[${jockeyDetail.jRweight}]]</td>
-			<th>은퇴날짜</th>
-			<td>[[${jockeyDetail.spDate}]]</td>
-		</tr>
-		<tr>
-			<th>최근 1년 전적</th>
-			<td>[[${jockeyDetail.jYearTotal}]]</td>
-			<th>통산 전적</th>
-			<td>[[${jockeyDetail.jAllTotal}]]</td>
-			<th>승률</th>
-			<td>[[${jockeyDetail.jWinningP}]]</td>
-			<th>복승률</th>
-			<td>[[${jockeyDetail.jComplementRyRate}]]</td>
-			<th>연승률</th>
-			<td>[[${jockeyDetail.jConsecutiveWinningP}]]</td>
-		</tr>
-	</table>
+	<div class="row justify-content-md-center">
+		<div class="col-sm-1-top">성명</div>
+		<div class="col-sm-2" th:text="${jockeyDetail.jkName}"></div>
+		<div class="col-sm-1-top">소속조</div>
+		<div class="col-sm-1" th:text="${jockeyDetail.part}"></div>
+		<div class="col-sm-1-top">데뷔날짜</div>
+		<div class="col-sm-1" th:text="${jockeyDetail.debut}"></div>
+		<div class="col-sm-1-top">은퇴날짜</div>
+		<div class="col-sm-1" th:text="${jockeyDetail.spDate}"></div>
+		<div class="col-sm-2-top">기승가능 중량</div>
+		<div class="col-sm-1">[[${jockeyDetail.jRweight}]]kg</div>
+		<div class="col-sm-1-top">승률</div>
+		<div class="col-sm-2" th:text="${jockeyDetail.jWinningP}"></div>
+		<div class="col-sm-1-top">복승률</div>
+		<div class="col-sm-1" th:text="${jockeyDetail.jComplementRyRate}"></div>
+		<div class="col-sm-1-top">연승률</div>
+		<div class="col-sm-1" th:text="${jockeyDetail.jConsecutiveWinningP}"></div>
+		<!-- 	<div class="col-sm-2-top">최근 1년 전적</div>
+			<div class="col-md-2" th:text="${jockeyDetail.jYearTotal}"></div> -->
+		<div class="col-sm-1-top">통산전적 </div>
+		<div class="col-md" th:text="${jockeyDetail.jAllTotal}"></div>
+	</div>
 </div>

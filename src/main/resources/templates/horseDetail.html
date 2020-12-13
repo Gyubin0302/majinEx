@@ -5,36 +5,32 @@
 
 <div id="information" class="container">
 	<h1 class="my-4">경주마 프로필</h1>
-	<table border=1>
-		<tr>
-			<th>마명</th>
-			<td>[[${horseDetail.hrName}]]</td>
-			<th>생년월일</th>
-			<td>[[${horseDetail.birthDay}]]</td>
-			<th>레이팅</th>
-			<td>[[${horseDetail.rating}]]</td>
-			<th>마번</th>
-			<td>[[${horseDetail.hrNo}]]</td>
-		</tr>
-		<tr>
-			<th>등급</th>
-			<td>[[${horseDetail.ranks}]]</td>
-			<th>성별</th>
-			<td>[[${horseDetail.sex}]]</td>
-			<th>산지</th>
-			<td>[[${horseDetail.nation}]]</td>
-			<th>조교사</th>
-			<td>qfqwf</td>
-		</tr>
-		<tr>
-			<th>통산전적</th>
-			<td>[[${horseDetail.totalRecords}]]</td>
-			<th>승률</th>
-			<td>[[${horseDetail.WinningP}]]</td>
-			<th>복승률</th>
-			<td>[[${horseDetail.ComplementaryRate}]]</td>
-			<th>연승률</th>
-			<td>[[${horseDetail.ConsecutiveWinningP}]]</td>
-		</tr>
-	</table>
+		<div class="row justify-content-md-center">
+		<div class="col-sm-1-top">마명</div>
+		<div class="col-sm-2" th:text="${horseDetail.hrName}"></div>
+		<div class="col-sm-1-top">등급</div>
+		<div class="col-sm-2" th:text="${horseDetail.ranks}"></div>
+		<div class="col-sm-1-top">레이팅</div>
+		<div class="col-sm-1" th:text="${horseDetail.rating}"></div>
+		<div class="col-sm-1-top">마번</div>
+		<div class="col-md-3" th:text="${horseDetail.hrNo}"></div>
+		<div class="col-sm-1-top">성별</div>
+		<div class="col-sm-2" th:text="${horseDetail.sex}"></div>
+		<div class="col-sm-1-top">산지</div>
+		<div class="col-sm-2" th:text="${horseDetail.nation}"></div>
+		<div class="col-sm-1-top">지역</div>
+		<div class="col-sm-1" th:if="${horseDetail.meet} == 1">서울마</div>
+		<div class="col-sm-1" th:if="${horseDetail.meet} == 2">제주마</div>
+		<div class="col-sm-1" th:if="${horseDetail.meet} == 3">부산마</div>
+		<div class="col-sm-1-top">생년월일</div>
+		<div class="col-md-3" th:text="${horseDetail.birthDay}"></div>
+		<div class="col-sm-1-top">승률</div>
+		<div class="col-sm-2" th:text="${horseDetail.WinningP}"></div>
+		<div class="col-sm-1-top">복승률</div>
+		<div class="col-sm-2" th:text="${horseDetail.ComplementaryRate}"></div>
+ 		<div class="col-sm-1-top">연승률</div>
+		<div class="col-sm-1" th:text="${horseDetail.ConsecutiveWinningP}"></div>
+		<div class="col-sm-1-top">통산전적 </div>
+		<div class="col-md" th:text="${horseDetail.totalRecords}"></div> 
+	</div>
 </div>

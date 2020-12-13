@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,11 +23,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.majin.bit.dto.HorseDto;
+import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.TrDto;
+import com.majin.bit.service.HorseService;
 import com.majin.bit.service.RaceHorseService;
+import com.majin.bit.service.TrainerService;
+import com.majin.bit.service.jockeyService;
 import com.majin.bit.util.RcDateCrawling;
 
 
@@ -38,7 +47,16 @@ public class AdminController {
 	@Autowired
 	private RaceHorseService raceHorseService;
 	
-	@RequestMapping(value="/")
+	@Autowired
+	private jockeyService jockeyService;
+	
+	@Autowired
+	private HorseService horseService;
+	
+	@Autowired
+	private TrainerService trainerService;
+	
+	@RequestMapping(value="/main")
     public String apitest(){
         return "admin/APIInsert";
     }
@@ -192,5 +210,175 @@ public class AdminController {
 		}
 
 	}
+	
+	/**
+	 * 기수 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/jkapi", method = {RequestMethod.GET, RequestMethod.POST})
+	public String jk(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
+		String inputLine;
+		String buffer = "";
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551015/API12/jockeyInfo");
+		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=YsfeAQ1K0KPH1fOqYRLcvfqOP2P6Mo2iQOiZSumF4bMSlfyWjdPg4NWPu7Y5ms%2Fql9n2oi4dQbNq2bISj%2Bi4Hg%3D%3D");
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
+		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
+
+		System.out.println(urlBuilder.toString());
+		
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+		
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+		urlConnection.setRequestMethod("GET");
+		urlConnection.setRequestProperty("Accept", "application/json");
+		System.out.println("Response code : " + urlConnection.getResponseCode());
+		
+		BufferedReader bufferedReader;
+		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+		}else {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
+		}
+		
+		while((inputLine = bufferedReader.readLine()) != null) {
+			buffer += inputLine.trim();
+		}
+		
+		bufferedReader.close();
+		urlConnection.disconnect();
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(buffer);
+		
+		List<JkDto> jkList = jockeyService.jockeyInsert(jsonObject, meet);
+
+		model.addAttribute("jkList", jkList);
+		
+		return "admin/APIInsert :: #API";
+		
+	}
+	
+	/**
+	 * 경주마 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/horseapi", method = {RequestMethod.GET, RequestMethod.POST})
+	public String horse(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
+		String inputLine;
+		String buffer = "";
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551015/API8/raceHorseInfo");
+		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=YsfeAQ1K0KPH1fOqYRLcvfqOP2P6Mo2iQOiZSumF4bMSlfyWjdPg4NWPu7Y5ms%2Fql9n2oi4dQbNq2bISj%2Bi4Hg%3D%3D");
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("30000", "UTF-8")); /*한 페이지 결과 수 25186 */
+		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
+		
+		System.out.println(urlBuilder.toString());
+		
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+		
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+		urlConnection.setRequestMethod("GET");
+		urlConnection.setRequestProperty("Accept", "application/json");
+		System.out.println("Response code : " + urlConnection.getResponseCode());
+		
+		BufferedReader bufferedReader;
+		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+		}else {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
+		}
+		
+		while((inputLine = bufferedReader.readLine()) != null) {
+			buffer += inputLine.trim();
+		}
+		
+		bufferedReader.close();
+		urlConnection.disconnect();
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(buffer);
+		
+		List<HorseDto> horseList = horseService.horseInsert(jsonObject, meet);
+		
+		
+		model.addAttribute("horseList", horseList);
+		
+		return "admin/APIInsert :: #API";
+				
+	}
+	
+	/**
+	 * 조교 크롤링 후 MYSQL DB에 저장
+	 * @param request
+	 * @param model
+	 * @param meet
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/trapi", method = {RequestMethod.GET, RequestMethod.POST})
+	public String tr(HttpServletRequest request, Model model, String meet) throws IOException, ParseException {
+		String inputLine;
+		String buffer = "";
+	
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551015/API19/trainerInfo");
+		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=YsfeAQ1K0KPH1fOqYRLcvfqOP2P6Mo2iQOiZSumF4bMSlfyWjdPg4NWPu7Y5ms%2Fql9n2oi4dQbNq2bISj%2Bi4Hg%3D%3D");
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
+		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
+
+		System.out.println(urlBuilder.toString());
+		
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+		
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+		urlConnection.setRequestMethod("GET");
+		urlConnection.setRequestProperty("Accept", "application/json");
+		System.out.println("Response code : " + urlConnection.getResponseCode());
+		
+		BufferedReader bufferedReader;
+		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+		}else {
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
+		}
+		
+		while((inputLine = bufferedReader.readLine()) != null) {
+			buffer += inputLine.trim();
+		}
+		
+		bufferedReader.close();
+		urlConnection.disconnect();
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(buffer);
+		
+		List<TrDto> trList = trainerService.trainerInsert(jsonObject, meet);
+		
+		
+		model.addAttribute("trList", trList);
+		return "admin/APIInsert :: #API";
+		
+	}
+	
 
 }

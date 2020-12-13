@@ -27,7 +27,7 @@ let token = $("meta[name='_csrf']").attr("content");
 					}); */
 				} else if (search !== "") {
 					$.ajax({
-						url : "/search",
+						url : "/search/total",
 						type : "POST",
 						async: false,
 						data : {
@@ -50,7 +50,7 @@ let token = $("meta[name='_csrf']").attr("content");
 					history.pushState(
 							{pageNo : 1, 
 							 search : search,
-							 url : "/search"},
+							 url : "/search/total"},
 							 null, null);
 				};
 			});
@@ -60,7 +60,7 @@ let token = $("meta[name='_csrf']").attr("content");
 				if(search !== ""){
 				console.log("searchBtn");
 					$.ajax({
-						url : "/search",
+						url : "/search/total",
 						type : "POST",
 						data : {
 							"search" : search,
@@ -82,7 +82,7 @@ let token = $("meta[name='_csrf']").attr("content");
 				history.pushState(
 						{pageNo : 1, 
 						 search : search,
-						 url : "/search"},
+						 url : "/search/total"},
 						 null, null);
 	
 			});
@@ -90,7 +90,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			function horseDetail(hrNo, meet, search, pageNo) {
 
 				$.ajax({
-					url : "/search/horseDetail",
+					url : "/search/detail/horseDetail",
 					type : "POST",
 					data : {
 						"hrNo" : hrNo,
@@ -109,7 +109,7 @@ let token = $("meta[name='_csrf']").attr("content");
 				history.pushState(
 						{pageNo : pageNo, 
 						 search : search,
-						 url : "/search/horseDetail",
+						 url : "/search/detail/horseDetail",
 						 meet : meet,
 						 hrNo : hrNo},
 						 null, null);
@@ -119,7 +119,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			function trainerDetail(trNo, meet, search, pageNo) {
 
 				$.ajax({
-					url : "/search/trainerDetail",
+					url : "/search/detail/trainerDetail",
 					type : "POST",
 					data : {
 						"trNo" : trNo,
@@ -138,7 +138,7 @@ let token = $("meta[name='_csrf']").attr("content");
 				history.pushState(
 						{pageNo : pageNo, 
 						 search : search,
-						 url : "/search/trainerDetail",
+						 url : "/search/detail/trainerDetail",
 						 meet : meet,
 						 trNo : trNo},
 						 null, null);
@@ -147,7 +147,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			function jockeyDetail(jkNo, meet, search, pageNo) {
 
 				$.ajax({
-					url : "/search/jockeyDetail",
+					url : "/search/detail/jockeyDetail",
 					type : "POST",
 					data : {
 						"jkNo" : jkNo,
@@ -166,7 +166,7 @@ let token = $("meta[name='_csrf']").attr("content");
 				history.pushState(
 						{pageNo : pageNo, 
 						 search : search,
-						 url : "/search/jockeyDetail",
+						 url : "/search/detail/jockeyDetail",
 						 meet : meet,
 						 jkNo : jkNo},
 						 null, null);
@@ -332,8 +332,22 @@ let token = $("meta[name='_csrf']").attr("content");
 				if (data == null){
 					location.href="/";
 				} else if (data.url === "/yundo/view"){
-		   				yundo();
+					console.log(data);
+			   				
+					$.ajax({
+						url : data.url,
+						type : "POST",
+						dataType : "text",
+						success : function(retVal) {
+							$("#information").val("");
+							$("#information").replaceWith(retVal);
+						},
+						error : function() {
+							alert("error");
+						}
+				});
 		    	  } else if(data.url === "/guideList"){
+		    	  console.log(data);
 		    	  	$.ajax({
 							url : "/guideList",
 							type : "POST",
@@ -352,9 +366,10 @@ let token = $("meta[name='_csrf']").attr("content");
 						});
 					
 		    	  } else if(data.url === "/search/check"){
+		    	  console.log(data);
 		    	  		$.ajax({
 							url : "/search/check",
-							type : "GET",
+							type : "POST",
 							data : data.form,
 							dataType : "text",
 							success : function(retVal) {
@@ -378,13 +393,16 @@ let token = $("meta[name='_csrf']").attr("content");
 								alert("error");
 							}
 						});
-		    	  } else if(data.url !== "/search"){
+		    	  } else if(data.url.substring(0,14) === "/search/detail"){
+		    	  console.log(data);
 			    	  $.ajax({
 							url : data.url,
 							type : "POST",
 							data : {
-									"pageNo" : data.pageNo,
-									"search" : data.search
+									"hrNo" : data.hrNo,
+									"jkNo" : data.jkNo,
+									"trNo" : data.trNo,
+									"meet" : data.meet,
 									},
 			                dataType : "text",
 							success : function(retVal) {
@@ -396,8 +414,9 @@ let token = $("meta[name='_csrf']").attr("content");
 							}
 						});
 		    	  } else {
+		    	  console.log("data test " + data);
 		    		  $.ajax({
-							url : "/search",
+							url : data.url,
 							type : "POST",
 							data : {
 								"search" : data.search,
@@ -531,7 +550,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			
 			$.ajax({
 				url : "/search/check",
-				type : "GET",
+				type : "POST",
 				data : form,
 				dataType : "text",
 				success : function(retVal) {

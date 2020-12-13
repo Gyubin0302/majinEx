@@ -36,6 +36,7 @@ import com.majin.bit.service.jockeyService;
 import com.majin.bit.util.RecommendProcess;
 
 @Controller
+@RequestMapping("/search")
 public class SearchController {
 	
 	@Autowired
@@ -51,12 +52,12 @@ public class SearchController {
 	private TrainerService trainerService;
 	
 	
-	@RequestMapping(value="/search/mulSearch")
+	@RequestMapping(value="/mulSearch")
     public String training(@ModelAttribute MultiSearchRaceDto multiSearchRaceDto){
         return "MultiCheck";
     }
 	
-	@RequestMapping(value = "/search/check", method = RequestMethod.GET)
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String checkBoxTest(MultiSearchRaceDto multiSearchRaceDto, HttpServletRequest request, Model model, @RequestParam(defaultValue = "1")int pageNo) throws IOException, ServletException{
 		
 		multiSearchRaceDto.setRcDateList(request.getParameterValues("rcDate"));
@@ -64,8 +65,6 @@ public class SearchController {
 		multiSearchRaceDto.setRanksList(request.getParameterValues("ranks"));
 		multiSearchRaceDto.setWgBudamList(request.getParameterValues("wgBudam"));
 		multiSearchRaceDto.setChulNoList(request.getParameterValues("chulNo"));
-		
-		System.out.println("BoardSearch : "+ multiSearchRaceDto);
 		
 		int searchCount = searchService.raceHorseSearchCount(multiSearchRaceDto);
 
@@ -98,7 +97,7 @@ public class SearchController {
 		
 	}
 	
-	@RequestMapping(value="/search/recommendWord", method = RequestMethod.POST)
+	@RequestMapping(value="/recommendWord", method = RequestMethod.POST)
 	public String recommendWord(String search, Model model) throws FileNotFoundException{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		RecommendProcess recommend = new RecommendProcess();
@@ -115,7 +114,7 @@ public class SearchController {
 		return "/fragments/header :: #recommendWord";
 	}
 	
-	@RequestMapping(value="/search", method = RequestMethod.POST)
+	@RequestMapping(value="/total", method = RequestMethod.POST)
     public String search(@RequestParam String search, @RequestParam int pageNo, Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -141,4 +140,123 @@ public class SearchController {
 
         return "mainSearch";
     }
+	
+	
+	/**
+	 * 조교 상세 정보
+	 * @param trNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/detail/trainerDetail", method = RequestMethod.POST)
+	public String trainerDetail(String trNo, String meet, Model model) {
+		
+		TrDto trDto = new TrDto();
+		trDto.setTrNo(trNo);
+		trDto.setMeet(meet);
+		
+		model.addAttribute("trainerDetail",trainerService.searchOneTrainer(trDto));
+		
+		return "trainerDetail";
+	}
+	
+	/**
+	 * 조교 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
+	@RequestMapping(value = "/trainerSearchPaging", method = RequestMethod.POST)
+	public String trainseSearchPaging(Model model, int pageNo, String search) {
+		
+		List<TrDto> trainerList = trainerService.searchTrainer(search);
+		Pagination trainerPagination = new Pagination(trainerList.size(), pageNo, search);
+		List<TrDto> trainerPaging = trainerService.searchPagingTrainer(trainerPagination);
+
+		model.addAttribute("searchTrainer", trainerPaging);
+		model.addAttribute("trainerPagination", trainerPagination);
+
+		return "trainerPaging";
+	}
+	
+	/**
+	 * 경주마 상세 정보
+	 * @param hrNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/detail/horseDetail", method = RequestMethod.POST)
+	public String horseDetail(String hrNo, String meet, Model model) {
+		
+		HorseDto horseDto = new HorseDto();
+		horseDto.setHrNo(hrNo);
+		horseDto.setMeet(meet);
+		System.out.println(horseDto);
+		model.addAttribute("horseDetail", horseService.searchOneHorse(horseDto));
+		
+		return "horseDetail";
+	}
+	
+	/**
+	 * 경주마 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
+	@RequestMapping(value = "/horseSearchPaging", method = RequestMethod.POST)
+	public String horseSearchPaging(Model model, @RequestParam(defaultValue = "1")int pageNo, String search) {
+
+		List<HorseDto> horseList = horseService.searchHorse(search);
+		Pagination horsePagination = new Pagination(horseList.size(), pageNo, search);
+		List<HorseDto> horsePaging = horseService.searchPagingHorse(horsePagination);
+
+		model.addAttribute("searchHorse", horsePaging);
+		model.addAttribute("horsePagination", horsePagination);
+
+		return "horsePaging";
+	}
+	
+	/**
+	 * 기수 상세 정보
+	 * @param jkNo
+	 * @param meet
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/detail/jockeyDetail", method = RequestMethod.POST)
+	public String jockeyDetail(String jkNo, String meet, Model model) {
+		
+		JkDto jkDto = new JkDto();
+		jkDto.setJkNo(jkNo);
+		jkDto.setMeet(meet);
+		
+		model.addAttribute("jockeyDetail",jockeyService.searchOneJockey(jkDto));
+		
+		return "jockeyDetail";
+	}
+	
+	/**
+	 * 기수 페이징
+	 * @param model
+	 * @param pageNo
+	 * @param search
+	 * @return
+	 */
+	@RequestMapping(value = "/jockeySearchPaging", method = RequestMethod.POST)
+	public String jockeySearchPaging(Model model, int pageNo, String search) {
+		
+		List<JkDto> jockeyList = jockeyService.searchJockey(search);
+		Pagination jockeyPagination = new Pagination(jockeyList.size(), pageNo, search);
+		List<JkDto> jockeyPaging = jockeyService.searchPagingJockey(jockeyPagination);
+		
+		model.addAttribute("searchJockey", jockeyPaging);
+		model.addAttribute("jockeyPagination", jockeyPagination);
+
+		return "jockeyPaging";
+	}
+
 }

@@ -36,32 +36,32 @@ public class GuideController {
 	// 가이드 서비스
 	@Autowired
 	GuideService guideservice;
-	
-	// 페이징 깐트롤러
-	@RequestMapping(value = "/guideList", method = {RequestMethod.POST, RequestMethod.GET})
-	public String GuideBoardPaging(Model model, @RequestParam(defaultValue = "1") int pageNo) {
 
+	public Pagination GuideSize(int pageNo) {
 		int guideList = guideservice.getGuideBoardSize();
 		Pagination guidePagination = new Pagination(guideList, pageNo);
-		List<GuideDto> guidePaging = guideservice.getGuideBoardList(guidePagination);
+		return guidePagination;
+	}
 
+	public List<GuideDto> GuidePag(Pagination guidePagination) {
+		List<GuideDto> guidePaging = guideservice.getGuideBoardList(guidePagination);
+		return guidePaging;
+	}
+
+	// 페이징 깐트롤러
+	@RequestMapping(value = "/guideList", method = RequestMethod.GET)
+	private String GuideBoardPaging(Model model, @RequestParam(defaultValue = "1") int pageNo) {
+//		int guideList = guideservice.getGuideBoardSize();
+//		Pagination guidePagination = new Pagination(guideList, pageNo);
+//		List<GuideDto> guidePaging = guideservice.getGuideBoardList(guidePagination);
+		Pagination guidePagination = GuideSize(pageNo);
+		List<GuideDto> guidePaging = GuidePag(guidePagination);
 		model.addAttribute("guideList", guidePaging);
 		model.addAttribute("guidePagination", guidePagination);
 
-		return "guideList";
+		return "/guideList";
 	}
-	
-	/*
-	 * // 게시물 전체 컨트롤러
-	 * 
-	 * @RequestMapping("/guideList") private String GuideBoardList(Model model,
-	 * HttpServletRequest request) { 
-	 * 
-	 * List<GuideDto> guideList = new ArrayList<>(); guideList =
-	 * guideservice.getGuideBoardList(); model.addAttribute("guideList", guideList);
-	 * 
-	 * return "guideList"; }
-	 */
+
 	// 게시물 상세보기 컨트롤러
 	@RequestMapping("/guideDetail/{g_no}")
 	private String GuideBoardDetail(@PathVariable("g_no") int g_no, Model model) {
@@ -104,8 +104,9 @@ public class GuideController {
 
 	// 삭제 컨트롤러
 	@RequestMapping(value = "/guideDelete/{g_no}", method = RequestMethod.POST)
-	private String GuideBoardDelete(@PathVariable("g_no") int g_no, RedirectAttributes red, HttpServletResponse response) throws Exception{
-		guideservice.GuideBoardDelete(g_no);					  
+	private String GuideBoardDelete(@PathVariable("g_no") int g_no, RedirectAttributes red,
+			HttpServletResponse response) throws Exception {
+		guideservice.GuideBoardDelete(g_no);
 
 		return "redirect:/guideList";
 	}
@@ -121,10 +122,6 @@ public class GuideController {
 			String oldName = request.getHeader("file-name");
 			System.out.println(oldName);
 			// 파일 기본경로_ 상세경로
-			// String filePath =
-			// request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
-			// String filePath =
-			// "D:/spring/work/majinEx/src/main/webapp/resources/photoUpload/";
 			String filePath = "D:/spring/work/majinEx/src/main/resources/static/fileupload/";
 
 			System.err.println(filePath);
@@ -145,7 +142,7 @@ public class GuideController {
 			// 정보출력
 			sb = new StringBuffer();
 			sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=").append("")
-					.append(filePath.substring(41, 60)).append(saveName);
+					.append(filePath).append(saveName);
 			System.out.println(sb);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,21 +150,20 @@ public class GuideController {
 
 		return sb.toString();
 	}
-	
-	//페이징 깐트롤러
-	/*
-	 * @RequestMapping(value = "/searchGuidePaging", method = RequestMethod.POST)
-	 * public String GuideBoardPaging(Model model, @RequestParam(defaultValue =
-	 * "1")int pageNo, String search) {
-	 * 
-	 * List<GuideDto> guideList = guideservice.getGuideBoardList(); Pagination
-	 * guidePagination = new Pagination(guideList.size(), pageNo, search);
-	 * List<GuideDto> guidePaging = guideservice.PagingGuideBoard(guidePagination);
-	 * 
-	 * model.addAttribute("searchguide", guidePaging);
-	 * model.addAttribute("guidePagination", guidePagination);
-	 * 
-	 * return "guidePaging"; }
-	 */
-	
+
+	// 검색
+	@RequestMapping(value = "/guideSelect")
+	public String GuideBoardSelect(Model model, @RequestParam(defaultValue = "1") int pageNo, String search) {
+
+		System.out.println("-----------------" + search);
+		int SelectG = guideservice.SelectGuideBoard(search);
+		Pagination guidePagination = new Pagination(SelectG, pageNo, search);
+		System.out.println("searchG=="+ SelectG);
+		List<GuideDto> guidePaging = guideservice.PagingGuideBoard(guidePagination);
+
+		model.addAttribute("searchguide", guidePaging);
+		model.addAttribute("guidePagination", guidePagination);
+		return "/guideSelect";
+	}
+
 }

@@ -593,5 +593,116 @@ let token = $("meta[name='_csrf']").attr("content");
 				fragment : "#searchPage"
 			}, null, null);
 		};
-	
-				 
+		
+			function gfirst(pageNo) {
+		GuideBoardPaging(pageNo);
+		}
+
+		function gprevious(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gcurrent(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gnext(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function gend(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+		
+		function guideList() {
+			GuideBoardPaging(1);
+		}
+		
+
+		function GuideBoardPaging(pageNo) {
+			//console.log("test");
+			$.ajax({
+				url : "/guideList",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo
+
+				},
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				url : "/guideList",
+				fragment : "#guide"
+			}, null, null);
+		};
+		
+		function gsearch(){
+			var tb = $("#gsearch").val();
+			var tb2 = $("gsearchType").val();
+			console.log("tb:" +tb);
+			console.log("tb2:" +tb2);
+			location.href="/guideSelect?search="+tb&tb2;
+		};
+		
+		
+		function gsfirst(pageNo, search) {
+		GuideBoardSelect(pageNo, search);
+		}
+
+		function gsprevious(pageNo, search) {
+			GuideBoardSelect(pageNo, search);
+		}
+
+		function gscurrent(pageNo, search) {
+			GuideBoardSelect(pageNo, search);
+		}
+
+		function gsnext(pageNo, search) {
+			GuideBoardSelect(pageNo, search);
+		}
+
+		function gsend(pageNo, search) {
+			GuideBoardSelect(pageNo, search);
+		}
+		
+		function gsuideList() {
+			GuideBoardSelect(1);
+		}
+		
+
+		function GuideBoardSelect(pageNo,search) {
+			console.log("test");
+			$.ajax({
+				url : "/guideSelect",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo,
+					"search" : search
+
+				},
+				dataType : "text",
+				async: false,
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				search : search,
+				url : "/guideSelect",
+				fragment : "#guide"
+			}, null, null);
+		};
+		

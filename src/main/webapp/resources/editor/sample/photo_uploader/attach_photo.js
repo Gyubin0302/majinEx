@@ -1,3 +1,12 @@
+	let token2 = $("meta[name='_csrf']").attr("content");
+	let header2 = $("meta[name='_csrf_header']").attr("content");
+	
+	$(function() {
+		$(document).ajaxSend(function(e, xhr, options) {
+	    	xhr.setRequestHeader(header2, token2);
+		});
+	});
+
 	//변수 선언 및 초기화
 	var nImageInfoCnt = 0;
 	var htImageInfo = [];		//image file정보 저장
@@ -38,6 +47,7 @@
 	console.log("attach_photo.js token==>"+token);
 	var header =  parent.localStorage.getItem("header");
 	console.log("attach_photo.js header==>"+header);
+	
 	
 	//File API 지원 여부로 결정
 	function checkDragAndDropAPI(){
@@ -330,7 +340,7 @@
 		}
 		return sLiTag;
     }
-    
+
     /**
      * HTML5 DragAndDrop으로 사진을 추가하고, 확인버튼을 누른 경우에 동작한다.
      * @return
@@ -373,7 +383,8 @@
 				}
 			},
 			timeout : 3,
-			onerror :  jindo.$Fn(onAjaxError, this).bind()
+			onerror :  jindo.$Fn(onAjaxError, this).bind(),
+			
 		});
 		oAjax.header("contentType","multipart/form-data");
 		oAjax.header("file-name",encodeURIComponent(tempFile.name));
@@ -686,3 +697,5 @@
  		req.send(data);
  		return this;
  	};
+
+ 	

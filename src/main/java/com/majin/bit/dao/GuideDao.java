@@ -26,6 +26,6 @@ public interface GuideDao {
 	
 	public List<GuideDto> PagingGuideBoard(Pagination pagination); // 페이징
 
-	
+	public int SelectGuideBoard(String search); // 검색
 
 }

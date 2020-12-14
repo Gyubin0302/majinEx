@@ -39,4 +39,22 @@
 		SELECT * FROM guide WHERE title LIKE CONCAT('%',#{search},'%') ORDER BY guide_no DESC LIMIT #{startIndex}, #{pageSize}
 	</select>
 
+	<select id="SelectGuideBoard" resultType="int" parameterType="java.lang.String">
+		SELECT count(*) FROM guide  
+		<!-- WHERE title LIKE CONCAT('%',#{search},'%')  -->
+			
+		<trim prefix="WHERE" prefixOverrides="AND|OR">		
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+				AND TITLE like CONCAT('%', #{search}, '%')
+			</if>
+			<if test="searchType=='content' and keyword != null and keyword != '' ">
+				AND CONTENT like CONCAT('%', #{search}, '%')
+			</if>
+			<if test="searchType=='titlecontent' and keyword != null and keyword != '' ">
+				AND TITLE like CONCAT('%', #{search}, '%') OR CONTENT like CONCAT('%', #{search}, '%')
+			</if>
+		</trim>
+		
+	</select>
+
 </mapper>

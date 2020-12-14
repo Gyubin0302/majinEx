@@ -9,7 +9,6 @@
 		<form role="form" th:object=${guideDto}
 			th:action="@{/static/sample/viewer/index.php}" method="POST"
 			enctype="multipart/form-data" onsubmit="return info_chk()">
-			<!--  /admin/guideInsertProc-->
 			<div>
 				<label for="title" style="font-weight: bolder">제목</label> <input
 					type="text" th:field="*{title}" id="title"

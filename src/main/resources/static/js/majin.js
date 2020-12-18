@@ -371,4 +371,116 @@ let token = $("meta[name='_csrf']").attr("content");
 					});
 		    	 }
 		    }); 
+		    
+		function nfirst(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function nprevious(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function ncurrent(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function nnext(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function nend(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+		
+		function noticeList() {
+			NoticeBoardPaging(1);
+		}
+		
+
+		function NoticeBoardPaging(pageNo) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeList",
+				type : "POST",
+				data : {
+					"pageNo" : pageNo
+
+				},
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				url : "/noticeList",
+				fragment : "#notice"
+			}, null, null);
+		};
+		
+		
+		function nsearch(){
+			var tt = $("#nsearch").val();
+			console.log("tt:" +tt);
+			location.href="/noticeSelect?search="+tt;
+		};
+		
+		
+		function nsfirst(pageNo, search) {
+		NoticeBoardSelect(pageNo, search);
+		}
+
+		function nsprevious(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function nscurrent(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function nsnext(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function nsend(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+		
+		function nsuideList() {
+			NoticeBoardSelect(1);
+		}
+		
+
+		function NoticeBoardSelect(pageNo,search) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeSelect",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo,
+					"search" : search
+
+				},
+				dataType : "text",
+				async: false,
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				search : search,
+				url : "/noticeSelect",
+				fragment : "#notice"
+			}, null, null);
+		};
+				 
 				 

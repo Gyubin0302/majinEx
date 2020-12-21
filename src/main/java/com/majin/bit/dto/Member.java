@@ -30,11 +30,13 @@ public class Member {
 	private String email;
 	@Column(name = "role")
 	private String role;
-	
+	@Column(name = "able", columnDefinition = "TINYINT", length=1)
+	private int able;
+			
 	public Member() {
 	}
 		
-	public Member(int mid, String id, String pw, String name, String nick, String email, String role) {
+	public Member(int mid, String id, String pw, String name, String nick, String email, String role,int able) {
 		this.mid = mid;
 		this.id = id;
 		this.pw = pw;
@@ -42,5 +44,6 @@ public class Member {
 		this.nick = nick;
 		this.email = email;
 		this.role = role;
+		this.able = able;
 	}
 }

@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.majin.bit.dto.Member;
 import com.majin.bit.dto.MemberDTO;
-import com.majin.bit.service.MemberServiceImpl;
+import com.majin.bit.service.MemberService;
 import com.majin.bit.word2vecTest.Word2VecTest;
 
 @Controller
 public class OAuth2Controller {
 	@Autowired
-	private MemberServiceImpl memberService;
+	private MemberService memberService;
 
 	@GetMapping({ "", "/" })
 	public String index() {
@@ -89,6 +90,9 @@ public class OAuth2Controller {
 
 			System.out.println("name:" + user2.getAuthorities());
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("\n\n"+auth.toString());
+		System.out.println("이거는 securitycontextholder에서 가져온것"+auth.getName());
 		return "hello";
 	}
 
@@ -114,10 +118,31 @@ public class OAuth2Controller {
 	public boolean IdCheck(@RequestParam String id) throws Exception {
 		return memberService.idcheck(id);
 	}
+	
+	@GetMapping("/findpw")
+	public String findpw() {
+		return "findpw";
+	}
+	
+	@GetMapping("/changepw")
+	public String changepw() {
+		return "changepw";
+	}
+	
+	@PostMapping("/changepw")
+	public String changepw2(@RequestParam String oldpw, @RequestParam String pw) {
+		memberService.checkPw(SecurityContextHolder.getContext().getAuthentication().getName(),oldpw,pw);
+		return "home";
+	}
+	
+	@GetMapping("/disableid")
+	public String disableId() {
+		memberService.disableId(SecurityContextHolder.getContext().getAuthentication().getName());
+		return "home";
+	}
 
 	@GetMapping("/yundoHorse")
 	public String getYundoHorse() {
-		
 		return "home";
 	}
 

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,7 +79,7 @@ public class GuideController {
 	}
 
 	// 게시물 등록 폼
-	@RequestMapping(value = "/guideInsertProc")
+	@RequestMapping(value = "/guideInsertProc", method=RequestMethod.POST)
 	private String GuideBoardInsertProc(@ModelAttribute GuideDto guideBoard, HttpServletRequest request) {
 		guideservice.GuideBoardInsert(guideBoard);
 		return "forward:/guideList";
@@ -122,8 +123,9 @@ public class GuideController {
 			String oldName = request.getHeader("file-name");
 			System.out.println(oldName);
 			// 파일 기본경로_ 상세경로
-			String filePath = "D:/spring/work/majinEx/src/main/resources/static/fileupload/";
-
+//			String filePath = "D:/workspace4.7/BitMajin/src/main/resources/static/fileupload/"; // "D:/spring/work/majinEx/src/main/resources/static/fileupload/";
+			String filePath = request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
+			
 			System.err.println(filePath);
 			String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
 					.append(UUID.randomUUID().toString()).append(oldName.substring(oldName.lastIndexOf(".")))
@@ -142,7 +144,7 @@ public class GuideController {
 			// 정보출력
 			sb = new StringBuffer();
 			sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=").append("")
-					.append(filePath).append(saveName);
+					.append("/static/resources/photoUpload/").append(saveName);
 			System.out.println(sb);
 		} catch (Exception e) {
 			e.printStackTrace();

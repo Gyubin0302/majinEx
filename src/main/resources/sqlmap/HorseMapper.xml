@@ -29,7 +29,7 @@
 	</insert>
 	
 	<select id="searchHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="java.lang.String">
-		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC
+		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') OR NATION LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC
 	</select>
 	
 	<select id="searchOneHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.HorseDto">
@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="searchPagingHorse" resultType="com.majin.bit.dto.HorseDto" parameterType="com.majin.bit.dto.Pagination">
-		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC LIMIT #{startIndex}, #{pageSize}
+		SELECT * FROM HORSESKINNY WHERE HRNAME LIKE CONCAT('%',#{search},'%') OR NATION LIKE CONCAT('%',#{search},'%') ORDER BY HRNAME ASC LIMIT #{startIndex}, #{pageSize}
 	</select>
 
 </mapper>

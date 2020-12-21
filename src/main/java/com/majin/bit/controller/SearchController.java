@@ -99,36 +99,21 @@ public class SearchController {
 	
 	@RequestMapping(value="/recommendWord", method = RequestMethod.POST)
 	public String recommendWord(String search, Model model) throws FileNotFoundException{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		RecommendProcess recommend = new RecommendProcess();
 		List<String> returnRecommend = new ArrayList<String>();
-		Collection<String> recommendWord =  recommend.recommender(auth.getName(), search);
-		
+		Collection<String> recommendWord =  recommend.recommender(search);
+			
 		if(recommendWord != null) {
 			returnRecommend = recommendWord.stream().collect(Collectors.toList()); // String[] test = recommendWord.toArray(new String[0]);
-			model.addAttribute("recommendWord", returnRecommend);	
 		} else {
-			model.addAttribute("recommendWord", "추천단어가 없습니다.");
+			returnRecommend.add("정확한 단어를 입력해주세요.");
 		}
-		
+		model.addAttribute("recommendWord", returnRecommend);
 		return "/fragments/header :: #recommendWord";
 	}
 	
 	@RequestMapping(value="/total", method = RequestMethod.POST)
-    public String search(@RequestParam String search, @RequestParam int pageNo, Model model){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		FileWriter userText;
-		try {
-			if(auth.getName() != "anonymousUser") {
-				userText = new FileWriter("D:/final/userText/" + auth.getName() + "_save.txt", true); // 파일 이어쓰기
-				userText.write(search + "\n");
-				userText.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+    public String search(@RequestParam String search, @RequestParam int pageNo, Model model) throws FileNotFoundException{
 		List<HorseDto> horseList = horseService.searchHorse(search);
 		List<TrDto> trainerList = trainerService.searchTrainer(search);
 		List<JkDto> jockeyList = jockeyService.searchJockey(search);
@@ -137,7 +122,6 @@ public class SearchController {
 		model.addAttribute("searchTrainer", trainerList);
 		model.addAttribute("searchJockey", jockeyList);
 		model.addAttribute("search", search);
-
         return "mainSearch";
     }
 	
@@ -194,7 +178,7 @@ public class SearchController {
 		HorseDto horseDto = new HorseDto();
 		horseDto.setHrNo(hrNo);
 		horseDto.setMeet(meet);
-		System.out.println(horseDto);
+
 		model.addAttribute("horseDetail", horseService.searchOneHorse(horseDto));
 		
 		return "horseDetail";

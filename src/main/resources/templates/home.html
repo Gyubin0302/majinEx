@@ -9,7 +9,11 @@
 	<br>
 	<a sec:authorize="isAnonymous()" th:href="@{/login}">로그인 하기</a>
 	<a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+	<a sec:authorize="isAnonymous()" th:href="@{/findpw}">비밀번호 찾기</a>
+	
+	<!-- 삭제 예정부분 -->
 	<a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+	<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{#None}">회원탈퇴</a>
 	
 	  
 	 <div sec:authorize="isAuthenticated()">

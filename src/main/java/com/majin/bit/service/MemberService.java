@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements UserDetailsService {
+public class MemberService implements UserDetailsService {
 	@Autowired
 	private MemberDao memberDao;
 
@@ -32,6 +32,9 @@ public class MemberServiceImpl implements UserDetailsService {
 		//Member member = memberEntity.orElse(null);
 		Member member = memberDao.findById(id);
 		System.out.println("가져온 맴버는 : "+member);
+		if(member.getAble()==1) {
+			throw new UsernameNotFoundException(id);
+		}
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRole()));
@@ -41,16 +44,60 @@ public class MemberServiceImpl implements UserDetailsService {
 
 	@Transactional
     public String save(MemberDTO memberDTO) {
-        Member member = memberDTO.toEntity();
         // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        member.setPw(passwordEncoder.encode(member.getPw()));
-        member.setEmail(member.getEmail().replace(",", "@"));
-		member.setRole(member.getId().equals("admin") ? "ADMIN" : "USER");
+        memberDTO.setPw(passwordEncoder.encode(memberDTO.getPw()));
+        memberDTO.setEmail(memberDTO.getEmail().replace(",", "@"));
+        memberDTO.setRole(memberDTO.getId().equals("admin") ? "ADMIN" : "USER");
+		Member member = memberDTO.toEntity();
 		System.out.println("저장된 멤버는 : "+member);
         return memberDao.save(member).getId();
     }
+	
+	public void newPw(String id,String newPw) {
+		Member member = memberDao.findById(id);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setEmail(member.getEmail());
+		memberDTO.setId(member.getId());
+		memberDTO.setMid(member.getMid());
+		memberDTO.setName(member.getName());
+		memberDTO.setNick(member.getNick());
+		memberDTO.setAble(member.getAble());
+		memberDTO.setPw(newPw);
+		save(memberDTO);
+	}
+	
+	public boolean checkPw(String id,String oldpw,String pw) {
+		Member member = memberDao.findById(id);
+		if(member.getPw() == oldpw) {
+			newPw(id,pw);
+			return true;
+		}else {
+			System.out.println("비번 안맞음");
+			return false;
+		}
+	}
 
+	public String findEmail(String id) {
+		Member member = memberDao.findById(id);
+		return member.getEmail();
+	}
+	
+	public void disableId(String id) {
+		Member member = memberDao.findById(id);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setEmail(member.getEmail());
+		memberDTO.setId(member.getId());
+		memberDTO.setMid(member.getMid());
+		memberDTO.setName(member.getName());
+		memberDTO.setNick(member.getNick());
+		memberDTO.setPw(member.getPw());
+		memberDTO.setRole(member.getRole());
+		memberDTO.setAble(1);
+		member = memberDTO.toEntity();
+		memberDao.save(member);
+	}
+	
 	public boolean idcheck(String id) {
 		return memberDao.findById(id) != null ? true : false;
 	}

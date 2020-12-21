@@ -4,7 +4,7 @@ var pwcheckFlag = false;
 var mailFlag = false;
 
 var idRe = /^\w{5,20}$/;
-//var pwRe = /^[\w!@#$%^&*()]{8,20}$/;
+var pwRe = /^[\w!@#$%^&*()]{8,20}$/;
 var lengRe = /.{8,20}/;
 var engRe = /[a-zA-Z]/;
 var numRe = /\d/;
@@ -18,7 +18,6 @@ $(function() {
         xhr.setRequestHeader(header, token);
     });
 });
-
 
 $(function () {
     // 아이디 유효성 체크

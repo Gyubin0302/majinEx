@@ -33,13 +33,13 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import com.majin.bit.security.CustomOAuth2Provider;
 import com.majin.bit.service.CustomOAuth2UserService;
-import com.majin.bit.service.MemberServiceImpl;
+import com.majin.bit.service.MemberService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	private MemberServiceImpl memberServiceImpl;
+	private MemberService memberServiceImpl;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**", "/file_uploader_DEXT").permitAll()
+				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**", "/file_uploader_DEXT","/findpw").permitAll()
 				.antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
 				.antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
 				.antMatchers("/naver").hasAuthority(NAVER.getRoleType())

@@ -6,30 +6,28 @@ let token = $("meta[name='_csrf']").attr("content");
 					xhr.setRequestHeader(header, token);
 				});
 			});
-	
-			$("#search").bind("keyup input", function(key) {
-				let search = $("#search").val();
-				if (key.keyCode !== 13) {
-					/* $.ajax({
-						url : "/search/recommendWord",
-						type : "POST",
-						data : {
-							"search" : search
-						},
-						dataType : "text",
-						success : function(retVal) {
-							$("#recommendWord").val("");
-							$("#recommendWord").replaceWith(retVal);
-						},
-						error : function() {
-							alert("error");
-						}
-					}); */
-				} else if (search !== "") {
+			
+			function G_search(search){
+
+					$.ajax({
+							url : "/search/recommendWord",
+							type : "POST",
+							data : {
+								"search" : search
+							},
+							dataType : "text",
+							success : function(retVal) {
+								$("#recommendWord").val("");
+								$("#recommendWord").replaceWith(retVal);
+							},
+							error : function() {
+								alert("error");
+							}
+					});
+						
 					$.ajax({
 						url : "/search/total",
 						type : "POST",
-						async: false,
 						data : {
 							"search" : search,
 							"pageNo" : 1
@@ -37,10 +35,9 @@ let token = $("meta[name='_csrf']").attr("content");
 						dataType : "text",
 						success : function(retVal) {
 							$("#information").val("");
-							$("#recommendWord").val("");
-							$("#recommendList").remove();
+							/*$("#recommendWord").val("");
+							$("#recommendList").remove();*/
 							$("#information").replaceWith(retVal);
-							
 						},
 						error : function() {
 							alert("error");
@@ -52,13 +49,22 @@ let token = $("meta[name='_csrf']").attr("content");
 							 search : search,
 							 url : "/search/total"},
 							 null, null);
-				};
+			};
+			
+			$("#search").bind("keyup input", function(key) {
+				let search = $("#search").val();
+				if (search !== "" && key.keyCode === 13) {
+					G_search(search);
+				}
 			});
+			
+			function G_recBtn(search){
+				G_search(search);
+			}
 			
 			$("#searchBtn").bind("click", function(){
 				let search = $("#search").val();
 				if(search !== ""){
-				console.log("searchBtn");
 					$.ajax({
 						url : "/search/total",
 						type : "POST",
@@ -331,9 +337,7 @@ let token = $("meta[name='_csrf']").attr("content");
 		    	  let data = event.originalEvent.state;
 				if (data == null){
 					location.href="/";
-				} else if (data.url === "/yundo/view"){
-					console.log(data);
-			   				
+				} else if (data.url === "/yundo/view"){	
 					$.ajax({
 						url : data.url,
 						type : "POST",
@@ -347,7 +351,6 @@ let token = $("meta[name='_csrf']").attr("content");
 						}
 				});
 		    	  } else if(data.url === "/guideList"){
-		    	  console.log(data);
 		    	  	$.ajax({
 							url : "/guideList",
 							type : "POST",
@@ -366,7 +369,6 @@ let token = $("meta[name='_csrf']").attr("content");
 						});
 					
 		    	  } else if(data.url === "/search/check"){
-		    	  console.log(data);
 		    	  		$.ajax({
 							url : "/search/check",
 							type : "POST",
@@ -394,7 +396,6 @@ let token = $("meta[name='_csrf']").attr("content");
 							}
 						});
 		    	  } else if(data.url.substring(0,14) === "/search/detail"){
-		    	  console.log(data);
 			    	  $.ajax({
 							url : data.url,
 							type : "POST",
@@ -414,7 +415,21 @@ let token = $("meta[name='_csrf']").attr("content");
 							}
 						});
 		    	  } else {
-		    	  console.log("data test " + data);
+			    	  	$.ajax({
+								url : "/search/recommendWord",
+								type : "POST",
+								data : {
+									"search" : data.search,
+								},
+								dataType : "text",
+								success : function(retVal) {
+									$("#recommendWord").val("");
+									$("#recommendWord").replaceWith(retVal);
+								},
+								error : function() {
+									alert("error");
+								}
+						});
 		    		  $.ajax({
 							url : data.url,
 							type : "POST",
@@ -425,9 +440,10 @@ let token = $("meta[name='_csrf']").attr("content");
 							dataType : "text",
 							success : function(retVal) {
 								$("#information").val("");
-								$("#recommendWord").val("");
-								$("#recommendList").remove();
+								/*$("#recommendWord").val("");
+								$("#recommendList").remove();*/
 								$("#information").replaceWith(retVal);
+								
 							},
 							error : function() {
 								alert("error");
@@ -620,7 +636,6 @@ let token = $("meta[name='_csrf']").attr("content");
 		
 
 		function GuideBoardPaging(pageNo) {
-			//console.log("test");
 			$.ajax({
 				url : "/guideList",
 				type : "GET",
@@ -679,7 +694,6 @@ let token = $("meta[name='_csrf']").attr("content");
 		
 
 		function GuideBoardSelect(pageNo,search) {
-			console.log("test");
 			$.ajax({
 				url : "/guideSelect",
 				type : "GET",

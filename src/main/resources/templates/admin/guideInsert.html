@@ -6,9 +6,8 @@
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
 	<div>
-		<form role="form" th:object=${guideDto}
-			th:action="@{/static/sample/viewer/index.php}" method="POST"
-			enctype="multipart/form-data" onsubmit="return info_chk()">
+		<form role="form" th:object=${guideDto} th:action="@{/guideInsertProc}" method="POST" 
+			enctype="multipart/form-data" id="guideInsertForm">
 			<div>
 				<label for="title" style="font-weight: bolder">제목</label> <input
 					type="text" th:field="*{title}" id="title"
@@ -17,17 +16,13 @@
 
 			<div style="font-weight: bolder">
 				<textarea name="content" id="content" rows="10" cols="100"
-					style="width: 766px; height: 412px; display: inline;"
-					th:field="*{content}" placeholder="내용을 입력하세욥~!"></textarea>
-				<!-- <label for="content">내용가리</label><br/>
-			<textarea  rows="50" cols="100" placeholder="내용을 입력하세욥~!" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 458px;"></textarea> -->
+					style="width: 766px; height: 412px; display: inline;" th:field="*{content}" placeholder="내용을 입력하세욥~!"></textarea>
 			</div>
 
 			<div style="text-align: right;">
 				<input type="submit" th:value="목록" th:formaction="@{/guideList}">
-				<input type="button" th:value="작성"
-					onclick='return info_chk2(this.form);'> <input
-					type="submit" th:value="취소">
+				<input type="button" id="info_chk2" th:value="작성" > 
+				<input type="submit" th:value="취소">
 			</div>
 		</form>
 	</div>
@@ -36,25 +31,20 @@
 <th:block layout:fragment="script">
 	
 	<script>
+	
+		var oEditors = [];
+		
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+	
+		localStorage.setItem("token", token);
+		localStorage.setItem("header", header);
 		
 		$(function() {
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(header, token);
 			});
 		});
-		
-		function info_chk() {
-			return true;
-		}
-
-		function info_chk2(frm) {
-			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			frm.action = '/guideInsertProc';
-			frm.submit();
-			return true;
-		}
-
-		var oEditors = [];
 
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
@@ -105,6 +95,13 @@
 			var nFontSize = 24;
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
+		
+		$("#info_chk2").click(function(){
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+			$("#guideInsertForm").submit();
+		});
+
+		
  
 	</script>
 </th:block>

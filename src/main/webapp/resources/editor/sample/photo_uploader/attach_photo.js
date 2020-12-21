@@ -1,12 +1,3 @@
-	let token2 = $("meta[name='_csrf']").attr("content");
-	let header2 = $("meta[name='_csrf_header']").attr("content");
-	
-	$(function() {
-		$(document).ajaxSend(function(e, xhr, options) {
-	    	xhr.setRequestHeader(header2, token2);
-		});
-	});
-
 	//변수 선언 및 초기화
 	var nImageInfoCnt = 0;
 	var htImageInfo = [];		//image file정보 저장

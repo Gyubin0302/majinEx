@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+	<form th:action="@{/findpw}" th:method="post">
+	<input type="text" id="id" name="id">
+	<input type="submit" value="비밀번호 초기화">
+	<input type="reset" value="다시입력">
+	</form>
+</body>
+</html>

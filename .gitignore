@@ -14,7 +14,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-application.yml
+application-oauth.yml
 
 # External tool builders
 .externalToolBuilders/

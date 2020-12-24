@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<main layout:fragment="content">
+	<div class="container">
+		<div class="row" >
+			<div class="col-lg-8-ex" >
+				<form role="form" th:object=${noticeDto}
+					th:action="@{/noticeList}" method="post">
+					  	
+					 <div>
+						<label style="font-weight: bolder;">제목</label>
+						<p th:text="${detail.title}"></p>
+						<input type="hidden" th:field="${detail.title}">
+					</div>
+					<div>
+						<label for="" style="font-weight: bolder;">내용</label>
+						<!-- <p th:text="${detail.content}"></p> -->
+						<span th:utext=${detail.content}></span>
+						<!-- <input type="hidden" th:field="${detail.content}"> -->
+					</div>
+					 <div style="text-align: right;">
+						<input type="submit" th:value="목록" th:formaction="@{/noticeList}">
+						<input type="submit" th:value="수정" th:formaction="@{/noticeUpdate/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+						<input type="submit" th:value="삭제" th:formaction="@{/noticeDelete/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+					</div> 
+				</form>
+			</div>
+
+		</div>
+
+		<br />
+		<br />
+		<br />
+
+	</div>
+	</main>
+</html>

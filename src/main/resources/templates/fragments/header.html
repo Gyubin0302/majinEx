@@ -12,7 +12,7 @@
 		
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" th:href="@{#none}">공지사항</a>
+						<li class="nav-item"><a class="nav-link" th:onclick="noticeList()">공지사항</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" th:onclick="guideList()">초보자 가이드</a>
 						</li>
@@ -24,7 +24,7 @@
 						<a sec:authorize="isAnonymous()" class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 더보기 </a>
 						<a sec:authorize="isAuthenticated()" class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span sec:authentication="name"></span>님 </a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
-							<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{/login}">로그인</a> <!-- 로그인 하면 로그아웃으로 변경되고 회원가입이 사라지고 마이페이지 생겨야 함-->
+							<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{/home}">로그인</a> <!-- 로그인 하면 로그아웃으로 변경되고 회원가입이 사라지고 마이페이지 생겨야 함-->
 							<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{/signup}">회원가입</a>
 							<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">로그아웃</a>
 							<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/changepw}">비밀번호 변경</a>
@@ -51,10 +51,12 @@
 				</button>
 			</div>
 			<div class="container">
-			<div class="row " id="recommendWord">
-				<div id="recommendList" th:each="recommend, index : ${recommendWord}">
-					<div class="col-md-recommend" th:id="G_recommend + ${index.index}" th:text="${recommend}" th:onclick='G_recBtn([[${recommend}]])'></div>
-				</div>
+			<div class="row" id="recommendWord">
+				<th:block th:each="recommend, index : ${recommendWord}">
+					<div th:id="recommendList + ${index.index}">
+						<div class="col-md-recommend" th:id="G_recommend + ${index.index}" th:text="${recommend}" th:onclick='G_recBtn([[${recommend}]])'></div>
+					</div>
+				</th:block>
 			</div>
 			</div>
 	   </div>

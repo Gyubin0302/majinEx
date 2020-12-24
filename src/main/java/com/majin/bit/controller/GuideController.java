@@ -38,29 +38,54 @@ public class GuideController {
 	@Autowired
 	GuideService guideservice;
 
+	// 가이드 메인용 페이징
 	public Pagination GuideSize(int pageNo) {
 		int guideList = guideservice.getGuideBoardSize();
 		Pagination guidePagination = new Pagination(guideList, pageNo);
 		return guidePagination;
 	}
 
+	// 가이드 메인용 페이징
 	public List<GuideDto> GuidePag(Pagination guidePagination) {
 		List<GuideDto> guidePaging = guideservice.getGuideBoardList(guidePagination);
 		return guidePaging;
 	}
 
-	// 페이징 깐트롤러
+	// 페이징 메잉용 컨트롤러
 	@RequestMapping(value = "/guideList", method = RequestMethod.GET)
 	private String GuideBoardPaging(Model model, @RequestParam(defaultValue = "1") int pageNo) {
-//		int guideList = guideservice.getGuideBoardSize();
-//		Pagination guidePagination = new Pagination(guideList, pageNo);
-//		List<GuideDto> guidePaging = guideservice.getGuideBoardList(guidePagination);
+
 		Pagination guidePagination = GuideSize(pageNo);
 		List<GuideDto> guidePaging = GuidePag(guidePagination);
 		model.addAttribute("guideList", guidePaging);
 		model.addAttribute("guidePagination", guidePagination);
 
 		return "/guideList";
+	}
+
+	// 가이드 검색용 페이징
+	public Pagination GuidePagination(int pageNo, String search) {
+		int SelectG = guideservice.SelectGuideBoard(search);
+		Pagination guidePagination = new Pagination(SelectG, pageNo, search);
+		return guidePagination;
+	}
+
+	// 가이드 검색용 페이징
+	public List<GuideDto> GuidePaging(Pagination guidePagination) {
+		List<GuideDto> guidePaging = guideservice.PagingGuideBoard(guidePagination);
+		return guidePaging;
+	}
+
+	// 가이드 검색용 컨트롤러
+	@RequestMapping(value = "/guideSelect", method = RequestMethod.GET)
+	public String GuideBoardSelect(Model model, @RequestParam(defaultValue = "1") int pageNo, String search) {
+
+		Pagination guidePagination = GuidePagination(pageNo, search);
+		List<GuideDto> guidePaging = GuidePaging(guidePagination);
+		model.addAttribute("searchguide", guidePaging);
+		model.addAttribute("guidePagination", guidePagination);
+
+		return "/guideSelect";
 	}
 
 	// 게시물 상세보기 컨트롤러
@@ -79,7 +104,7 @@ public class GuideController {
 	}
 
 	// 게시물 등록 폼
-	@RequestMapping(value = "/guideInsertProc", method=RequestMethod.POST)
+	@RequestMapping(value = "/guideInsertProc", method = RequestMethod.POST)
 	private String GuideBoardInsertProc(@ModelAttribute GuideDto guideBoard, HttpServletRequest request) {
 		guideservice.GuideBoardInsert(guideBoard);
 		return "forward:/guideList";
@@ -112,7 +137,7 @@ public class GuideController {
 		return "redirect:/guideList";
 	}
 
-	// 다중파일업로드 에디터
+	// 다중파일업로드 에디터(네이버 스마트 에디터 2.8)
 	@ResponseBody
 	@RequestMapping(value = "/file_uploader_DEXT", method = RequestMethod.POST)
 	public String multiplePhotoUpload(HttpServletRequest request) {
@@ -121,16 +146,11 @@ public class GuideController {
 		try {
 			// 파일명을 받는다- 일반 원본파일명
 			String oldName = request.getHeader("file-name");
-			System.out.println(oldName);
 			// 파일 기본경로_ 상세경로
-//			String filePath = "D:/workspace4.7/BitMajin/src/main/resources/static/fileupload/"; // "D:/spring/work/majinEx/src/main/resources/static/fileupload/";
 			String filePath = request.getSession().getServletContext().getRealPath("/resources/photoUpload/");
-			
-			System.err.println(filePath);
 			String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
 					.append(UUID.randomUUID().toString()).append(oldName.substring(oldName.lastIndexOf(".")))
 					.toString();
-			System.err.println("=======>" + filePath + saveName);
 			InputStream is = request.getInputStream();
 
 			OutputStream os = new FileOutputStream(filePath + saveName);
@@ -145,27 +165,11 @@ public class GuideController {
 			sb = new StringBuffer();
 			sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=").append("")
 					.append("/static/resources/photoUpload/").append(saveName);
-			System.out.println(sb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return sb.toString();
-	}
-
-	// 검색
-	@RequestMapping(value = "/guideSelect")
-	public String GuideBoardSelect(Model model, @RequestParam(defaultValue = "1") int pageNo, String search) {
-
-		System.out.println("-----------------" + search);
-		int SelectG = guideservice.SelectGuideBoard(search);
-		Pagination guidePagination = new Pagination(SelectG, pageNo, search);
-		System.out.println("searchG=="+ SelectG);
-		List<GuideDto> guidePaging = guideservice.PagingGuideBoard(guidePagination);
-
-		model.addAttribute("searchguide", guidePaging);
-		model.addAttribute("guidePagination", guidePagination);
-		return "/guideSelect";
 	}
 
 }

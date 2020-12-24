@@ -1,72 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html
+  lang="ko"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout/loginlayout"
+>
 <head>
 <meta charset="UTF-8">
-<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header"
-	th:content="${_csrf.headerName}" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<title>register page</title>
+<title>로그인</title>
 </head>
-<body>
-
-	<form th:action="@{/signup}" th:method="post">
-		<table border="1px">
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" id="id" name="id">&nbsp&nbsp
-					<button type="button" id="chkId">아이디 체크</button></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" id="pw" name="pw"></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="password" id="pwcheck" name="pwcheck"></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td><input type="text" name="nick"></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input type="text" id="email" name="email"> @ <select
-					name="email" id="domain">
-						<option value="gmail.com">gmail.com</option>
-						<option value="naver.com">naver.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="nate.com">nate.com</option>
-				</select>
-					<button type="button" id="chkEmail">인증메일 전송</button></td>
-			</tr>
-			<tr>
-				<td>인증번호 확인</td>
-				<td><input type="text" id="code" name="code">&nbsp&nbsp
-					<button type="button" id="chkCode">인증</button></td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center;">
+<main layout:fragment="content">
+	<div class="hyeok">
+	    <div class="col-md-4 col-sm-4 hyeok-lg">
+            <div>
+                <div class="form-group">Margin</div>
+            </div>
+            <div>
+			<form th:action="@{/signup}" th:method="post">				
+				<div>
+					아이디<input type="text" class="form-control form-group" id="id" name="id">&nbsp&nbsp<button type="button" id="chkId">아이디 체크</button>
+				</div>
+				<div>
+					비밀번호<input type="password" class="form-control form-group" id="pw" name="pw">
+				</div>
+				<div>
+					비밀번호 확인<input type="password" class="form-control form-group" id="pwcheck" name="pwcheck">
+				</div>
+				<div>
+					이름<input type="text" class="form-control form-group" name="name">
+				</div>
+				<div>
+					닉네임<input type="text" class="form-control form-group" name="nick">
+				</div>
+				<div>
+					이메일<br>
+					<input type="text" class="form-group mx-sm-1 mb-3" id="email" name="email">@ <select name="email" id="domain">
+							<option value="gmail.com">gmail.com</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="nate.com">nate.com</option>
+					</select>
+						<button type="button" id="chkEmail">인증메일 전송</button>
+				</div>
+				<div>
+					인증번호 확인<input type="text" class="form-group mx-sm-1 mb-3" id="code" name="code">&nbsp&nbsp<button type="button" id="chkCode">인증</button>
+				</div>
+				<div style="text-align: center;">
 					<div id="idNotice" style="color: red">아이디를 입력해 주세요</div>
 					<div id="pwNotice" style="color: red">비밀번호를 입력해주세요</div>
 					<div id="pwChkNotice" style="color: red">비밀번호 확인을 입력해주세요</div>
-					<div id="mailNotice" style="color: red">이메일 인증을 해주세요</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center;">
-				<input type="submit" id="submitButton" value="회원가입">
-				<input type="reset" value="다시입력"></td>
-			<tr>
-		</table>
-	</form>
+					<div id="mailNotice" style="color: red">이메일 인증을 해주세요</div><br>
+				</div>
+				<div style="text-align: center;">
+					<input type="submit" id="submitButton" value="회원가입">
+					<input type="reset" value="다시입력"></td>
+				</div>
+			</form>
 	<script src="/static/js/regicheck.js"></script>
-</body>
+</main>
 </html>

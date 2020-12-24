@@ -1,30 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html
+  lang="ko"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout/loginlayout"
+>
 <head>
 <meta charset="UTF-8">
-<title>Title</title>
+<title>로그인</title>
 </head>
-<body>
-	<h2>로그인</h2>
+<main layout:fragment="content">
+	<div class="hyeok">
+	    <div class="col-4 hyeok-lg">
+            <div>
+                <div class="form-group">Margin</div>
+            </div>
+            <div>
+                <form th:action="@{/login}" method="post">
+                    <div>
+                        <input type="text" class="form-control form-group" name="id" placeholder="아이디" autofocus>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control form-group" name="pw" placeholder="비밀번호">
+                    </div>
+                    <div>
+                        <button type="submit" class="form-control btn btn-primary form-group">로그인</button>
+                    </div>
+                    <div>
+                        <button type="button" class="form-control btn btn-primary form-group" onclick="location.href='/findpw'">비밀번호 찾기</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+            <a href="javascript:;" class="btn_social" data-social="google"><img src="https://ssl.nx.com/S2/p3/login/2016/bt_google1.gif" width="100%" height="38px"></a>
+			<br>
+			<a href="javascript:;" class="btn_social" data-social="kakao"><img src="/static/logo/kakao_login_medium_wide.png" width="100%" height="38px"></a>
+			<br>
+			<a href="javascript:;" class="btn_social" data-social="naver"><img src="/static/logo/네이버 아이디로 로그인_완성형_Green.PNG" width="100%" height="38px"></a>
+			<br>
+			</div>
+        </div>
+	</div>
+		<!--
+		<form th:action="@{/login}" method="post">
+			<table>
+				<tr><td><input type="text" name="id" placeholder="아이디" autofocus></td></tr>
+				<tr><td><input type="password" name="pw" placeholder="비밀번호"></td></tr>
+				<tr><td style="text-align: right"><input type="submit" value="login"></td></tr>
+			</table>
+		</form>
+		-->
 	<br />
-	<br />
-	<form th:action="@{/login}" method="post">
-		<table>
-			<tr><td>아이디</td><td><input type="text" name="id" autofocus></td></tr>
-			<tr><td>비밀번호</td><td><input type="password" name="pw"></td></tr>
-			<tr><td colspan="2" style="text-align: right"><input type="submit" value="login"></td></tr>
-		</table>
-	</form>
-	<br />
-	<a href="javascript:;" class="btn_social" data-social="google">구글
-		로그인</a>
-	<br />
-	<a href="javascript:;" class="btn_social" data-social="kakao">카카오톡
-		로그인</a>
-	<br />
-	<a href="javascript:;" class="btn_social" data-social="naver">네이버
-		로그인</a>
-	<br />
+	
+	
 	<script> 
 		let socials = document.getElementsByClassName("btn_social");
 		for(let social of socials) {
@@ -34,5 +65,7 @@
 			})
 		} 
 	</script>
-</body>
+	<script src="/static/vendor/jquery/jquery.min.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</main>
 </html>

@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html
+  lang="ko"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout/loginlayout"
+>
 <head>
 <meta charset="UTF-8">
-<title>Title</title>
+<title>비밀번호 초기화</title>
 </head>
-<body>
-	<form th:action="@{/findpw}" th:method="post">
-	<input type="text" id="id" name="id">
-	<input type="submit" value="비밀번호 초기화">
-	<input type="reset" value="다시입력">
-	</form>
-</body>
+<main layout:fragment="content">
+	<div class="hyeok_mid">
+		<div>
+			<div class="form-group">비밀번호 찾기(이메일로 보내드립니다.)</div>
+		</div>
+		<form th:action="@{/findpw}" th:method="post">
+			<input type="text" id="id" name="id" placeholder="아이디를 입력해 주세요">
+			<button type="submit" class="btn btn-primary">비밀번호 초기화</button>
+		</form>
+	</div>
+</main>
 </html>

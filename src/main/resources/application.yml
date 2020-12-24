@@ -29,4 +29,3 @@ spring:
     static-locations:
     - classpath:/static/
     add-mappings: true
-  

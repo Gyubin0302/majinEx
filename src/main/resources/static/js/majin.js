@@ -720,3 +720,137 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};
 		
+		function SearchTerms(){
+			location.href="/";
+		};
+		
+		
+		function SearchTermsHorses(){
+			location.href="/SearchTermsHorses";
+		};
+		
+		function SearchTermsJokey(){
+			location.href="/SearchTermsJokey";
+		};
+		
+		function SearchTermsTrainer(){
+			location.href="/SearchTermsTrainer";
+		};
+		
+		function guideInsert(){
+			location.href="/guideInsert";
+		};
+		
+		
+		function noticefirst(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticeprevious(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticecurrent(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticenext(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticeend(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+		
+		function noticeList() {
+			NoticeBoardPaging(1);
+		}
+		
+
+		function NoticeBoardPaging(pageNo) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeList",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo
+
+				},
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				url : "/noticeList",
+				fragment : "#notice"
+			}, null, null);
+		};
+		
+		
+		function noticesearch(){
+			var tt = $("#noticesearch").val();
+			console.log("tt:" +tt);
+			location.href="/noticeSelect?search="+tt;
+		};
+		
+		
+		function noticesarchfirst(pageNo, search) {
+		NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchprevious(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchcurrent(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchnext(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchend(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+		
+		function noticesarchuideList() {
+			NoticeBoardSelect(1);
+		}
+		
+
+		function NoticeBoardSelect(pageNo,search) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeSelect",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo,
+					"search" : search
+
+				},
+				dataType : "text",
+				async: false,
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				search : search,
+				url : "/noticeSelect",
+				fragment : "#notice"
+			}, null, null);
+		};	
+		
+		

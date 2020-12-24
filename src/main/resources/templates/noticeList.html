@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<!-- Page Content -->
+	<div id="information" class="container">
+		
+		
+		<div id="notice">
+		<form>	
+			<div>
+				<input name="noticesearch" id="noticesearch" type="text" placeholder="검색어를 입력해주세요">
+				 <a class="btn btn-default" role="button" id="nsearchbut" onclick="noticesearch()">검색</a> 
+			</div>
+		</form>
+		<div style="text-align: right;">
+			
+			<a class="btn btn-default" th:href="@{/noticeInsert}" role="button"
+				sec:authorize="hasRole('ROLE_ADMIN')" >작성</a>
+		</div>
+		<div>
+			<table class="table table-hover">
+				<thead style="text-align: center;">
+					<tr>
+						<th style="text-align: center;">순서</th>
+						<th style="text-align: center;">제목</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="data : ${noticeList}"
+						th:onclick="'window.location.href = \'' + @{/noticeDetail/{boardNo}(boardNo=${data.boardNo})} + '\''">
+						<td th:text="${data.boardNo}"
+							style="cursor: pointer; text-align: center;"></td>
+						<td th:text="${data.title}"
+							style="cursor: pointer; text-align: center;"></td>
+							
+					</tr>
+					<tr>
+						<td colspan="2"></td>
+					</tr>	
+				</tbody>
+			</table>
+		</div>
+		<br /> <br /> <br />
+		
+		<div id="noticePaging" class="row justify-content-md-center-paging"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"
+					th:class="${1 == noticePagination.page} ? 'page-item disabled'">
+					<a class="page-link" th:onclick="noticefirst(1)" aria-label="Previous">
+						<span aria-hidden="true">처음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${1 == noticePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="noticeprevious([[${noticePagination.prevBlock}]])"
+					aria-label="Previous"> <span aria-hidden="true">이전</span>
+				</a>
+				</li>
+				<th:block
+					th:with="start = ${noticePagination.startPage}, end = ${noticePagination.endPage}">
+					<li class="page-item"
+						th:with="start = ${noticePagination.startPage}, end = ${noticePagination.endPage}"
+						th:each="pageButton : ${#numbers.sequence(start, end)}"
+						th:class="${pageButton == noticePagination.page} ? 'page-item active'">
+						<a class="page-link" th:onclick="noticecurrent([[${pageButton}]])"
+						th:text=${pageButton} id="page"></a>
+					</li>
+				</th:block>
+				<li class="page-item"
+					th:class="${noticePagination.totalPageCnt == noticePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="noticenext([[${noticePagination.nextBlock}]])"
+					aria-label="Next"> <span aria-hidden="true">다음</span>
+				</a>
+				</li>
+				<li class="page-item"
+					th:class="${noticePagination.totalPageCnt == noticePagination.page} ? 'page-item disabled'">
+					<a class="page-link"
+					th:onclick="noticeend([[${noticePagination.totalPageCnt}]])"
+					aria-label="Previous"> <span aria-hidden="true">끝</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	<!-- /.container -->

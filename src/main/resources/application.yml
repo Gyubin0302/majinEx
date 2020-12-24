@@ -18,36 +18,11 @@ spring:
       file-size-threshold: 1MB
       max-file-size: 100MB
       max-request-size: 100MB
-      location: D:/spring/work/majinEx/src/main/resources/static/fileupload/
+      location: /static/resources/photoUpload/
           
-      
-  jpa:
-    hibernate:
-      ddl-auto: update
-  thymeleaf:
-    cache: false
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
-            client-id: d7aa1a058208ce9c3e3d0a97bf67df5f
-            client-secret: wF0l0wqkhl8f9DQnf3Ha9CvZJ1wfrdUg
-          google:
-            client-id: 812570960299-kqm03pp6rnqguril0571qnek5bo72350.apps.googleusercontent.com
-            client-secret: BoD5YooCzR88LJn-IqhmMPBO
-          naver:
-            client-id: gxPiqw42Ue3RfXQjxDzC
-            client-secret: Uh4x6VI3sh
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: dxb0325@gmail.com
-    password: majin12!@
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      
+  profiles:
+    include: oauth  
+     
   mvc:
     static-path-pattern: static/**
   resources:

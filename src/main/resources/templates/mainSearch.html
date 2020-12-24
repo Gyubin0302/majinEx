@@ -2,7 +2,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
+	
 <div id="information" class="container">
 	<th:block th:unless="${#lists.isEmpty(searchHorse)}">
 	<div id="horseP">
@@ -34,7 +34,7 @@
 				<div class="card-body">
 					<a th:onclick="horseSearchPaging(1,[[${search}]])"> 경주마 정보
 						더보기..</a>
-					<!-- th:datahorse="${searchHorse}" th:onclick="horseSearch(this.getAttribute('datahorse'))" th:href="@{/search/horseSearch(pageNo=1)}" -->
+					
 				</div>
 			</div>
 		</div>

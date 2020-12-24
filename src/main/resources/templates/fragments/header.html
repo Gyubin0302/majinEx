@@ -9,6 +9,7 @@
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+		
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" th:href="@{#none}">공지사항</a>
@@ -49,13 +50,12 @@
 			  </svg> -->
 				</button>
 			</div>
-			
-			<div class="container" id="recommendWord">
-				<th:block th:unless="${#lists.isEmpty(recommendWord)} ">
-					<ul id="recommendList">
-						<li style="list-style: none" th:each="recommend: ${recommendWord}" th:text=${recommend}></li>
-					</ul>
-				</th:block>
+			<div class="container">
+			<div class="row " id="recommendWord">
+				<div id="recommendList" th:each="recommend, index : ${recommendWord}">
+					<div class="col-md-recommend" th:id="G_recommend + ${index.index}" th:text="${recommend}" th:onclick='G_recBtn([[${recommend}]])'></div>
+				</div>
+			</div>
 			</div>
 	   </div>
 	</header>

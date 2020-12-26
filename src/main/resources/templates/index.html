@@ -16,25 +16,21 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 			</ol>
-			<!-- <div class="carousel-inner" role="listbox"> -->
 			<div class="carousel-inner">
-				<!-- Slide One - Set the background image for this slide in the line below -->
 				<div class="carousel-item active"
-					style="background-image: url('static/fileupload/2020120713072060724d18-f060-4548-8cba-6391036e2171.gif')">
+					style="background-image: url('/static/resources/photoUpload/202012211528058dc7ffcb-535b-4c3b-979c-0b5ca94b6b62.PNG')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>초보자 사용가이드</h3>
 						<p>초보자를 위한 경마 가이드</p>
 					</div>
 				</div>
-				<!-- Slide Two - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
-					style="background-image: url('static/fileupload/2020120716152269cf430b-a9f1-4560-99ad-ffb2a20e132a.png')">
+					style="background-image: url('/static/resources/photoUpload/20201224155511b9bda3c6-f028-42b0-85f9-68d13ff1d1b0.PNG')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>공지사항</h3>
 						<p>마진 공지사항</p>
 					</div>
 				</div>
-				<!-- Slide Three - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
 					style="background-image: url('http://placehold.it/1900x1080')">
 					<div class="carousel-caption d-none d-md-block">
@@ -53,17 +49,19 @@
 				</a>
 			</div>
 			<div class="hak">
+			<!-- <div class="young"> -->
 				<div class="col-md-12">
 					<h3 class="my-3">&nbsp&nbsp<a onclick="SearchTerms()">인기 검색어</a></h3>
-					<div class="w3-bar">
-						<button class="w3-button w3-black" onclick="SearchTermsHorses()" >경주마</button>
-						<button class="w3-button w3-black" onclick="SearchTermsJokey()">기수</button>
-						<button class="w3-button w3-black" onclick="SearchTermsTrainer()">조교사</button>
+					<div class="w3-bar w3-black">
+						<button class="button3" onclick="SearchTermsHorses()" >경주마</button>
+						<button class="button3" onclick="SearchTermsJokey()">기수</button>
+						<button class="button3" onclick="SearchTermsTrainer()">조교사</button>
 					</div>
-					<div class="col-md-12" th:each="data, index : ${SearchTermsList}">
+					<div class="young" id="young" th:each="data, index : ${SearchTermsList}">
 						<div th:text="${index.count}+'.&nbsp'+${data.searchword}"></div>
 					</div>
 				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>

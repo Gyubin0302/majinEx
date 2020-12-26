@@ -27,7 +27,6 @@ public class MainController {
 
 		List<SearchTermsDto> SearchTermsList = new ArrayList<>();
 		SearchTermsList = searchtermsservice.getSearchtermsList();
-		System.out.println("통합 실검 :"+SearchTermsList);
 		model.addAttribute("SearchTermsList", SearchTermsList);
 
 		return "/index";
@@ -39,7 +38,6 @@ public class MainController {
 
 		List<SearchTermsDto> SearchTermsList = new ArrayList<>();
 		SearchTermsList = searchtermsservice.getSearchTermsHoreseList();
-		System.out.println("말실검 나와라~" + SearchTermsList);
 		model.addAttribute("SearchTermsList", SearchTermsList);
 
 		return "index";
@@ -51,7 +49,6 @@ public class MainController {
 
 		List<SearchTermsDto> SearchTermsList = new ArrayList<>();
 		SearchTermsList = searchtermsservice.getSearchTermsJockeyList();
-		System.out.println("기수실검 나와라~" + SearchTermsList);
 		model.addAttribute("SearchTermsList", SearchTermsList);
 
 		return "index";

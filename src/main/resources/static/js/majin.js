@@ -451,57 +451,6 @@ let token = $("meta[name='_csrf']").attr("content");
 					});
 		    	 }
 		    }); 
-		    
-		    	function gfirst(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gprevious(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gcurrent(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gnext(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gend(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-		
-		function guideList() {
-			GuideBoardPaging(1);
-		}
-		
-		
-		
-
-		function GuideBoardPaging(pageNo) {
-			$.ajax({
-				url : "/guideList",
-				type : "POST",
-				data : {
-					"pageNo" : pageNo
-
-				},
-				dataType : "text",
-				success : function(retVal) {
-					$("#information").val("");
-					$("#information").replaceWith(retVal);
-				},
-				error : function(retVal) {
-					alert("error");
-				}
-			});
-			history.pushState({
-				pageNo : pageNo,
-				url : "/guideList",
-				fragment : "#guide"
-			}, null, null);
-		};
 		
 		$("#multiSearchBtn").click(function(){
 			$.ajax({
@@ -610,23 +559,23 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};
 		
-			function gfirst(pageNo) {
-		GuideBoardPaging(pageNo);
-		}
-
-		function gprevious(pageNo) {
+		function guidefirst(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gcurrent(pageNo) {
+		function guideprevious(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gnext(pageNo) {
+		function guidecurrent(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gend(pageNo) {
+		function guidenext(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function guideend(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 		
@@ -659,32 +608,31 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};
 		
-		function gsearch(){
+		function guidesearch(){
 			var tb = $("#gsearch").val();
-			var tb2 = $("gsearchType").val();
 			console.log("tb:" +tb);
-			console.log("tb2:" +tb2);
-			location.href="/guideSelect?search="+tb&tb2;
+			//console.log("tb2:" +tb2);
+			location.href="/guideSelect?search="+tb;
 		};
 		
 		
-		function gsfirst(pageNo, search) {
+		function guidesearchfirst(pageNo, search) {
 		GuideBoardSelect(pageNo, search);
 		}
 
-		function gsprevious(pageNo, search) {
+		function guidesearchprevious(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gscurrent(pageNo, search) {
+		function guidesearchcurrent(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gsnext(pageNo, search) {
+		function guidesearchnext(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gsend(pageNo, search) {
+		function guidesearchend(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 		
@@ -737,6 +685,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			location.href="/SearchTermsTrainer";
 		};
 		
+		
 		function guideInsert(){
 			location.href="/guideInsert";
 		};
@@ -766,6 +715,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			NoticeBoardPaging(1);
 		}
 		
+	
 
 		function NoticeBoardPaging(pageNo) {
 			console.log("test");

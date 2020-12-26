@@ -9,7 +9,7 @@
 		<form>	
 			<div>
 				<input name="gsearch" id="gsearch" type="text" placeholder="검색어를 입력해주세요">
-				 <a class="btn btn-default" role="button" id="gsearchbut" onclick="gsearch()">검색</a> 
+				 <a class="btn btn-default" role="button" id="gsearchbut" onclick="guidesearch()">검색</a> 
 			</div>
 		</form>
 		<div style="text-align: right;">
@@ -32,8 +32,6 @@
 							style="cursor: pointer; text-align: center;"></td>
 						<td th:text="${data.title}"
 							style="cursor: pointer; text-align: center;"></td>
-						<!-- <td th:utext="${data.content}"
-							style="cursor: pointer; text-align: center;"></td> -->
 
 					</tr>
 					<tr>
@@ -49,14 +47,14 @@
 			<ul class="pagination">
 				<li class="page-item"
 					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
-					<a class="page-link" th:onclick="gsfirst(1,[[${guidePagination.search}]])" aria-label="Previous">
+					<a class="page-link" th:onclick="guidesearchfirst(1,[[${guidePagination.search}]])" aria-label="Previous">
 						<span aria-hidden="true">처음</span>
 				</a>
 				</li>
 				<li class="page-item"
 					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gsprevious([[${guidePagination.prevBlock}]],[[${guidePagination.search}]])"
+					th:onclick="guidesearchprevious([[${guidePagination.prevBlock}]],[[${guidePagination.search}]])"
 					aria-label="Previous"> <span aria-hidden="true">이전</span>
 				</a>
 				</li>
@@ -66,21 +64,21 @@
 						th:with="start = ${guidePagination.startPage}, end = ${guidePagination.endPage}"
 						th:each="pageButton : ${#numbers.sequence(start, end)}"
 						th:class="${pageButton == guidePagination.page} ? 'page-item active'">
-						<a class="page-link" th:onclick="gscurrent([[${pageButton}]],[[${guidePagination.search}]])"
+						<a class="page-link" th:onclick="guidesearchcurrent([[${pageButton}]],[[${guidePagination.search}]])"
 						th:text=${pageButton} id="page"></a>
 					</li>
 				</th:block>
 				<li class="page-item"
 					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gsnext([[${guidePagination.nextBlock}]],[[${guidePagination.search}]])"
+					th:onclick="guidesearchnext([[${guidePagination.nextBlock}]],[[${guidePagination.search}]])"
 					aria-label="Next"> <span aria-hidden="true">다음</span>
 				</a>
 				</li>
 				<li class="page-item"
 					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gsend([[${guidePagination.totalPageCnt}]],[[${guidePagination.search}]])"
+					th:onclick="guidesearchend([[${guidePagination.totalPageCnt}]],[[${guidePagination.search}]])"
 					aria-label="Previous"> <span aria-hidden="true">끝</span>
 				</a>
 				</li>

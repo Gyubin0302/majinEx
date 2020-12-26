@@ -49,17 +49,19 @@
 				</a>
 			</div>
 			<div class="hak">
+			<!-- <div class="young"> -->
 				<div class="col-md-12">
 					<h3 class="my-3">&nbsp&nbsp<a onclick="SearchTerms()">인기 검색어</a></h3>
-					<div class="w3-bar">
-						<button class="w3-button w3-black" onclick="SearchTermsHorses()" >경주마</button>
-						<button class="w3-button w3-black" onclick="SearchTermsJokey()">기수</button>
-						<button class="w3-button w3-black" onclick="SearchTermsTrainer()">조교사</button>
+					<div class="w3-bar w3-black">
+						<button class="button3" onclick="SearchTermsHorses()" >경주마</button>
+						<button class="button3" onclick="SearchTermsJokey()">기수</button>
+						<button class="button3" onclick="SearchTermsTrainer()">조교사</button>
 					</div>
-					<div class="col-md-12" th:each="data, index : ${SearchTermsList}">
+					<div class="young" id="young" th:each="data, index : ${SearchTermsList}">
 						<div th:text="${index.count}+'.&nbsp'+${data.searchword}"></div>
 					</div>
 				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>

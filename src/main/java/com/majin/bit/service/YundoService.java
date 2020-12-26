@@ -22,7 +22,6 @@ public class YundoService {
 		List<YundoDto> yundos = yundoCrawling.yundoCrwaling(meet);
 
 		for (YundoDto yundo : yundos) {
-			System.out.println(yundo);
 			yundoDao.save(yundo);
 		}
 	}
@@ -31,7 +30,6 @@ public class YundoService {
 		YundoJpaKey yundoJpaKey = new YundoJpaKey();
 		yundoJpaKey.setMeet(meet);
 		List<YundoDto> yundos = yundoDao.findAllByYundoJpaKey(yundoJpaKey);
-		System.out.println(yundos);
 		return yundos;
 	}
 	
@@ -51,7 +49,6 @@ public class YundoService {
 			for(int j=0;j<list[i].length;j++) {
 				System.out.print(list[i][j]+"\t");
 			}
-			System.out.println();
 		}
 		return list;
 	}

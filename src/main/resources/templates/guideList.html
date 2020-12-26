@@ -10,8 +10,8 @@
 		<form>
 			<div>
 				<input name="gsearch" id="gsearch" type="text"
-					placeholder="검색어를 입력해주세요"> <a class="btn btn-default"
-					role="button" id="gsearchbut" onclick="gsearch()">검색</a>
+					placeholder="검색어를 입력해주세요"> 
+					<a class="btn btn-default" role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
 			</div>
 		</form>
 		<div style="text-align: right;">
@@ -44,19 +44,21 @@
 
 			</table>
 		</div>
-		<div id="horsePaging" class="row justify-content-md-center-paging"
+		<br /> <br /> <br />
+		
+		<div id="guidePaging" class="row justify-content-md-center-paging"
 			aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item"
 					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
-					<a class="page-link" th:onclick="gfirst(1)" aria-label="Previous">
+					<a class="page-link" th:onclick="guidefirst(1)" aria-label="Previous">
 						<span aria-hidden="true">처음</span>
 				</a>
 				</li>
 				<li class="page-item"
 					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gprevious([[${guidePagination.prevBlock}]])"
+					th:onclick="guideprevious([[${guidePagination.prevBlock}]])"
 					aria-label="Previous"> <span aria-hidden="true">이전</span>
 				</a>
 				</li>
@@ -66,21 +68,21 @@
 						th:with="start = ${guidePagination.startPage}, end = ${guidePagination.endPage}"
 						th:each="pageButton : ${#numbers.sequence(start, end)}"
 						th:class="${pageButton == guidePagination.page} ? 'page-item active'">
-						<a class="page-link" th:onclick="gcurrent([[${pageButton}]])"
+						<a class="page-link" th:onclick="guidecurrent([[${pageButton}]])"
 						th:text=${pageButton} id="page"></a>
 					</li>
 				</th:block>
 				<li class="page-item"
 					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gnext([[${guidePagination.nextBlock}]])"
+					th:onclick="guidenext([[${guidePagination.nextBlock}]])"
 					aria-label="Next"> <span aria-hidden="true">다음</span>
 				</a>
 				</li>
 				<li class="page-item"
 					th:class="${guidePagination.totalPageCnt == guidePagination.page} ? 'page-item disabled'">
 					<a class="page-link"
-					th:onclick="gend([[${guidePagination.totalPageCnt}]])"
+					th:onclick="guideend([[${guidePagination.totalPageCnt}]])"
 					aria-label="Previous"> <span aria-hidden="true">끝</span>
 				</a>
 				</li>
@@ -88,4 +90,4 @@
 		</div>
 	</div>
 </div>
-<!-- /.container -->
+	<!-- /.container -->

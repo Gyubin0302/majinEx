@@ -32,12 +32,6 @@ public class OAuth2Controller {
 	@Autowired
 	private MemberService memberService;
 
-	@GetMapping({ "", "/" })
-	public String index() {
-
-		return "index";
-	}
-
 	@GetMapping("/home")
 	public String home() {
 		return "home";

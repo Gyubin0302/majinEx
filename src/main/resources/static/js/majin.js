@@ -453,57 +453,6 @@ let token = $("meta[name='_csrf']").attr("content");
 					});
 		    	 }
 		    }); 
-		    
-		    	function gfirst(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gprevious(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gcurrent(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gnext(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-
-		function gend(pageNo) {
-			GuideBoardPaging(pageNo);
-		}
-		
-		function guideList() {
-			GuideBoardPaging(1);
-		}
-		
-		
-		
-
-		function GuideBoardPaging(pageNo) {
-			$.ajax({
-				url : "/guideList",
-				type : "POST",
-				data : {
-					"pageNo" : pageNo
-
-				},
-				dataType : "text",
-				success : function(retVal) {
-					$("#information").val("");
-					$("#information").replaceWith(retVal);
-				},
-				error : function(retVal) {
-					alert("error");
-				}
-			});
-			history.pushState({
-				pageNo : pageNo,
-				url : "/guideList",
-				fragment : "#guide"
-			}, null, null);
-		};
 		
 		$("#multiSearchBtn").click(function(){
 			$.ajax({
@@ -612,23 +561,23 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};
 		
-			function gfirst(pageNo) {
-		GuideBoardPaging(pageNo);
-		}
-
-		function gprevious(pageNo) {
+		function guidefirst(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gcurrent(pageNo) {
+		function guideprevious(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gnext(pageNo) {
+		function guidecurrent(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 
-		function gend(pageNo) {
+		function guidenext(pageNo) {
+			GuideBoardPaging(pageNo);
+		}
+
+		function guideend(pageNo) {
 			GuideBoardPaging(pageNo);
 		}
 		
@@ -661,32 +610,31 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};
 		
-		function gsearch(){
+		function guidesearch(){
 			var tb = $("#gsearch").val();
-			var tb2 = $("gsearchType").val();
 			console.log("tb:" +tb);
-			console.log("tb2:" +tb2);
-			location.href="/guideSelect?search="+tb&tb2;
+			//console.log("tb2:" +tb2);
+			location.href="/guideSelect?search="+tb;
 		};
 		
 		
-		function gsfirst(pageNo, search) {
+		function guidesearchfirst(pageNo, search) {
 		GuideBoardSelect(pageNo, search);
 		}
 
-		function gsprevious(pageNo, search) {
+		function guidesearchprevious(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gscurrent(pageNo, search) {
+		function guidesearchcurrent(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gsnext(pageNo, search) {
+		function guidesearchnext(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 
-		function gsend(pageNo, search) {
+		function guidesearchend(pageNo, search) {
 			GuideBoardSelect(pageNo, search);
 		}
 		
@@ -721,4 +669,140 @@ let token = $("meta[name='_csrf']").attr("content");
 				fragment : "#guide"
 			}, null, null);
 		};
+		
+		function SearchTerms(){
+			location.href="/";
+		};
+		
+		
+		function SearchTermsHorses(){
+			location.href="/SearchTermsHorses";
+		};
+		
+		function SearchTermsJokey(){
+			location.href="/SearchTermsJokey";
+		};
+		
+		function SearchTermsTrainer(){
+			location.href="/SearchTermsTrainer";
+		};
+		
+		
+		function guideInsert(){
+			location.href="/guideInsert";
+		};
+		
+		
+		function noticefirst(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticeprevious(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticecurrent(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticenext(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+
+		function noticeend(pageNo) {
+			NoticeBoardPaging(pageNo);
+		}
+		
+		function noticeList() {
+			NoticeBoardPaging(1);
+		}
+		
+	
+
+		function NoticeBoardPaging(pageNo) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeList",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo
+
+				},
+				dataType : "text",
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				url : "/noticeList",
+				fragment : "#notice"
+			}, null, null);
+		};
+		
+		
+		function noticesearch(){
+			var tt = $("#noticesearch").val();
+			console.log("tt:" +tt);
+			location.href="/noticeSelect?search="+tt;
+		};
+		
+		
+		function noticesarchfirst(pageNo, search) {
+		NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchprevious(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchcurrent(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchnext(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+
+		function noticesarchend(pageNo, search) {
+			NoticeBoardSelect(pageNo, search);
+		}
+		
+		function noticesarchuideList() {
+			NoticeBoardSelect(1);
+		}
+		
+
+		function NoticeBoardSelect(pageNo,search) {
+			console.log("test");
+			$.ajax({
+				url : "/noticeSelect",
+				type : "GET",
+				data : {
+					"pageNo" : pageNo,
+					"search" : search
+
+				},
+				dataType : "text",
+				async: false,
+				success : function(retVal) {
+					$("#information").val("");
+					$("#information").replaceWith(retVal);
+				},
+				error : function(retVal) {
+					alert("error");
+				}
+			});
+			history.pushState({
+				pageNo : pageNo,
+				search : search,
+				url : "/noticeSelect",
+				fragment : "#notice"
+			}, null, null);
+		};	
+		
 		

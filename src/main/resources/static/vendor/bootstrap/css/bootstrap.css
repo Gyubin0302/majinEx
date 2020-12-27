@@ -10151,7 +10151,6 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .hak {
-	position: absolute;
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 	max-width: 100%;

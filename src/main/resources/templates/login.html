@@ -17,7 +17,7 @@
 	    <div class="col-4 hyeok-lg">
 	    <br/><br/>
             <div>
-                <div class="form-group">Margin</div>
+                <div class="form-group">Margin 로그인</div>
             </div>
             <div>
                 <form th:action="@{/login}" method="post">
@@ -28,10 +28,10 @@
                         <input type="password" class="form-control form-group" name="pw" placeholder="비밀번호">
                     </div>
                     <div>
-                        <button type="submit" class="form-control btn btn-primary form-group">로그인</button>
+                        <button type="submit" class="form-control btn btn-primary">로그인</button>
                     </div>
                     <div>
-                        <button type="button" class="form-control btn btn-primary form-group" onclick="location.href='/findpw'">비밀번호 찾기</button>
+                        <button type="button" class="form-control btn btn-secondary form-group" onclick="location.href='/findpw'">비밀번호 찾기</button>
                     </div>
                 </form>
             </div>
@@ -55,7 +55,6 @@
 		</form>
 		-->
 	<br />
-	
 	
 	<script> 
 		let socials = document.getElementsByClassName("btn_social");

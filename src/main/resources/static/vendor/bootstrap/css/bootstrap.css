@@ -1783,7 +1783,7 @@ pre code {
 }
 
 .table {
-	width: 80%;
+	width: 100%;
 	margin-bottom: 1rem;
 	color: #212529;
 	/*background-color: rgba(86, 61, 124, 0.15);*/
@@ -6597,8 +6597,8 @@ a.close.disabled {
 
 .carousel-inner {
 	position: relative;
-	width: 70%;
-	margin-left: 5%;
+	width: 60%;
+	margin-left: 20%;
 	overflow: hidden;
 	display: inline-block;
 }
@@ -10151,11 +10151,14 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .hak {
-	-ms-flex: 0 0 100%;
+	position: relative;
+	/* -ms-flex: 0 0 100%;
 	flex: 0 0 100%;
-	max-width: 100%;
-	margin-top: 2%;
-	margin-left: 3%;
+	max-width: 100%; */
+	width: 15%;
+	margin-left: 2.5%;
+	margin-top: 4%;
+	vertical-align: top;
 	display: inline-block;
 	border: 3px solid rgba(33, 37, 41, 0.3);
 }
@@ -10164,7 +10167,7 @@ a.text-dark:hover, a.text-dark:focus {
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 	max-width: 100%;
-	padding: .5rem 1rem;
+	padding: .3rem 1rem;
 	background-color: #fff;
 }
 .button3 {

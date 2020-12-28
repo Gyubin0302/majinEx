@@ -20,24 +20,24 @@
 				<div class="carousel-item active"
 					style="background-image: url('/static/resources/photoUpload/202012211528058dc7ffcb-535b-4c3b-979c-0b5ca94b6b62.PNG')">
 					<div class="carousel-caption d-none d-md-block">
-						<h3>초보자 사용가이드</h3>
-						<p>초보자를 위한 경마 가이드</p>
+						<!-- <h3>초보자 사용가이드</h3>
+						<p>초보자를 위한 경마 가이드</p> -->
 					</div>
 				</div>
 				<div class="carousel-item"
 					style="background-image: url('/static/resources/photoUpload/20201224155511b9bda3c6-f028-42b0-85f9-68d13ff1d1b0.PNG')">
 					<div class="carousel-caption d-none d-md-block">
-						<h3>공지사항</h3>
-						<p>마진 공지사항</p>
+						<!-- <h3>공지사항</h3>
+						<p>마진 공지사항</p> -->
 					</div>
 				</div>
-				<div class="carousel-item"
+				<!-- <div class="carousel-item"
 					style="background-image: url('http://placehold.it/1900x1080')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>Third Slide</h3>
 						<p>This is a description for the third slide.</p>
 					</div>
-				</div>
+				</div> -->
 				<a class="carousel-control-prev" href="#carouselExampleIndicators"
 					role="button" data-slide="prev"> <span
 					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
@@ -53,9 +53,9 @@
 				<div class="col-12">
 					<h3 class="my-3">&nbsp&nbsp<a onclick="SearchTerms()">인기 검색어</a></h3>
 					<div class="w3-bar w3-black">
-						<button class="button3" onclick="SearchTermsHorses()" >경주마</button>
-						<button class="button3" onclick="SearchTermsJokey()">기수</button>
-						<button class="button3" onclick="SearchTermsTrainer()">조교사</button>
+						<button class="btn btn-dark" onclick="SearchTermsHorses()" >경주마</button>
+						<button class="btn btn-dark" onclick="SearchTermsJokey()">기수</button>
+						<button class="btn btn-dark" onclick="SearchTermsTrainer()">조교사</button>
 					</div>
 					<div class="young" id="young" th:each="data, index : ${SearchTermsList}">
 						<div th:text="${index.count}+'.&nbsp'+${data.searchword}"></div>

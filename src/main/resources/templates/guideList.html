@@ -11,11 +11,11 @@
 			<div>
 				<input name="gsearch" id="gsearch" type="text"
 					placeholder="검색어를 입력해주세요"> 
-					<a class="btn btn-default" role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
+					<a class="btn btn-dark" role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
 			</div>
 		</form>
 		<div style="text-align: right;">
-			<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
+			<a class="btn btn-dark" th:href="@{/guideInsert}" role="button"
 				sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
 		</div>
 		<div>

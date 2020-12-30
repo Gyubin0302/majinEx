@@ -8,18 +8,22 @@
 <div id="information" class="container">
 	<div id="guide">
 		<form>
-			<div>
+			<div style="display: inline-block;">
 				<input name="gsearch" id="gsearch" type="text"
-					placeholder="검색어를 입력해주세요"> 
-					<a class="btn btn-dark" role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
+					placeholder="검색어를 입력해주세요"> <a class="btn btn-dark"
+					role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
+			</div>
+			<div style="display: inline-block;">
+				<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
+					sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
 			</div>
 		</form>
-		<div style="text-align: right;">
-			<a class="btn btn-dark" th:href="@{/guideInsert}" role="button"
+		<div style="display: inline-block;">
+			<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
 				sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
 		</div>
 		<div>
-			<table class="table table-hover">
+			<table class="table table-hover" style="margin: auto;">
 				<thead style="text-align: center;">
 					<tr>
 						<th style="text-align: center;">순서</th>
@@ -37,22 +41,19 @@
 							style="cursor: pointer; text-align: center;"></td> -->
 
 					</tr>
-					<tr>
-						<td colspan="2"></td>
-					</tr>
 				</tbody>
 
 			</table>
 		</div>
 		<br /> <br /> <br />
-		
+
 		<div id="guidePaging" class="row justify-content-md-center-paging"
 			aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item"
 					th:class="${1 == guidePagination.page} ? 'page-item disabled'">
-					<a class="page-link" th:onclick="guidefirst(1)" aria-label="Previous">
-						<span aria-hidden="true">처음</span>
+					<a class="page-link" th:onclick="guidefirst(1)"
+					aria-label="Previous"> <span aria-hidden="true">처음</span>
 				</a>
 				</li>
 				<li class="page-item"
@@ -90,4 +91,4 @@
 		</div>
 	</div>
 </div>
-	<!-- /.container -->
+<!-- /.container -->

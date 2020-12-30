@@ -8,18 +8,17 @@
 		
 		<div id="notice">
 		<form>	
-			<div>
+			<div style="display: inline-block;">
 				<input name="noticesearch" id="noticesearch" type="text" placeholder="검색어를 입력해주세요">
 				 <a class="btn btn-default" role="button" id="nsearchbut" onclick="noticesearch()">검색</a> 
 			</div>
-		</form>
-		<div style="text-align: right;">
-			
+		<div style="display: inline-block;">
 			<a class="btn btn-default" th:href="@{/noticeInsert}" role="button"
 				sec:authorize="hasRole('ROLE_ADMIN')" >작성</a>
 		</div>
+		</form>
 		<div>
-			<table class="table table-hover">
+			<table class="table table-hover" style="margin: auto;">
 				<thead style="text-align: center;">
 					<tr>
 						<th style="text-align: center;">순서</th>
@@ -33,11 +32,7 @@
 							style="cursor: pointer; text-align: center;"></td>
 						<td th:text="${data.title}"
 							style="cursor: pointer; text-align: center;"></td>
-							
 					</tr>
-					<tr>
-						<td colspan="2"></td>
-					</tr>	
 				</tbody>
 			</table>
 		</div>

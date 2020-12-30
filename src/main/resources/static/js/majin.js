@@ -94,7 +94,7 @@ let token = $("meta[name='_csrf']").attr("content");
 			});
 	
 			function horseDetail(hrNo, meet, search, pageNo) {
-
+				if(hrNo != 0){
 				$.ajax({
 					url : "/search/detail/horseDetail",
 					type : "POST",
@@ -119,11 +119,11 @@ let token = $("meta[name='_csrf']").attr("content");
 						 meet : meet,
 						 hrNo : hrNo},
 						 null, null);
-	
+				}
 			}
 	
 			function trainerDetail(trNo, meet, search, pageNo) {
-
+				if(trNo!=0){
 				$.ajax({
 					url : "/search/detail/trainerDetail",
 					type : "POST",
@@ -148,10 +148,11 @@ let token = $("meta[name='_csrf']").attr("content");
 						 meet : meet,
 						 trNo : trNo},
 						 null, null);
+				}
 			}
 	
 			function jockeyDetail(jkNo, meet, search, pageNo) {
-
+				if(jkNo!=0){
 				$.ajax({
 					url : "/search/detail/jockeyDetail",
 					type : "POST",
@@ -176,6 +177,7 @@ let token = $("meta[name='_csrf']").attr("content");
 						 meet : meet,
 						 jkNo : jkNo},
 						 null, null);
+				}
 			}
 			
 			function yundo() {

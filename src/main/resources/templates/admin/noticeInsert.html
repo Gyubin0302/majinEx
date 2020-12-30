@@ -5,30 +5,31 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
-	<div>
+	<div class="lololo">
 		<form role="form" th:object=${noticeDto}
 			th:action="@{/noticeInsertProc}" method="POST"
 			enctype="multipart/form-data" id="noticeInsertForm">
-			<div>
+			<br />
+			<div class="younghak">
 				<label for="title" style="font-weight: bolder">제목</label> <input
-					type="text" th:field="*{title}" id="title"
+					type="text" th:field="*{title}" id="title" style="width:730px;height:30px;"
 					placeholder="제목을 입력하세요!!!" required="required">
 			</div>
 
-			<div style="font-weight: bolder">
+			<div class="hakyoung">
 				<textarea name="content" id="content" rows="10" cols="100"
 					style="width: 766px; height: 412px; display: inline;"
 					th:field="*{content}" placeholder="내용을 입력하세욥~!"></textarea>
 			</div>
-
-			<div style="text-align: right;">
-				<input type="submit" th:value="목록" th:formaction="@{/noticeList}">
-				<input type="button" id="info_chk2" th:value="작성" > 
-				 <input type="submit" th:value="취소">
+			<br /> <br />
+			<div style="text-align: center;">
+				<input class="btn-dark" type="submit" th:value="목록" th:formaction="@{/noticeList}">
+				<input class="btn-dark" type="button" id="info_chk2" th:value="작성" > 
+				<input class="btn-dark" type="submit" th:value="취소">
 			</div>
 		</form>
 	</div>
-	<br /> <br /> <br />
+	<br /> <br />
 </main>
 <th:block layout:fragment="script">
 	

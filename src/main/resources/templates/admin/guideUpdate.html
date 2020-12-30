@@ -5,8 +5,8 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
-		<div>
-			<div>
+		<div class="lololo">
+			
 				<form role="form" th:object="${guideDto}" th:action="@{/static/sample/viewer/index.php}" method="POST" enctype="multipart/form-data" onsubmit="return info_chk()">
 					<div class="younghak">
 						<label for="title" style="font-weight: bolder;">제목</label>
@@ -29,7 +29,7 @@
 				</form>
 			</div>
 		<br/><br/>
-		</div>
+		
 	</main>
 <th:block layout:fragment="script">
 	<script>

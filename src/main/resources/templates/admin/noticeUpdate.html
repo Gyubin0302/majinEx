@@ -5,23 +5,24 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout">
 <main layout:fragment="content">
-		<div>		
+		<div class="lololo">
+		<br/>	
 			<div>
 				<form role="form" th:object="${noticeDto}" th:action="@{/static/sample/viewer/index.php}" method="POST" enctype="multipart/form-data" onsubmit="return info_chk()">
-					<div>
+					<div class="younghak">
 						<label for="title" style="font-weight: bolder;">제목</label>
-						<input type="text" id="title" name="title" th:value="${detail.title}">
+						<input type="text" id="title" name="title" style="width:730px;height:30px;" th:value="${detail.title}">
 					</div>
-					
-				 	<div style="font-weight: bolder">
+					<br/>
+				 	<div class="hakyoung">
 						<textarea name="content" id="content" rows="10" cols="100"
 								  style="width: 766px; height: 412px; display: none;"
 							  	  placeholder="내용을 입력하세욥~!">
 						[[${detail.content}]]
 						</textarea>
 					</div> 
-					
-					<div style="text-align: right;">
+					<br/>
+					<div style="text-align: center;">
 						<input type="hidden" name="boardNo" th:value="${detail.boardNo}">
 						<input type="submit" th:value="목록" th:formaction="@{/noticeList}">
 						<input type="submit" th:value="저장 " sec:authorize="hasRole('ROLE_ADMIN')" onclick='return info_chk2(this.form);'>   

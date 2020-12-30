@@ -10172,10 +10172,26 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .younghak{
-	margin-left	: 30%;
+	/* margin-left	: 30%; */
 }
 
 .hakyoung{
-	margin-left	: 30%;
+	 margin-left: 30%;
+	 
 }
+
+.copi{
+	position: relative;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	-ms-flex: 0 0 71.666667%;
+	flex: 0 0 71.666667%;
+	max-width: 71.666667%;
+}
+
+.lololo{
+	text-align: center;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

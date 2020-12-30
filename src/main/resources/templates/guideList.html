@@ -13,16 +13,12 @@
 					placeholder="검색어를 입력해주세요"> <a class="btn btn-dark"
 					role="button" id="gsearchbut" onclick="guidesearch()">검색</a>
 			</div>
+			<div class="copi" style="display: inline-block;"></div>
 			<div style="display: inline-block;">
-				<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
+				<a class="btn btn-dark" th:href="@{/guideInsert}" role="button"
 					sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
 			</div>
 		</form>
-		<div style="display: inline-block;">
-			<a class="btn btn-default" th:href="@{/guideInsert}" role="button"
-				sec:authorize="hasRole('ROLE_ADMIN')">작성</a>
-		</div>
-		<div>
 			<table class="table table-hover" style="margin: auto;">
 				<thead style="text-align: center;">
 					<tr>

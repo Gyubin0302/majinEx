@@ -10,10 +10,11 @@
 		<form>	
 			<div style="display: inline-block;">
 				<input name="noticesearch" id="noticesearch" type="text" placeholder="검색어를 입력해주세요">
-				 <a class="btn btn-default" role="button" id="nsearchbut" onclick="noticesearch()">검색</a> 
+				 <a class="btn btn-dark" role="button" id="nsearchbut" onclick="noticesearch()">검색</a> 
 			</div>
+			<div class="copi" style="display: inline-block;"></div>
 		<div style="display: inline-block;">
-			<a class="btn btn-default" th:href="@{/noticeInsert}" role="button"
+			<a class="btn btn-dark" th:href="@{/noticeInsert}" role="button"
 				sec:authorize="hasRole('ROLE_ADMIN')" >작성</a>
 		</div>
 		</form>

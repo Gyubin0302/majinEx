@@ -22,10 +22,11 @@
 						<span th:utext=${detail.content}></span>
 						<!-- <input type="hidden" th:field="${detail.content}"> -->
 					</div>
-					 <div style="text-align: right;">
-						<input type="submit" th:value="목록" th:formaction="@{/noticeList}">
-						<input type="submit" th:value="수정" th:formaction="@{/noticeUpdate/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
-						<input type="submit" th:value="삭제" th:formaction="@{/noticeDelete/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+					<br/><br/>
+					<div style="text-align: center;">
+						<input class="btn-dark" type="submit" th:value="목록" th:formaction="@{/noticeList}">
+						<input class="btn-dark" type="submit" th:value="수정" th:formaction="@{/noticeUpdate/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+						<input class="btn-dark" type="submit" th:value="삭제" th:formaction="@{/noticeDelete/{boardNo} (boardNo=${detail.boardNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
 					</div> 
 				</form>
 			</div>

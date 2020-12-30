@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.majin.bit.dto.Member" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/Member.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8419" y="1111"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.majin.bit.service.HorseService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/HorseService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8814" y="273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.majin.bit.dto.Pagination" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/Pagination.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8674" y="1106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.majin.bit.service.TrainerService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/TrainerService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8525" y="270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.majin.bit.util.YundoCrawling" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/YundoCrawling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8475" y="704"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.majin.bit.dto.JkDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/JkDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8910" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.majin.bit.util.TrainerCrawling" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/TrainerCrawling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9473" y="551"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.majin.bit.dao.HorseDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/HorseDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8813" y="544"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" language="java" name="com.majin.bit.dao.TrainerDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/TrainerDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8525" y="544"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="com.majin.bit.configuration.ExceptionHandlerFilter" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/configuration/ExceptionHandlerFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10356" y="772"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="com.majin.bit.dao.MemberDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/MemberDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10125" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="com.majin.bit.service.CustomOAuth2UserService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/CustomOAuth2UserService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9907" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="13" language="java" name="com.majin.bit.security.SocialType" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/security/SocialType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9709" y="416"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="14" language="java" name="com.majin.bit.dto.YundoDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/YundoDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8148" y="993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="com.majin.bit.dao.RaceHorseDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/RaceHorseDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7934" y="526"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="com.majin.bit.service.GuideService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/GuideService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11064" y="179"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="17" language="java" name="com.majin.bit.dao.MailDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/MailDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10466" y="322"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="18" language="java" name="com.majin.bit.dto.HorseDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/HorseDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9516" y="1087"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.majin.bit.dto.RaceHorseDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/RaceHorseDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9116" y="1218"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.majin.bit.util.RcDateCrawling" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/RcDateCrawling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8139" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.majin.bit.dto.MailDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/MailDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9756" y="1126"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.majin.bit.controller.NoticeController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/NoticeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10780" y="533"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.majin.bit.dto.NoticeDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/NoticeDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9942" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.majin.bit.dto.MultiSearchRaceDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/MultiSearchRaceDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9302" y="1084"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.majin.bit.service.SearchTermsService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/SearchTermsService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9477" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.majin.bit.service.jockeyService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/jockeyService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8244" y="270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.majin.bit.controller.AdminController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/AdminController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8585" y="-186"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.majin.bit.dto.SearchTermsDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/SearchTermsDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10127" y="1119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.majin.bit.dto.TrDtoId" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/TrDtoId.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8315" y="708"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.majin.bit.service.RaceHorseService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/RaceHorseService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7946" y="252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.majin.bit.service.MemberService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/MemberService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10166" y="100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.majin.bit.controller.SearchController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/SearchController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9052" y="-163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="com.majin.bit.dao.JockeyDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/JockeyDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8244" y="544"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="34" language="java" name="com.majin.bit.dao.SearchTermsDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/SearchTermsDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9467" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="35" language="java" name="com.majin.bit.Word2VecTest1Application" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/Word2VecTest1Application.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10334" y="1159"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="com.majin.bit.dao.NoticeDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/NoticeDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10015" y="540"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="37" language="java" name="com.majin.bit.dao.SearchDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/SearchDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9145" y="548"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="com.majin.bit.service.MailService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/MailService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10482" y="111"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="39" language="java" name="com.majin.bit.dao.YundoDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/YundoDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10752" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="40" language="java" name="com.majin.bit.dto.HorseDtoId" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/HorseDtoId.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10493" y="1181"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.majin.bit.controller.Wrod2VecController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/Wrod2VecController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10331" y="1306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="com.majin.bit.dto.FileDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/FileDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10329" y="1004"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="com.majin.bit.dto.JkDtoId" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/JkDtoId.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10490" y="1008"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.majin.bit.configuration.DBConfiguration" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/configuration/DBConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8421" y="1516"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="com.majin.bit.service.YundoService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/YundoService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10742" y="64"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.majin.bit.dto.MemberDTO" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/MemberDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7939" y="952"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.majin.bit.controller.MainController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/MainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9519" y="-215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="com.majin.bit.controller.OAuth2Controller" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/OAuth2Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9780" y="125"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="com.majin.bit.util.JockeyCrawling" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/JockeyCrawling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7696" y="702"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.majin.bit.util.HorseCrawling" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/HorseCrawling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7703" y="-237"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="com.majin.bit.configuration.SecurityConfig" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/configuration/SecurityConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10110" y="-181"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="com.majin.bit.controller.MailController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/MailController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10532" y="-208"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="53" language="java" name="com.majin.bit.dao.GuideDao" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dao/GuideDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11102" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="54" language="java" name="com.majin.bit.word2vecTest.Word2VecTest" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/word2vecTest/Word2VecTest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="125" width="126" x="7866" y="-285"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="com.majin.bit.controller.YundoController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/YundoController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10753" y="-215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="56" language="java" name="com.majin.bit.security.CustomOAuth2Provider" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/security/CustomOAuth2Provider.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7898" y="1483"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="57" language="java" name="com.majin.bit.util.DownloaderUtility" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/DownloaderUtility.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7703" y="1124"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="58" language="java" name="com.majin.bit.controller.GuideController" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/controller/GuideController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11049" y="-144"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="com.majin.bit.service.NoticeService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/NoticeService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10382" y="540"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="com.majin.bit.util.RecommendProcess" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/RecommendProcess.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8121" y="1"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="com.majin.bit.service.SearchService" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/service/SearchService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9141" y="392"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="com.majin.bit.util.MailHandler" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/util/MailHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="215" x="8015" y="-285"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="com.majin.bit.word2vecTest.StringCleaning" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/word2vecTest/StringCleaning.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8340" y="-228"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="com.majin.bit.dto.GuideDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/GuideDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7886" y="8"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="com.majin.bit.dto.TrDto" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/TrDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7679" y="201"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="com.majin.bit.dto.YundoJpaKey" project="majinEx" 
+    file="/majinEx/src/main/java/com/majin/bit/dto/YundoJpaKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8170" y="1449"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="67">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="68" name="memberServiceImpl"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="71" name="horseService"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="74" name="searchtermsservice"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="77" name="yundoDao"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="80" name="memberService"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="83" name="trainerDao"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="86" name="memberDao"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="89" name="jockeyDao"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="92" name="horseDao"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="95" name="yundoService"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="98" name="memberService"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="101" name="jockeyService"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="104" name="horseService"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="107" name="trainerService"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="110" name="mailDao"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="113" name="searchtermsservice"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="116" name="searchService"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="119" name="yundoJpaKey"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="122" name="jockeyService"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="125" name="trainerService"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="128" name="raceHorseDao"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="131" name="raceHorseService"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="134" name="noticedao"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="137" name="guidedao"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="140" name="guideservice"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="143" name="noticeservice"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="146" name="searchtermsdao"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="149" name="searchDao"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="152" name="mailService"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

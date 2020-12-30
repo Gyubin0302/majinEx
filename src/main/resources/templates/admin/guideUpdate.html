@@ -8,36 +8,27 @@
 		<div>
 			<div>
 				<form role="form" th:object="${guideDto}" th:action="@{/static/sample/viewer/index.php}" method="POST" enctype="multipart/form-data" onsubmit="return info_chk()">
-					<div>
+					<div class="younghak">
 						<label for="title" style="font-weight: bolder;">제목</label>
-						<input type="text" id="title" name="title" th:value="${detail.title}">
+						<input type="text" id="title" name="title" style="width:730px;height:30px;" th:value="${detail.title}" >
 					</div>
-					
-				 	<div style="font-weight: bolder">
+					<br/>
+				 	<div class="hakyoung">
 						<textarea name="content" id="content" rows="10" cols="100"
 								  style="width: 766px; height: 412px; display: none;"
 							  	  placeholder="내용을 입력하세욥~!">
 						[[${detail.content}]]
 						</textarea>
 					</div> 
-					
-					 <!-- <div>
-						<label for="content" style="font-weight: bolder;">내용</label><dr/>
-						<dr/>
-						<textarea id="content" name="content" rows="50" cols="100" >
-						[[${detail.content}]]
-						</textarea>
-					</div> --> 
-					
-					<div style="text-align: right;">
-						<input type="hidden" name="guideNo" th:value="${detail.guideNo}">
-						<input type="submit" th:value="목록" th:formaction="@{/guideList}">
-						<input type="submit" th:value="저장 " sec:authorize="hasRole('ROLE_ADMIN')" onclick='return info_chk2(this.form);'>   
-						<input type="submit" th:value="삭제" th:formaction="@{/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
+					<br/>
+					<div style="text-align: center;">
+						<input class="btn-dark" type="submit" th:value="목록" th:formaction="@{/guideList}">
+						<input class="btn-dark" type="submit" th:value="저장 " sec:authorize="hasRole('ROLE_ADMIN')" onclick='return info_chk2(this.form);'>   
+						<input class="btn-dark" type="submit" th:value="삭제" th:formaction="@{/guideDelete/{g_no} (g_no=${detail.guideNo})}" sec:authorize="hasRole('ROLE_ADMIN')">
 					</div>
 				</form>
 			</div>
-		<br/><br/><br/>
+		<br/><br/>
 		</div>
 	</main>
 <th:block layout:fragment="script">

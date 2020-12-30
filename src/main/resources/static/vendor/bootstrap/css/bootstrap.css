@@ -10170,55 +10170,12 @@ a.text-dark:hover, a.text-dark:focus {
 	padding: .3rem 1rem;
 	background-color: #fff;
 }
-.button3 {
-	position: relative;
-	-webkit-perspective: 300px;
-	perspective: 300px;
+
+.younghak{
+	margin-left	: 30%;
 }
-.button3 span {
-	display: block;
-	position: absolute;
-	width: 200px;
-	height: 60px;
-	border: 2px solid #333;
-	text-align: center;
-	line-height: 56px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all .3s;
-	transition: all .3s;
-	pointer-events: none;
-}
-.button3 span:nth-child(1) {
-	background-color: #333;
-	color: #fff;
-	-webkit-transform: rotateX(90deg);
-	-moz-transform: rotateX(90deg);
-	transform: rotateX(90deg);
-	-webkit-transform-origin: 50% 50% -30px;
-	-moz-transform-origin: 50% 50% -30px;
-	transform-origin: 50% 50% -30px;
-}
-.button3 span:nth-child(2) {
-	background-color: #fff;
-	color: #333;
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	transform: rotateX(0deg);
-	-webkit-transform-origin: 50% 50% -30px;
-	-moz-transform-origin: 50% 50% -30px;
-	transform-origin: 50% 50% -30px;
-}
-.button3:hover span:nth-child(1) {
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	transform: rotateX(0deg);
-}
-.button3:hover span:nth-child(2) {
-	background-color: #333;
-	-webkit-transform: rotateX(-90deg);
-	-moz-transform: rotateX(-90deg);
-	transform: rotateX(-90deg);
+
+.hakyoung{
+	margin-left	: 30%;
 }
 /*# sourceMappingURL=bootstrap.css.map */

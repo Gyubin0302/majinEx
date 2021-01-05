@@ -24,5 +24,3 @@ Naver ID Login, Kakao Login, Google Login,
 DL4J(딥러닝), Tensor Flow, Keras 
  
 - Tool : Spring Boot 4.7.2, Visual Studio, GitHub, Anaconda, MySQL Workbench, Google Drive, Notion, StarUML
-
-주의사항 -추천트레이닝파일에 없는 상품 클릭후 메인페이지로 나올시 500에러 ex)신규상품, 상품모델명 수정, 상품삭제시 -->오류발생시 clickproduct테이블에서 해당 상품 삭제하면 해결됨 -->트레이닝을 원할경우 상품 등록후 clickproduct 테이블에 비슷한 상품이랑 함께 넣어 데이터 만든후 관리자-회원관리-추천트레이닝 접속후 트레이닝하기 클릭하면 해결됨.

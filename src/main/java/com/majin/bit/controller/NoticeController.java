@@ -1,12 +1,6 @@
 package com.majin.bit.controller;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.majin.bit.dto.GuideDto;
 import com.majin.bit.dto.NoticeDto;
 import com.majin.bit.dto.Pagination;
 import com.majin.bit.service.NoticeService;
@@ -48,7 +40,6 @@ public class NoticeController {
 	// 공지사항 페이징 컨트롤러
 	@RequestMapping(value = "/noticeList", method = { RequestMethod.GET, RequestMethod.POST })
 	private String NoticeBoardPaging(Model model, @RequestParam(defaultValue = "1") int pageNo) {
-
 		Pagination noticePagination = NoticeSize(pageNo);
 		List<NoticeDto> noticePaging = NoticePag(noticePagination);
 		model.addAttribute("noticeList", noticePaging);
@@ -60,10 +51,8 @@ public class NoticeController {
 	// 여기부터 작업
 	// 가이드 검색용 페이징
 	public Pagination NoticePagination(int pageNo, String search) {
-		System.out.println("검색어 : " + search);
 		int SelectNotice = noticeservice.SelectNoticeBoard(search);
 		Pagination noticePagination = new Pagination(SelectNotice, pageNo, search);
-		System.out.println("DB에서 가져온 데이터 전체 :" + SelectNotice + "개");
 		return noticePagination;
 	}
 
@@ -76,7 +65,6 @@ public class NoticeController {
 	// 검색 깐트롤러
 	@RequestMapping(value = "/noticeSelect", method = RequestMethod.GET)
 	public String NoticeBoardSelect(Model model, @RequestParam(defaultValue = "1") int pageNo, String search) {
-
 		Pagination NoticePagination = NoticePagination(pageNo, search);
 		List<NoticeDto> noticePaging = NoticePaging(NoticePagination);
 		model.addAttribute("searchnotice", noticePaging);
@@ -98,7 +86,6 @@ public class NoticeController {
 	// 공지사항 게시물 등록 컨트롤러
 	@RequestMapping(value = "/noticeInsert")
 	private String NoticeBoardInsert(@ModelAttribute NoticeDto noticeDto) {
-
 		return "admin/noticeInsert";
 	}
 
@@ -119,7 +106,6 @@ public class NoticeController {
 	// 공지사항 업데이트 폼
 	@RequestMapping(value = "/noticeUpdateProc")
 	private String NoticeBoardUpdateProc(@ModelAttribute NoticeDto noticeBoard) {
-
 		noticeservice.NoticeBoardUpdate(noticeBoard);
 		int boardNumber = noticeBoard.getBoardNo();
 		String boardNo = Integer.toString(boardNumber);

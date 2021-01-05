@@ -805,4 +805,84 @@ let token = $("meta[name='_csrf']").attr("content");
 			}, null, null);
 		};	
 		
+		function viewrace(){
+			$.ajax({
+					url : "/viewrace",
+					type : "GET",
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error viewrace");
+					}
+				});
+				
+				history.pushState(
+						{url : "/viewrace"},
+						 null, null);
+		}
+		
+		function viewdetailrace(meet,rcdate,rcdist,rcno){
+			$.ajax({
+					url : "/viewdetailrace",
+					type : "GET",
+					data : {
+					"meet" : meet,
+					"rcdate" : rcdate,
+					"rcdist" : rcdist,
+					"rcno" : rcno
+					},
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error viewdetailrace");
+					}
+				});
+				
+				history.pushState(
+						{url : "/viewdetailrace"},
+						 null, null);
+		}
+		
+		
+		function memberBan() {
+			$.ajax({
+					url : "/admin/memberBan",
+					type : "GET",
+					dataType : "text",
+					success : function(retVal) {
+						$("#information").val("");
+						$("#information").replaceWith(retVal);
+					},
+					error : function() {
+						alert("error1");
+					}
+				});
+				
+				history.pushState(
+						{url : "/memberBan"},
+						 null, null);
+		}
+		
+		function memberBan1(id) {
+			$.ajax({
+					url : "/admin/memberBan1",
+					type : "GET",
+					data : {
+					"id" : id,
+					},
+					dataType : "text",
+					success : function(retVal) {
+						alert("success");
+					},
+					error : function() {
+						alert("error");
+					}
+				});
+		}
 		

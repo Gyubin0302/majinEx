@@ -3,12 +3,9 @@ package com.majin.bit.controller;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.majin.bit.dto.GuideDto;
 import com.majin.bit.dto.Pagination;
 import com.majin.bit.service.GuideService;
-
-import oshi.jna.platform.linux.Libc.Sysinfo;
 
 @Controller
 //@RequestMapping("/guideBoard")

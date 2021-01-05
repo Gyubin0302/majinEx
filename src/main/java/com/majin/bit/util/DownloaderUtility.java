@@ -1,10 +1,10 @@
 package com.majin.bit.util;
 
-import org.apache.commons.io.FilenameUtils;
-import org.nd4j.common.resources.Downloader;
-
 import java.io.File;
 import java.net.URL;
+
+import org.apache.commons.io.FilenameUtils;
+import org.nd4j.common.resources.Downloader;
 
 /**
  * Given a base url and a zipped file name downloads contents to a specified directory under ~/dl4j-examples-data
@@ -82,11 +82,8 @@ public enum DownloaderUtility {
 
     public String Download(boolean returnSubFolder) throws Exception {
         String dataURL = BASE_URL + "/" + ZIP_FILE;
-        System.out.println("dataURL : " + dataURL);
         String downloadPath = FilenameUtils.concat(System.getProperty("java.io.tmpdir"), ZIP_FILE);
-        System.out.println("downloadPath : " + downloadPath);
         String extractDir = FilenameUtils.concat(System.getProperty("user.home"), "dl4j-examples-data/" + DATA_FOLDER);
-        System.out.println("extractDir : " + extractDir);
         if (!new File(extractDir).exists()) {
         	new File(extractDir).mkdirs();
         }
@@ -94,14 +91,10 @@ public enum DownloaderUtility {
         String dataPathLocal = extractDir;
         if (returnSubFolder) {
             String resourceName = ZIP_FILE.substring(0, ZIP_FILE.lastIndexOf(".zip"));
-            System.out.println("resourceName : " + resourceName);
             dataPathLocal = FilenameUtils.concat(extractDir, resourceName);
         }
         int downloadRetries = 10;
         if (!new File(dataPathLocal).exists() || new File(dataPathLocal).list().length == 0) {
-            System.out.println("_______________________________________________________________________");
-            System.out.println("Downloading data (" + DATA_SIZE + ") and extracting to \n\t" + dataPathLocal);
-            System.out.println("_______________________________________________________________________");
             Downloader.downloadAndExtract("files",
                 new URL(dataURL),
                 new File(downloadPath),
@@ -109,10 +102,6 @@ public enum DownloaderUtility {
                 MD5,
                 downloadRetries);
         } else {
-        	System.out.println("4");
-            System.out.println("_______________________________________________________________________");
-            System.out.println("Example data present in \n\t" + dataPathLocal);
-            System.out.println("_______________________________________________________________________");
         }
         return dataPathLocal;
     }

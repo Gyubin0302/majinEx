@@ -1,16 +1,13 @@
 package com.majin.bit.controller;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +23,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.majin.bit.dto.HorseDto;
 import com.majin.bit.dto.JkDto;
+import com.majin.bit.dto.Member;
 import com.majin.bit.dto.TrDto;
 import com.majin.bit.service.HorseService;
+import com.majin.bit.service.MemberService;
 import com.majin.bit.service.RaceHorseService;
 import com.majin.bit.service.TrainerService;
 import com.majin.bit.service.jockeyService;
@@ -55,6 +55,9 @@ public class AdminController {
 	
 	@Autowired
 	private TrainerService trainerService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="/main")
     public String apitest(){
@@ -122,8 +125,6 @@ public class AdminController {
 			
 			for (int i = 0; i < jsonArray.size(); i++) {
 				jsonObj.add(jsonArray.get(i));
-				System.out.println(jsonArray.get(i));
-
 			}
 			
 			startYear++;
@@ -230,8 +231,6 @@ public class AdminController {
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
 		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
-
-		System.out.println(urlBuilder.toString());
 		
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
@@ -240,7 +239,6 @@ public class AdminController {
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("GET");
 		urlConnection.setRequestProperty("Accept", "application/json");
-		System.out.println("Response code : " + urlConnection.getResponseCode());
 		
 		BufferedReader bufferedReader;
 		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
@@ -287,8 +285,6 @@ public class AdminController {
 		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
 		
-		System.out.println(urlBuilder.toString());
-		
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 		
@@ -296,7 +292,6 @@ public class AdminController {
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("GET");
 		urlConnection.setRequestProperty("Accept", "application/json");
-		System.out.println("Response code : " + urlConnection.getResponseCode());
 		
 		BufferedReader bufferedReader;
 		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
@@ -343,8 +338,6 @@ public class AdminController {
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
 		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 		urlBuilder.append("&" + URLEncoder.encode("meet","UTF-8") + "=" + URLEncoder.encode(meet, "UTF-8")); /*시행경마장구분(1.서울,2.제주,3.부산)*/
-
-		System.out.println(urlBuilder.toString());
 		
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
@@ -353,7 +346,6 @@ public class AdminController {
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("GET");
 		urlConnection.setRequestProperty("Accept", "application/json");
-		System.out.println("Response code : " + urlConnection.getResponseCode());
 		
 		BufferedReader bufferedReader;
 		if(urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() <= 300) {
@@ -380,5 +372,17 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping(value="/memberBan", method = RequestMethod.GET)
+	public String memberBan(Model model) {
+		List<Member> members = memberService.findAll();
+		model.addAttribute("members",members);
+		return "memberBan";
+	}
+	
+	@RequestMapping(value="/memberBan1", method = RequestMethod.GET)
+	public String memberBanId(@RequestParam String id) {
+		memberService.disableId(id);
+		return "redirect:/admin/memberBan";
+	}
 
 }

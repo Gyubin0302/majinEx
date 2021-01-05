@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div id="information" class="container">
+	<div class="hyeok3">
+		<div class="hyeok2" th:text="출전번호"></div>
+		<div class="hyeok2" th:text="마명"></div>
+		<div class="hyeok2" th:text="부담중량"></div>
+		<div class="hyeok2" th:text="나이"></div>
+		<div class="hyeok2" th:text="성별"></div>
+		<div class="hyeok2" th:text="레이팅"></div>
+		<div class="hyeok2" th:text="기수승률"></div>
+	</div>
+	<div class="hyeok3" th:each="race : ${races}">
+		<div class="hyeok2" th:text="${race.chulno}"></div>
+		<div class="hyeok2" th:text="${race.hrname}"></div>
+		<div class="hyeok2" th:text="${race.wgbudam+'kg'}"></div>
+		<div class="hyeok2" th:text="${race.age+'세'}"></div>
+		<div class="hyeok2" th:text="${race.sex}"></div>
+		<div class="hyeok2" th:text="${race.rating}"></div>
+		<div class="hyeok2" th:text="${race.jconsecutivewinningp+'%'}"></div>
+	</div><br><br>
+	<div class="hyeok3">
+		<h1>예상 결과([연승률,패배율])</h1><br>
+	</div>
+	<div class="hyeok3" th:each="pre : ${predict}">
+		<div th:text="${pre}"></div>
+	</div>
+</div>
+</html>

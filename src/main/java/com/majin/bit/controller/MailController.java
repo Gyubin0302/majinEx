@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.majin.bit.dao.MailDao;
 import com.majin.bit.dto.MailDto;
-import com.majin.bit.dto.Member;
-import com.majin.bit.dto.MemberDTO;
 import com.majin.bit.service.MailService;
 import com.majin.bit.service.MemberService;
 
@@ -37,7 +34,6 @@ public class MailController {
     @ResponseBody
     @PostMapping("/mailChk")
     public boolean chkMail(MailDto mailDto) {
-    	System.out.println("mailcheck controller\n\n");
     	return mailService.checkMail(mailDto);
     }
     
@@ -49,7 +45,6 @@ public class MailController {
     	mailDto.setTitle("마진 비밀번호 초기화 이메일 입니다");
     	mailDto.setMessage(newPw);
     	mailDto.setAddress(memberService.findEmail(id));
-    	System.out.println("비번 바꼇나 확인");
     	mailService.mailSend(mailDto);
     	return "login";
     }

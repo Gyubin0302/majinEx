@@ -3,9 +3,9 @@ package com.majin.bit.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jsoup.Jsoup;
 import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class HorseCrawling {
@@ -30,7 +30,6 @@ public class HorseCrawling {
 			Document document = response.parse();
 			
 			String trParser = document.select("#contents > div.tableType1 > table > tbody > tr:nth-child(2) > td:nth-child(8)").text();
-			System.out.println(trParser);
 			if ( trParser.equals("휴양마(99)")){
 				map.put("trNo", "0AAAAA");
 			} else if(trParser.equals("")){
@@ -68,7 +67,6 @@ public class HorseCrawling {
 			map.put("meet", meet);
 								
 		} catch (Exception e) {
-			System.out.println(e);
 		}
 		return map;
 	}

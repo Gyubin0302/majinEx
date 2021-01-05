@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
 
 @Entity
-@Data
+@Getter
 @Table(name = "member")
 public class Member {
 	@Id
@@ -31,7 +30,7 @@ public class Member {
 	@Column(name = "role")
 	private String role;
 	@Column(name = "able", columnDefinition = "TINYINT", length=1)
-	private int able;
+	private int able; //회원탈퇴시1
 			
 	public Member() {
 	}

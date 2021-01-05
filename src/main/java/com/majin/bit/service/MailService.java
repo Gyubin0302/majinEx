@@ -76,10 +76,7 @@ public class MailService {
 	}
 
 	public boolean checkMail(MailDto mailDto) {
-		System.out.println(mailDto.getAddress());
 		MailDto mail= mailDao.findByAddress(mailDto.getAddress());
-		System.out.println("\n발급키 : "+mail.getMessage());
-		System.out.println("입력키 : "+mailDto.getMessage());
 		return mail.getMessage().equals(mailDto.getMessage()) ? true : false;
 	}
 

@@ -18,7 +18,7 @@
 						</li>
 						<li class="nav-item"><a class="nav-link" th:onclick="yundo()">연도별 대표마</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" th:href="@{#none}">순위 예측</a>
+						<li class="nav-item"><a class="nav-link" th:onclick="viewrace()">순위 예측</a>
 						</li>
 						<li class="nav-item dropdown">
 						<a sec:authorize="isAnonymous()" class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 더보기 </a>
@@ -28,7 +28,8 @@
 							<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{/signup}">회원가입</a>
 							<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">로그아웃</a>
 							<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/changepw}">비밀번호 변경</a>
-							<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/disableid}">회원탈퇴</a>
+							<a sec:authorize="hasRole('ROLE_USER')" class="dropdown-item" th:href="@{/disableid}">회원탈퇴</a>
+							<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:onclick="memberBan()">회원추방</a>
 						</div></li>
 					</ul>
 				</div>

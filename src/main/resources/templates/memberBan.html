@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	
+<div id="information" class="container">
+	<div th:each="member:${members}">
+		<div style="display: inline-block;" th:text="${member.id}"></div>
+		<div style="display: inline-block;" th:text="${member.name}"></div>
+		<div style="display: inline-block;" th:text="${member.nick}"></div>
+		<div style="display: inline-block;" th:text="${member.email}"></div>
+		<div style="display: inline-block;" th:text="${member.able}"></div>
+		<div style="display: inline-block;"><button class="btn btn-danger" th:onclick="memberBan1([[${member.id}]])">추방</button></div>
+	</div>
+</div>

@@ -28,7 +28,6 @@ public class YundoCrawling {
 		try {
 			doc = Jsoup.connect(URL).get();
 		} catch (IOException e1) {
-			System.out.println("web connect error");
 			e1.printStackTrace();
 		}
 
@@ -39,6 +38,7 @@ public class YundoCrawling {
 		List<YundoDto> yundos = new ArrayList();
 
 		Elements ele = doc.getElementsByTag("table");
+		System.out.println(ele);
 		Elements thead = ele.get(0).getElementsByTag("thead");
 
 		String pattern = "[\\d]{6}";
@@ -46,8 +46,6 @@ public class YundoCrawling {
 		Pattern p = Pattern.compile(pattern);
 		Pattern p2 = Pattern.compile(pattern2);
 		Matcher m;
-		// 연도 대표말 제목
-		System.out.println(thead.select("th").append("|").text());
 
 		// 연도 대표말 내용
 		Elements tbody = ele.get(0).getElementsByTag("tbody");
@@ -161,9 +159,6 @@ public class YundoCrawling {
 			yundos.add(yundo);
 		}
 
-		for (YundoDto yundoo : yundos) {
-			System.out.println(yundoo);
-		}
 		return yundos;
 	}
 }

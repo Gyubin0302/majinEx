@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.nd4j.nativeblas.Nd4jCpu.boolean_and;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,25 +56,15 @@ public class jockeyService {
 			jkDto.setMeet(jokey.get("meet").toString());
 			jkDto.setAct("09");
 			jkList.add(jkDto);
-			System.out.println(jkDto);
 		}
 		
 		long endTime = System.currentTimeMillis();
 		long completeTime = (endTime - startTime) / 1000;
-		System.out.println("걸린 시간 : " + completeTime);
-
-		System.out.println("가져온 기수의 사이즈 : " + jkList.size());
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", jkList);
 
 		boolean insertStatus = jockeyDao.jockeyInsert(map);
 
-		if (insertStatus == true) {
-			System.out.println("insert 성공");
-		} else {
-			System.out.println("insert 실패");
-		}
 		return jkList;
 	}
 

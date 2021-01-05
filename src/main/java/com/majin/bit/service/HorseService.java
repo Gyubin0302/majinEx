@@ -58,27 +58,17 @@ public class HorseService {
 
 			if (!horseDto.getHrNo().equals("")) {
 				horseList.add(horseDto);
-				System.out.println(horseDto);
 			}
 
 		}
 		
 		long endTime = System.currentTimeMillis();
 		long completeTime = (endTime - startTime) / 1000;
-		System.out.println("걸린 시간 : " + completeTime);
-
-		System.out.println("가져온 말의 사이즈 : " + horseList.size());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", horseList);
 
 		boolean insertStatus = horseDao.horseInsert(map);
-
-		if (insertStatus == true) {
-			System.out.println("insert 성공");
-		} else {
-			System.out.println("insert 실패");
-		}
 
 		return horseList;
 	}

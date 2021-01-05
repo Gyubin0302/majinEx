@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div id="information" class="container">
+	<div class="hyeok3">
+		<div class="hyeok2" th:text="지역"></div>
+		<div class="hyeok2" th:text="경주일자"></div>
+		<div class="hyeok2" th:text="경주거리"></div>
+		<div class="hyeok2" th:text="경주번호"></div>
+		<div class="hyeok2" th:text="시간"></div>
+	</div>
+	<div class="hyeok3" th:each="race : ${races}">
+		<div class="hyeok2" th:text="${race.meet}"></div>
+		<div class="hyeok2" th:text="${race.rcdate}"></div>
+		<div class="hyeok2" th:text="${race.rcdist}+'m'"></div>
+		<div class="hyeok2"
+			th:onclick="viewdetailrace([[${race.meet}]],[[${race.rcdate}]],[[${race.rcdist}]],[[${race.rcno}]])"
+			th:text="${race.rcno}"></div>
+		<div class="hyeok2" th:text="${race.sttime}"></div>
+	</div>
+</div>
+</html>

@@ -3,9 +3,9 @@ package com.majin.bit.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jsoup.Jsoup;
 import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class JockeyCrawling {
@@ -54,7 +54,7 @@ public class JockeyCrawling {
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return map;
 	}

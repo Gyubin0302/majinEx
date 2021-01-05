@@ -45,11 +45,6 @@ public class YundoService {
 				list[count]=yundo.getMeetSeq().split("/");
 			count++;
 		}
-		for(int i=0;i<list.length;i++) {
-			for(int j=0;j<list[i].length;j++) {
-				System.out.print(list[i][j]+"\t");
-			}
-		}
 		return list;
 	}
 }

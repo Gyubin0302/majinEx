@@ -34,7 +34,6 @@ public class YundoController {
 	@PostMapping("/yundo/view")
 	public String ShowYundo(Model model) {
 		List<YundoDto> yundos;
-		String[][] list;
 		/*
 		 * 여기 실행하기 전에 db에서
 		 * create view findname as select hrno as 'seq',hrname as 'name' from horseskinny union select jkno as 'seq',jkname as 'name' from jockeyskinny union select trno as 'seq',trname as 'name' from trainerskinny;

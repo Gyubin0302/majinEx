@@ -1,7 +1,5 @@
 package com.majin.bit.dto;
 
-import java.util.Arrays;
-
 import lombok.Data;
 
 @Data

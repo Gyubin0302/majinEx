@@ -52,25 +52,15 @@ public class TrainerService {
 			trDto.setMeet(trainer.get("meet").toString());
 			trDto.setAct("10");
 			trList.add(trDto);
-			System.out.println(trDto);
 		}
 		
 		long endTime = System.currentTimeMillis();
 		long completeTime = (endTime - startTime) / 1000;
-		System.out.println("걸린 시간 : " + completeTime);
-
-		System.out.println("가져온 조교의 사이즈 : " + trList.size());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", trList);
 
 		boolean insertStatus = trainerDao.trainerInsert(map);
-
-		if (insertStatus == true) {
-			System.out.println("insert 성공");
-		} else {
-			System.out.println("insert 실패");
-		}
 
 		return trList;
 	}

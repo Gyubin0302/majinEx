@@ -31,7 +31,6 @@ public class MemberService implements UserDetailsService {
 		//Optional<Member> memberEntity = memberDao.findById(id);
 		//Member member = memberEntity.orElse(null);
 		Member member = memberDao.findById(id);
-		System.out.println("가져온 맴버는 : "+member);
 		if(member.getAble()==1) {
 			throw new UsernameNotFoundException(id);
 		}
@@ -50,7 +49,6 @@ public class MemberService implements UserDetailsService {
         memberDTO.setEmail(memberDTO.getEmail().replace(",", "@"));
         memberDTO.setRole(memberDTO.getId().equals("admin") ? "ADMIN" : "USER");
 		Member member = memberDTO.toEntity();
-		System.out.println("저장된 멤버는 : "+member);
         return memberDao.save(member).getId();
     }
 	
@@ -69,11 +67,11 @@ public class MemberService implements UserDetailsService {
 	
 	public boolean checkPw(String id,String oldpw,String pw) {
 		Member member = memberDao.findById(id);
-		if(member.getPw() == oldpw) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if(passwordEncoder.matches(oldpw, member.getPw())) {
 			newPw(id,pw);
 			return true;
 		}else {
-			System.out.println("비번 안맞음");
 			return false;
 		}
 	}
@@ -100,5 +98,10 @@ public class MemberService implements UserDetailsService {
 	
 	public boolean idcheck(String id) {
 		return memberDao.findById(id) != null ? true : false;
+	}
+	
+	public List<Member> findAll() {
+		List<Member> members = memberDao.findAll();
+		return members;
 	}
 }

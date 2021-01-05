@@ -55,11 +55,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**", "/file_uploader_DEXT","/findpw").permitAll()
+				.antMatchers("/viewrace").authenticated()
+				//.antMatchers("/", "/yundo/**", "/search/**", "/home", "/signup", "/idcheck", "/mailChk", "/mail", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**","/favicon.ico/**", "/file_uploader_DEXT","/findpw").permitAll()
 				.antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
 				.antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
 				.antMatchers("/naver").hasAuthority(NAVER.getRoleType())
 				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 					.formLogin()
@@ -78,7 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
 				.and()
 					.logout()
-//						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("/")
 						.invalidateHttpSession(true)

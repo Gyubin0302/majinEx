@@ -33,7 +33,7 @@ public class TrainerCrawling {
 			map.put("meet", meet);
 								
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return map;
 	}

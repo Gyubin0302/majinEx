@@ -1,14 +1,8 @@
 package com.majin.bit.controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,10 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.majin.bit.dto.Member;
 import com.majin.bit.dto.MemberDTO;
 import com.majin.bit.service.MemberService;
-import com.majin.bit.word2vecTest.Word2VecTest;
 
 @Controller
 public class OAuth2Controller {
@@ -45,7 +37,6 @@ public class OAuth2Controller {
 	@GetMapping("/loginSuccess")
 	public String loginSuccess() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth.getName());
 		return "home";
 	}
 
@@ -78,7 +69,6 @@ public class OAuth2Controller {
 
 	@PostMapping("/signup")
 	public String signupsuccess(MemberDTO memberDTO) {
-		System.out.println("여기는 컨트롤러에 memberservice 호출");
 		memberService.save(memberDTO);
 		return "login";
 	}

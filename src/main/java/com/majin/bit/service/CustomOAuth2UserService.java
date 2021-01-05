@@ -92,8 +92,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		for (String authority : token.getScopes()) {
 			authorities.add(new SimpleGrantedAuthority("SCOPE_" + authority));
 		}
-		System.out.println("\n\n\n\n"+authorities+"\n"+userAttributes+"\n"+userNameAttributeName);
-//		System.out.println("\n\n\n\n"+userAttributes.get(userNameAttributeName));
 		return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
 	}
 

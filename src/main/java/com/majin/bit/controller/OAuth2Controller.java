@@ -37,7 +37,7 @@ public class OAuth2Controller {
 	@GetMapping("/loginSuccess")
 	public String loginSuccess() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return "home";
+		return "redirect:/";
 	}
 
 	@GetMapping("/hello")
@@ -92,18 +92,18 @@ public class OAuth2Controller {
 	@PostMapping("/changepw")
 	public String changepw2(@RequestParam String oldpw, @RequestParam String pw) {
 		memberService.checkPw(SecurityContextHolder.getContext().getAuthentication().getName(),oldpw,pw);
-		return "home";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/disableid")
 	public String disableId() {
 		memberService.disableId(SecurityContextHolder.getContext().getAuthentication().getName());
-		return "home";
+		return "redirect:/";
 	}
 
 	@GetMapping("/yundoHorse")
 	public String getYundoHorse() {
-		return "home";
+		return "/index";
 	}
 
 	@GetMapping("/logout")
